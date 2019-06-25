@@ -1,5 +1,5 @@
 import React from 'react';
 
-const modal = (props) => {
+const searchBox = (props) => {
     
 }
