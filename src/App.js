@@ -16,12 +16,14 @@ const app = props => {
   return (
   <div>
     <XPBar />
-    <Switch>
-      <Route path="questlog" render={props => <QuestLog />} />
-      <Route path="rewardList" render={props => <RewardList />} />
-      <Route path="taskList" render={props => <TaskList />} />
-      <Redirect to="taskList" />
-    </Switch>
+    <Suspense fallback = {<p>Loading Tasks...</p>} >
+      <Switch>
+        <Route path="questlog" render={props => <QuestLog />} />
+        <Route path="rewardList" render={props => <RewardList />} />
+        <Route path="taskList" render={props => <TaskList />} />
+        <Redirect to="taskList" />
+      </Switch>
+    </Suspense>
   </div>);
 }
 
