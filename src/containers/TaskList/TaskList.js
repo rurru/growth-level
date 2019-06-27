@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 
-const rewardList = (props) => {
+const taskList = (props) => {
     
 }
+
+export default taskList;
