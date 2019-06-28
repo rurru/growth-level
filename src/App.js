@@ -12,9 +12,13 @@ const RewardList = React.lazy(() => {
   return import('./containers/RewardList/RewardList');
 });
 
-const app = props => {
+const App = (props) => {
+  useEffect(
+    () => {return "tobecompletedlater";}
+  );
+
   return (
-  <div>
+  <AppContext.Provider>
     <XPBar />
     <Suspense fallback = {<p>Loading Tasks...</p>} >
       <Switch>
@@ -24,7 +28,7 @@ const app = props => {
         <Redirect to="taskList" />
       </Switch>
     </Suspense>
-  </div>);
+  </AppContext.Provider>);
 }
 
 export default app;

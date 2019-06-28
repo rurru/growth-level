@@ -1,5 +1,7 @@
 import React, {useContext} from 'react';
 
-const questEditor = (props) => {
-    
+const xpBar = (props) => {
+    return (<div></div>);
 }
+
+export default xpBar;
