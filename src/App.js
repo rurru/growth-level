@@ -1,15 +1,15 @@
 import React, { useEffect, useContext, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AppContext from './context/context';
-import XPBar from './components/XPBar/XPBar';
-import TaskList from './containers/TaskList/TaskList'
+import XPBar from './components/XPBar';
+import TaskList from './containers/TaskList'
 
 const QuestLog = React.lazy(() => {
-  return import('./containers/QuestLog/QuestLog');
+  return import('./containers/QuestLog');
 });
 
 const RewardList = React.lazy(() => {
-  return import('./containers/RewardList/RewardList');
+  return import('./containers/RewardList');
 });
 
 const App = (props) => {
@@ -31,4 +31,4 @@ const App = (props) => {
   </AppContext.Provider>);
 }
 
-export default app;
+export default App;
