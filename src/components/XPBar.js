@@ -1,7 +1,12 @@
 import React, {useContext} from 'react';
+import './XPBar.css';
 
 const XPBar = (props) => {
-    return (<div></div>);
+    return (
+    <div id = "bar">
+          
+    </div>
+    );
 }
 
 export default XPBar;
