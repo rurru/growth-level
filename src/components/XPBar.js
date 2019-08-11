@@ -1,17 +1,15 @@
 import React, {useContext} from 'react';
 import './XPBar.css';
-import AppContext from '../context/context';
+import appContext from '../context/context';
 
 
 const XPBar = (props) => {
+    const userData = useContext(appContext);
+
     return (
-    <AppContext.Consumer>
-    {(level, xp, levelingSpeed, questDecay) => (
         <div id = "bar">
             
         </div>
-    )}
-    </AppContext.Consumer>
     );
 }
 

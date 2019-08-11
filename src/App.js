@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, Suspense } from 'react';
+import React, { useEffect, useState, useContext, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AppContext from './context/context';
 import XPBar from './components/XPBar';
@@ -16,8 +16,14 @@ const RewardList = React.lazy(() => {
 
 const App = (props) => {
   useEffect(
-    () => {"tobecompletedlater";}
+    () => {"tobecompletedlater";}, []
   );
+
+  
+
+  const calcXpToLevel = (level, multiplier) => {
+    Math.round(multiplier * 100 * (Math.pow(level, 3)));
+  }
 
   return (
   <AppContext.Provider>
