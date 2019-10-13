@@ -19,8 +19,6 @@ const App = (props) => {
     () => {"tobecompletedlater";}, []
   );
 
-  
-
   const calcXpToLevel = (level, multiplier) => {
     Math.round(multiplier * 100 * (Math.pow(level, 3)));
   }
