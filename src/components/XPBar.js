@@ -1,17 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './XPBar.css';
-import appContext from '../context/context';
 
 
 const XPBar = (props) => {
-    const userData = useContext(appContext);
-
-    
-
     return (
         <div id = "bar">
-            <span id = "bar-progress"></span>
-            <span id = "bar-background"></span>
+            <span id = "bar-progress" 
+             style = {{width: props.progress.current+"%"}}></span>
+            <span id = "bar-background"
+             style = {{width: props.progress.toLevel+"%"}}></span>
         </div>
     );
 }
