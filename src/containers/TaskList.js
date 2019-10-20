@@ -1,9 +1,28 @@
 import React, {useState, useEffect, useContext} from 'react';
-
+import TaskItem from 'TaskItem';
+ 
 const TaskList = (props) => {
+    useEffect(() => {
+        Initializate();}, []
+      );
+ 
+    const [tasks, setTasks] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+
+    const handleTaskClick = (level) => {
+    }
+
+       
+ 
     return (
-        <div></div>
+        <div id = "tasklist" className = "container">
+            {tasks.map(task =>
+                <TaskItem onTaskClick = {(level) => handleTaskClick(level)}
+                    
+                /> ) }
+        </div>
     )
 }
-
+ 
 export default TaskList;
