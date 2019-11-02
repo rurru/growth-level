@@ -46,14 +46,14 @@ const App = (props) => {
     <div id = "app">
       <NavBar />
       <XPBar progress = {progress} />
-        <Switch>
-          <Route path="questlog" render={props => 
-            <QuestLog {...props} update = {(p) => updateXP(p)} />} level = {level} />
-          <Route path="rewardList" render={props => 
-            <RewardList {...props} />} />
-          <Route path="taskList" render={props => 
-            <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
-        </Switch>
+      <Switch>
+        <Route path="/questlog" render={props => 
+          <QuestLog {...props} update = {(p) => updateXP(p)} level = {level} />} />
+        <Route path="/rewardList" render={props => 
+          <RewardList {...props} />} />
+        <Route exact path="/" render={props => 
+          <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
+      </Switch>
     </div>);
 }
 

@@ -15,10 +15,11 @@ body {
 }
 
 .container {
-  width: 90%;
-  height: 90%;
+  width: 95%;
+  height: 95%;
+  margin: 0 auto;
 
-  border: 1px solid #777;
+  border: 1px solid #ccc;
 }
 
 @media screen and (min-width: 768px) {
@@ -26,4 +27,5 @@ body {
     width: 80%;
     min-width: 768px;
   }
+
 }
