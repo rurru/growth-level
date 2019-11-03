@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 
 const RewardList = (props) => {
-  return (<div></div>);
+  return (<div className = "container"></div>);
 }
 
 export default RewardList;

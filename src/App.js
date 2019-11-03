@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { RoutedTabs, NavTab } from "react-router-tabs";
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import TaskList from './containers/TaskList';
+import "./react-router-tabs.css";
 import './App.css';
+
 
 const QuestLog = React.lazy(() => {
   return import('./containers/QuestLog');
@@ -46,14 +49,24 @@ const App = (props) => {
     <div id = "app">
       <NavBar />
       <XPBar progress = {progress} />
-      <Switch>
-        <Route path="/questlog" render={props => 
-          <QuestLog {...props} update = {(p) => updateXP(p)} level = {level} />} />
-        <Route path="/rewardList" render={props => 
-          <RewardList {...props} />} />
-        <Route exact path="/" render={props => 
-          <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
-      </Switch>
+      <div id = "list">
+        <div className = "tab-row">
+          <NavTab to="/tasklist">Tasks</NavTab>
+          <NavTab to="/questlog">Quests</NavTab>
+          <NavTab to="/rewardlist">Rewards</NavTab>
+          <span id = "tab-border"></span>
+        </div>
+        <Suspense fallback = {<p>Loading Tasks...</p>} >
+          <Switch>        
+            <Route path="/questlog" render={props => 
+              <QuestLog {...props} update = {(p) => updateXP(p)} level = {level} />} />
+            <Route path="/rewardlist" render={props => 
+              <RewardList {...props} />} />
+            <Route exact path="/tasklist" render={props => 
+              <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
+          </Switch>
+        </Suspense>
+      </div>
     </div>);
 }
 
