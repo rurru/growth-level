@@ -1,13 +1,13 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
+import ReactDOM from 'react-dom';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
 import "./react-router-tabs.css";
 import './App.css';
-
 
 const QuestLog = React.lazy(() => {
   return import('./containers/QuestLog');

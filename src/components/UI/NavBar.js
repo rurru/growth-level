@@ -8,6 +8,9 @@ const NavBar = (props) => {
     <div id = "branding">
       <img src = {logo} />
       Growth Level
+    </div>   
+    <div id = "menu-button">
+      <i class="fas fa-bars"></i>
     </div>
   </div>);
 }
