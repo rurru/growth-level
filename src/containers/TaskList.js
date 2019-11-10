@@ -7,7 +7,6 @@ const TaskList = (props) => {
       );
  */
     const [tasks, setTasks] = useState([]);
-    const [categories, setCategories] = useState([]);
 
 
     const handleTaskClick = (level) => {

@@ -18,11 +18,11 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
-  const [xp, setXp] = useState(37);
+  const [paths, setPaths] = ["default"]
+  const [xp, setXp] = useState(90);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
-  const [level, setLevel] = useState(1);
+  const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 200});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
-  const [levelXP, setLevelXP] = useState(200);
   const [categories, setCategories] = useState([{name: "Test", color: categoryColors[0]}, {name: "Test2", color: categoryColors[1]}]);
 
 
@@ -30,21 +30,24 @@ const App = (props) => {
     updateXP(0);}, []
   );
 
-  const calcXpToLevel = () => {
+  const calcXpToLevel = (level) => {
     Math.round(multiplier * 100 * (Math.pow(level, 3)));
   }
 
   const updateXP = (points) => {
     let newXP = xp + points;
-    
-    if (newXP > levelXP) {
-      setLevel(level => level + 1);
-      setLevelXP(calcXpToLevel());
-      newXP -= levelXP;
+
+    if (newXP > levelInfo.levelXP) {
+      setLevelInfo((levelInfo) => ({
+        level: levelInfo.level + 1,
+        levelXP: calcXpToLevel(levelInfo.level + 1)
+      })
+      );
+      newXP -= levelInfo.levelXP;
     }
 
     setXp(newXP);
-    let xpPercent = (xp * 100) / levelXP;
+    let xpPercent = (xp * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
 
@@ -62,11 +65,11 @@ const App = (props) => {
         <Suspense fallback = {<p>Loading Tasks...</p>} >
           <Switch>        
             <Route path="/questlog" render={props => 
-              <QuestLog {...props} update = {(p) => updateXP(p)} level = {level} />} />
+              <QuestLog {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} />} />
             <Route path="/rewardlist" render={props => 
               <RewardList {...props} />} />
             <Route exact path="/tasklist" render={props => 
-              <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
+              <TaskList {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} />} />
             <Redirect exact from="/" to="taskList" />
           </Switch>
         </Suspense>
