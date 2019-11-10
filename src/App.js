@@ -4,6 +4,7 @@ import { RoutedTabs, NavTab } from "react-router-tabs";
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import TaskList from './containers/TaskList';
+import { categoryColors } from './constants';
 import "./react-router-tabs.css";
 import './App.css';
 
@@ -22,6 +23,7 @@ const App = (props) => {
   const [level, setLevel] = useState(1);
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [levelXP, setLevelXP] = useState(200);
+  const [categories, setCategories] = useState([{name: "Test", color: categoryColors[0]}, {name: "Test2", color: categoryColors[1]}]);
 
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const App = (props) => {
 
   const updateXP = (points) => {
     let newXP = xp + points;
+    
     if (newXP > levelXP) {
       setLevel(level => level + 1);
       setLevelXP(calcXpToLevel());
@@ -64,6 +67,7 @@ const App = (props) => {
               <RewardList {...props} />} />
             <Route exact path="/tasklist" render={props => 
               <TaskList {...props} update = {(p) => updateXP(p)} level = {level} />} />
+            <Redirect exact from="/" to="taskList" />
           </Switch>
         </Suspense>
       </div>
