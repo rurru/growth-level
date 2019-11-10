@@ -7,8 +7,7 @@ const NavBar = (props) => {
 
   const toggleSettings = () => {
     let settingsActive = buttonStyle != null;
-    setButtonStyle(settingsActive ? 
-                    null : {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"});
+    setButtonStyle(settingsActive ? null : {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"});
     
   }
 
