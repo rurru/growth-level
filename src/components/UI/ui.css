@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+.menu-item {
+    font-size: 0.75em
+}
+
 #branding img {
     height: 80%;
     margin: 0 10px 0 5px;

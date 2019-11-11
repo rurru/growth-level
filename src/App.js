@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
-import ReactDOM from 'react-dom';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
+import MainMenu from './components/UI/MainMenu';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
 import "./react-router-tabs.css";
@@ -53,7 +53,9 @@ const App = (props) => {
 
   return (
     <div id = "app">
-      <NavBar />
+      <NavBar>
+        <MainMenu />
+      </NavBar>
       <XPBar progress = {progress} />
       <div id = "list">
         <div className = "tab-row">
