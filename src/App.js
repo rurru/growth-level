@@ -36,19 +36,20 @@ const App = (props) => {
 
   const updateXP = (points) => {
     let newXP = xp + points;
-
     if (newXP > levelInfo.levelXP) {
       setLevelInfo((levelInfo) => ({
         level: levelInfo.level + 1,
         levelXP: calcXpToLevel(levelInfo.level + 1)
-      })
-      );
+      }) );
       newXP -= levelInfo.levelXP;
     }
-
     setXp(newXP);
     let xpPercent = (xp * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
+  }
+
+  const changeLevelSpeed = (speed) => {
+    
   }
 
   return (
