@@ -32,8 +32,21 @@
     cursor: pointer;
 }
 
-.menu-item {
-    font-size: 0.75em
+.menu-item, .submenu-item {
+    font-family: Roboto;
+    font-size: 0.65em;
+    font-weight: 700;
+    padding: 5px;
+}
+
+.menu-item:hover {
+    background-color: #56ab2f;
+    cursor: default;
+}
+
+.submenu-item:hover {
+    background-color: #56ab2f;
+    cursor: pointer;
 }
 
 #branding img {
