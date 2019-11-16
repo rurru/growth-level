@@ -53,3 +53,35 @@
     height: 80%;
     margin: 0 10px 0 5px;
 }
+
+#message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 90%;
+    margin: 20px auto 0;
+    height: 40px;
+    font-family: Roboto;
+    font-size: 0.9em;
+    color: #555;
+    background-color: #def0d8;
+}
+
+#message-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    color: #7bab79;
+    font-weight: 700;
+    border: 1px solid #7bab79
+}
+
+#message-close:hover {
+    background-color: #fff;
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@ import { RoutedTabs, NavTab } from "react-router-tabs";
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
+import Message from './components/UI/Message';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
 import "./react-router-tabs.css";
@@ -18,7 +19,8 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
-  const [paths, setPaths] = ["default"]
+  const [paths, setPaths] = useState(["default"]);
+  const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(90);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 200});
@@ -49,14 +51,19 @@ const App = (props) => {
   }
 
   const changeLevelSpeed = (speed) => {
-    
+    let speeds = ["Slow", "Balanced", "Fast"];
+    setMultiplier(speed + 1);
+    setMessage({content: "Leveling speed is now "+speeds[speed]+".", type: "notification"});
   }
 
   return (
     <div id = "app">
       <NavBar>
-        <MainMenu />
+        <MainMenu
+          changeSpeed = {(s) => changeLevelSpeed(s)} />
       </NavBar>
+      {message.type == "" ? null :
+        <Message content = {message} clear = {() => setMessage({content: "", type: ""})} /> }
       <XPBar progress = {progress} />
       <div id = "list">
         <div className = "tab-row">
