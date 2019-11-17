@@ -32,7 +32,7 @@
     cursor: pointer;
 }
 
-.menu-item, .submenu-item {
+.menu-item {
     font-family: Roboto;
     font-size: 0.65em;
     font-weight: 700;
@@ -44,7 +44,7 @@
     cursor: default;
 }
 
-.submenu-item:hover {
+.leaf:hover {
     background-color: #56ab2f;
     cursor: pointer;
 }

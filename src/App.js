@@ -58,6 +58,14 @@ const App = (props) => {
         setMultiplier(value + 1);
         setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
         break;
+      case "categories":
+        setCategories(value);
+        setMessage({content: "Categories have been updated!", type: "notification"});
+        break;
+      case "paths":
+        setPaths(value);
+        setMessage({content: "Paths have been updated!", type: "notification"});
+        break;
       default: break;
     }
 

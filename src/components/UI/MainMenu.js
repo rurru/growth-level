@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
+import CategoryEditor from '../Editors/CategoryEditor';
 import './ui.css';
 
 const MainMenu = (props) => {
@@ -21,15 +22,21 @@ const MainMenu = (props) => {
                          contentStyle={menuStyle} position='bottom right'>
         <div className="menu">
           <div className="menu-item">Set Path</div>
-          <div className="submenu-item"> Edit Categories </div>
+
+          <Popup trigger = { <div className="menu-item leaf"> Edit Categories </div>}
+                            contentStyle = {{width: "70%", height: "400px"}}
+                            onClose = {() => toggleMenu(false)}
+                            modal closeOnDocumentClick >
+            <CategoryEditor categories = {props.categories} update = {(s, v) => props.update(s, v)} />
+          </Popup>
 
           <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} closeOnDocumentClick>
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="submenu-item" onClick = {()=>props.update("speed", 0)}>Slow</div>
-              <div className="submenu-item" onClick = {()=>props.update("speed", 1)}>Balanced</div>
-              <div className="submenu-item" onClick ={()=>props.update("speed", 2)}>Fast</div>
+              <div className="menu-item leaf" onClick = {()=>props.update("speed", 0)}>Slow</div>
+              <div className="menu-item leaf" onClick = {()=>props.update("speed", 1)}>Balanced</div>
+              <div className="menu-item leaf" onClick ={()=>props.update("speed", 2)}>Fast</div>
             </div>
           </Popup>
 
