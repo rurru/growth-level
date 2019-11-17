@@ -56,6 +56,10 @@ const App = (props) => {
     setMessage({content: "Leveling speed is now "+speeds[speed]+".", type: "notification"});
   }
 
+  const changeCategories = (categories) => {
+    
+  }
+
   return (
     <div id = "app">
       <NavBar>
