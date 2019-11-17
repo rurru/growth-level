@@ -50,21 +50,24 @@ const App = (props) => {
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
 
-  const changeLevelSpeed = (speed) => {
-    let speeds = ["Slow", "Balanced", "Fast"];
-    setMultiplier(speed + 1);
-    setMessage({content: "Leveling speed is now "+speeds[speed]+".", type: "notification"});
-  }
 
-  const changeCategories = (categories) => {
-    
+  const changeSettings = (setting, value) => {
+    switch (setting) {
+      case "speed": 
+        let speeds = ["Slow", "Balanced", "Fast"];
+        setMultiplier(value + 1);
+        setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
+        break;
+      default: break;
+    }
+
   }
 
   return (
     <div id = "app">
       <NavBar>
         <MainMenu
-          changeSpeed = {(s) => changeLevelSpeed(s)} />
+          update = {(setting, value) => changeSettings(setting, value)} />
       </NavBar>
       {message.type == "" ? null :
         <Message content = {message} clear = {() => setMessage({content: "", type: ""})} /> }

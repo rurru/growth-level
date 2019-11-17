@@ -27,9 +27,9 @@ const MainMenu = (props) => {
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} closeOnDocumentClick>
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="submenu-item" onClick = {()=>props.changeSpeed(0)}>Slow</div>
-              <div className="submenu-item" onClick = {()=>props.changeSpeed(1)}>Balanced</div>
-              <div className="submenu-item" onClick = {()=>props.changeSpeed(2)}>Fast</div>
+              <div className="submenu-item" onClick = {()=>props.update("speed", 0)}>Slow</div>
+              <div className="submenu-item" onClick = {()=>props.update("speed", 1)}>Balanced</div>
+              <div className="submenu-item" onClick ={()=>props.update("speed", 2)}>Fast</div>
             </div>
           </Popup>
 
