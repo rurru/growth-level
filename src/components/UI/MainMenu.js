@@ -23,10 +23,13 @@ const MainMenu = (props) => {
         <div className="menu">
           <div className="menu-item">Set Path</div>
 
-          <Popup trigger = { <div className="menu-item leaf"> Edit Categories </div>}
-                            contentStyle = {{width: "70%", height: "400px"}}
+          <Popup trigger = { <div className="menu-item leaf"> 
+                              Edit Categories </div>}
+                            contentStyle = {{width: "auto", display: "flex", padding: "20px",
+                              justifyContent: "center", alignItems: "center", flexDirection: "column"}}
                             onClose = {() => toggleMenu(false)}
                             modal closeOnDocumentClick >
+              <h3>Task and Quest Categories</h3>
             <CategoryEditor categories = {props.categories} update = {(s, v) => props.update(s, v)} />
           </Popup>
 
@@ -34,9 +37,9 @@ const MainMenu = (props) => {
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} closeOnDocumentClick>
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="menu-item leaf" onClick = {()=>props.update("speed", 0)}>Slow</div>
+              <div className="menu-item leaf" onClick = {()=>props.update("speed", 2)}>Slow</div>
               <div className="menu-item leaf" onClick = {()=>props.update("speed", 1)}>Balanced</div>
-              <div className="menu-item leaf" onClick ={()=>props.update("speed", 2)}>Fast</div>
+              <div className="menu-item leaf" onClick ={()=>props.update("speed", 0)}>Fast</div>
             </div>
           </Popup>
 

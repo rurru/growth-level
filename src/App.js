@@ -54,7 +54,7 @@ const App = (props) => {
   const changeSettings = (setting, value) => {
     switch (setting) {
       case "speed": 
-        let speeds = ["Slow", "Balanced", "Fast"];
+        let speeds = ["Fast", "Balanced", "Slow"];
         setMultiplier(value + 1);
         setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
         break;

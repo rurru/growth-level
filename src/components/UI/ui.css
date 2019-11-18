@@ -65,7 +65,6 @@
     font-family: Roboto;
     font-size: 0.9em;
     color: #555;
-    background-color: #def0d8;
 }
 
 #message-close {
@@ -78,7 +77,7 @@
     height: 15px;
     color: #7bab79;
     font-weight: 700;
-    border: 1px solid #7bab79
+    border: 1px solid;
 }
 
 #message-close:hover {
