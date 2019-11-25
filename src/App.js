@@ -75,6 +75,8 @@ const App = (props) => {
     <div id = "app">
       <NavBar>
         <MainMenu
+          paths = {paths}
+          categories = {categories}
           update = {(setting, value) => changeSettings(setting, value)} />
       </NavBar>
       {message.type == "" ? null :

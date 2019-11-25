@@ -6,12 +6,20 @@ import './ui.css';
 const MainMenu = (props) => {
     const [buttonStyle, setButtonStyle] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [categoriesOpen, setCategoriesOpen] = useState(false);
     const menuStyle = { width: "auto", padding: "0", boxShadow: "-8px 8px 5px #ccc"};
     const subMenuStyle = {...menuStyle, textAlign: "center"};
 
     const toggleMenu = (shouldOpen) => {
       setButtonStyle(shouldOpen ? {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"} : null);
       setMenuOpen(shouldOpen);
+    }
+
+    const toggleCategories = (shouldOpen) => {
+      if (!shouldOpen) {
+        toggleMenu(false);
+      }
+      setCategoriesOpen(shouldOpen);
     }
 
   return (
@@ -22,18 +30,16 @@ const MainMenu = (props) => {
                          contentStyle={menuStyle} position='bottom right'>
         <div className="menu">
           <div className="menu-item">Set Path</div>
-
-          <Popup trigger = { <div className="menu-item leaf"> 
-                              Edit Categories </div>}
-                            contentStyle = {{width: "auto", display: "flex", padding: "20px",
-                              justifyContent: "center", alignItems: "center", flexDirection: "column"}}
-                            onClose = {() => toggleMenu(false)}
-                            modal closeOnDocumentClick >
-              <h3>Task and Quest Categories</h3>
-            <CategoryEditor categories = {props.categories} update = {(s, v) => props.update(s, v)} />
-          </Popup>
-
-          <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
+          <div className = "menu-item leaf" 
+               onClick = {() => toggleCategories(true)}>Edit Categories</div>
+            <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}>
+              <div className = "modal">
+                <h3>Task and Quest Categories</h3>
+                  <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
+                  <CategoryEditor categories = {props.categories} update = {(s, v) => props.update(s, v)} />
+              </div>
+            </Popup>
+            <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} closeOnDocumentClick>
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
@@ -47,5 +53,11 @@ const MainMenu = (props) => {
       </Popup>
     );
 }
+
+const CustomButton = React.forwardRef(({open , ...props}, ref) => (
+  <button className="close-button" ref={ref} {...props}>
+    X
+  </button>
+));
 
 export default MainMenu;
