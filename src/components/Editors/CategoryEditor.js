@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import "./editors.css";
+import "./editors.css"; 
 import { categoryColors } from "./../../constants"
 
 const CategoryEditor = (props) => {
@@ -19,7 +19,7 @@ const CategoryEditor = (props) => {
     }
 
     const updateName = (name) => {
-        
+
     }
 
     return (
