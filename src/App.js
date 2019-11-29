@@ -21,6 +21,7 @@ const RewardList = React.lazy(() => {
 const App = (props) => {
   const [paths, setPaths] = useState(["default"]);
   const [message, setMessage] = useState({content: "", type: ""});
+  const [showMessage, setShowMessage] = useState(false);
   const [xp, setXp] = useState(90);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 200});
@@ -57,6 +58,7 @@ const App = (props) => {
         let speeds = ["Fast", "Balanced", "Slow"];
         setMultiplier(value + 1);
         setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
+        console.log(message);
         break;
       case "categories":
         setCategories(value);
@@ -66,6 +68,9 @@ const App = (props) => {
         setPaths(value);
         setMessage({content: "Paths have been updated!", type: "notification"});
         break;
+      case "message":
+        setShowMessage(true);
+        console.log(message);
       default: break;
     }
 
@@ -79,8 +84,10 @@ const App = (props) => {
           categories = {categories}
           update = {(setting, value) => changeSettings(setting, value)} />
       </NavBar>
-      {message.type == "" ? null :
-        <Message content = {message} clear = {() => setMessage({content: "", type: ""})} /> }
+      {showMessage && message.content !== "" ? 
+        <Message content = {message} 
+          clear = {() => {setShowMessage(false); setMessage = {content: "", type: ""}}} /> 
+        : null }
       <XPBar progress = {progress} />
       <div id = "list">
         <div className = "tab-row">

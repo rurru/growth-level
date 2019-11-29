@@ -5,6 +5,7 @@ import { categoryColors } from "./../../constants"
 const CategoryEditor = (props) => {
     const [colorPickerStyle, setColorPickerStyle] = useState({display: "none"});
     const [currentCategory, setCurrentCategory] = useState(0);
+    const [edit, setEdit] = useState(props.categories.length);
 
     const selectCategory = (cat) => {
         setColorPickerStyle({display: "block", top: -227 + (cat+2)*36 + "px"});
@@ -18,7 +19,13 @@ const CategoryEditor = (props) => {
         props.update("categories", newCategories);
     }
 
-    const updateName = (name) => {
+    const updateName = (e, i) => {
+        let newCategories = props.categories;
+        newCategories[i].name = e.target.value;
+        props.update("categories", newCategories);
+    }
+
+    const addNew = (e) => {
 
     }
 
@@ -40,7 +47,11 @@ const CategoryEditor = (props) => {
         </div>
         {props.categories.map ((cat, i) => 
             <div className = "table-row" key = {cat.color.color}>
-                <div className = "table-column">{cat.name}</div>
+                <div className = "table-column">
+                    {edit === i ? <input type="text" value={cat.name} 
+                        onChange={(e) => updateName(e, i)} /> : 
+                    <div onClick = {() => setEdit(i)} >{cat.name}</div> }
+                </div>
                 <div className = "table-column">
                     <div className = "category-color" 
                         style = {{backgroundColor: cat.color.color}}
@@ -48,6 +59,11 @@ const CategoryEditor = (props) => {
                 </div>
             </div>
         )}
+        <div className = "table-row"> 
+            {edit < props.categories.length ? null :
+                    <input type="text" placeholder="Enter new category name" 
+                     onChange={(e) => addNew(e)} /> }
+        </div>
     </div>)
 }   
 

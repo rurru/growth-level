@@ -13,6 +13,9 @@ const MainMenu = (props) => {
     const toggleMenu = (shouldOpen) => {
       setButtonStyle(shouldOpen ? {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"} : null);
       setMenuOpen(shouldOpen);
+      if (!shouldOpen) {
+        props.update("message", true);
+      }
     }
 
     const toggleCategories = (shouldOpen) => {
