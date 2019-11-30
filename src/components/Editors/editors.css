@@ -88,6 +88,11 @@
     cursor: pointer;
 }
 
+.settings-input {
+    height: 20px;
+    padding: 0 2px;
+}
+
 h3 {
     margin: 0 0 10px;
 }

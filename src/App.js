@@ -86,7 +86,7 @@ const App = (props) => {
       </NavBar>
       {showMessage && message.content !== "" ? 
         <Message content = {message} 
-          clear = {() => {setShowMessage(false); setMessage = {content: "", type: ""}}} /> 
+          clear = {() => {setShowMessage(false); setMessage({content: "", type: ""})}} /> 
         : null }
       <XPBar progress = {progress} />
       <div id = "list">

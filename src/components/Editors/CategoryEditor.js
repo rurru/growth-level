@@ -48,9 +48,9 @@ const CategoryEditor = (props) => {
         {props.categories.map ((cat, i) => 
             <div className = "table-row" key = {cat.color.color}>
                 <div className = "table-column">
-                    {edit === i ? <input type="text" value={cat.name} 
-                        onChange={(e) => updateName(e, i)} /> : 
-                    <div onClick = {() => setEdit(i)} >{cat.name}</div> }
+                    {<input type="text" value={cat.name} 
+                        style = {{border: "none"}} className = "settings-input"
+                        onChange={(e) => updateName(e, i)} />  }
                 </div>
                 <div className = "table-column">
                     <div className = "category-color" 
@@ -59,9 +59,10 @@ const CategoryEditor = (props) => {
                 </div>
             </div>
         )}
-        <div className = "table-row"> 
+        <div className = "table-row" onClick = {() => setEdit(props.categories.length)} > 
             {edit < props.categories.length ? null :
-                    <input type="text" placeholder="Enter new category name" 
+                    <input type="text" className = "settings-input"
+                     placeholder="Enter new category name" 
                      onChange={(e) => addNew(e)} /> }
         </div>
     </div>)
