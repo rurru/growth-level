@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: #fff;
 }
 
 .settings-table {
@@ -112,6 +113,17 @@
 .settings-input {
     height: 20px;
     padding: 0 2px;
+}
+
+.delete {
+    right: 5px;
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.delete:hover {
+    cursor: pointer;
+    color: #FC2847;
 }
 
 h3 {

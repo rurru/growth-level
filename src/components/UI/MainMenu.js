@@ -13,9 +13,6 @@ const MainMenu = (props) => {
     const toggleMenu = (shouldOpen) => {
       setButtonStyle(shouldOpen ? {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"} : null);
       setMenuOpen(shouldOpen);
-      if (!shouldOpen) {
-        props.update("message", true);
-      }
     }
 
     const toggleCategories = (shouldOpen) => {
@@ -25,7 +22,7 @@ const MainMenu = (props) => {
       setCategoriesOpen(shouldOpen);
     }
 
-    const update = (setting, value) => {
+    const updateSettings = (setting, value) => {
       toggleCategories(false);
       props.update(setting, value);
     }
@@ -36,24 +33,28 @@ const MainMenu = (props) => {
                           onOpen={() => toggleMenu(true)} arrow={false}
                           open = {menuOpen} onClose = {() => toggleMenu(false)}
                          contentStyle={menuStyle} position='bottom right'>
+
         <div className="menu">
           <div className="menu-item">Set Path</div>
           <div className = "menu-item leaf" 
                onClick = {() => toggleCategories(true)}>Edit Categories</div>
-            <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}>
+
+            <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}
+                  contentStyle = {{width: "auto"}}>
               <div className = "modal">
                 <h3>Task and Quest Categories</h3>
                   <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
-                  <CategoryEditor categories = {props.categories} update = {(s,v) => update(s,v)} />
+                  <CategoryEditor categories = {props.categories} update = {(s,v) => updateSettings(s,v)} />
               </div>
             </Popup>
+
             <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} >
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="menu-item leaf" onClick = {()=> update("speed", 2)}>Slow</div>
-              <div className="menu-item leaf" onClick = {()=> update("speed", 1)}>Balanced</div>
-              <div className="menu-item leaf" onClick ={()=> update("speed", 0)}>Fast</div>
+              <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 2)}>Slow</div>
+              <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 1)}>Balanced</div>
+              <div className="menu-item leaf" onClick ={()=>updateSettings("speed", 0)}>Fast</div>
             </div>
           </Popup>
 
