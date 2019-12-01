@@ -1,9 +1,10 @@
 import React, { useState }  from 'react';
-import "./editors.css"; 
+import _ from "lodash";
 import { categoryColors } from "./../../constants"
+import "./editors.css"; 
 
 const CategoryEditor = (props) => {
-    const [categories, setCategories] = useState([...props.categories]);
+    const [categories, setCategories] = useState(_.cloneDeep(props.categories));
     const [colorPickerStyle, setColorPickerStyle] = useState({display: "none"});
     const [currentCategory, setCurrentCategory] = useState(0);
 
@@ -13,14 +14,14 @@ const CategoryEditor = (props) => {
     }
 
     const selectColor = (color) => {
-        let newCategories = [...categories];
+        let newCategories = _.cloneDeep(categories);
         newCategories[currentCategory].color = color;
         setColorPickerStyle({display: "none"});
         setCategories(newCategories);
     }
 
     const updateName = (e, i) => {
-        let newCategories = [...categories];
+        let newCategories = _.cloneDeep(categories);
         newCategories[i].name = e.target.value;
         setCategories(newCategories);
     }
@@ -39,7 +40,7 @@ const CategoryEditor = (props) => {
     }
 
     const deleteCategory = (i) => {
-        let newCategories = [...categories];
+        let newCategories = _.cloneDeep(categories);
         newCategories.splice(i, 1);
         setCategories(newCategories);
     }
