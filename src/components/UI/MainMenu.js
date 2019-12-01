@@ -25,6 +25,11 @@ const MainMenu = (props) => {
       setCategoriesOpen(shouldOpen);
     }
 
+    const update = (setting, value) => {
+      toggleCategories(false);
+      props.update(setting, value);
+    }
+
   return (
       <Popup trigger = { <div id = "menu-button" style = {buttonStyle} >
                           <i className="fas fa-bars"></i> </div>} 
@@ -39,16 +44,16 @@ const MainMenu = (props) => {
               <div className = "modal">
                 <h3>Task and Quest Categories</h3>
                   <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
-                  <CategoryEditor categories = {props.categories} update = {(s, v) => props.update(s, v)} />
+                  <CategoryEditor categories = {props.categories} update = {(s,v) => update(s,v)} />
               </div>
             </Popup>
             <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
-                            contentStyle={subMenuStyle} closeOnDocumentClick>
+                            contentStyle={subMenuStyle} >
             <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="menu-item leaf" onClick = {()=>props.update("speed", 2)}>Slow</div>
-              <div className="menu-item leaf" onClick = {()=>props.update("speed", 1)}>Balanced</div>
-              <div className="menu-item leaf" onClick ={()=>props.update("speed", 0)}>Fast</div>
+              <div className="menu-item leaf" onClick = {()=> update("speed", 2)}>Slow</div>
+              <div className="menu-item leaf" onClick = {()=> update("speed", 1)}>Balanced</div>
+              <div className="menu-item leaf" onClick ={()=> update("speed", 0)}>Fast</div>
             </div>
           </Popup>
 
