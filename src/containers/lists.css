@@ -1,0 +1,26 @@
+.add-button, .edit-button {
+    position: absolute;
+    font-size: 1.3em;
+    font-weight: 900;
+    top: -40px;
+    right: 37px;
+    color: #56ab2f;
+    border: 1px solid #fff;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-button {
+    right: 0;
+}
+
+
+.add-button:hover, .edit-button:hover {
+    cursor: pointer;
+    background: #56ab2f;
+    color: #fff;
+    border: 1px solid #ccc;
+}

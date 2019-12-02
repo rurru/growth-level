@@ -6,4 +6,8 @@ export const categoryColors = [
     {color: "#A5694F", font: "#ffffff"}, {color: "#FFCFAB", font: "#000000"},
     {color: "#CDC5C2", font: "#000000"}, {color: "#1FCECB", font: "#000000"},
     {color: "#FFAACC", font: "#000000"}, {color: "#1DF914", font: "#000000"}
-]
+];
+
+export const icons = [
+
+];
