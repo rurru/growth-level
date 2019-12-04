@@ -17,10 +17,13 @@
     right: 0;
 }
 
-
 .add-button:hover, .edit-button:hover {
     cursor: pointer;
     background: #56ab2f;
     color: #fff;
     border: 1px solid #ccc;
+}
+
+.add-button:active, .edit-button:active {
+    background: #074a07;
 }
