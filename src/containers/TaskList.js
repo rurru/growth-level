@@ -32,6 +32,9 @@ const TaskList = (props) => {
             <div className = "add-button" >
             <Popup open = {editTask} onClose = {() => toggleTaskEditor(false)}
                   contentStyle = {{width: "auto"}}>
+                      <div className = "modal">
+                          <TaskEditor />
+                      </div>
             </Popup>
                 <i class="fas fa-plus"></i>
             </div>
