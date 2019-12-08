@@ -63,10 +63,4 @@ const MainMenu = (props) => {
     );
 }
 
-const CustomButton = React.forwardRef(({open , ...props}, ref) => (
-  <button className="close-button" ref={ref} {...props}>
-    X
-  </button>
-));
-
 export default MainMenu;
