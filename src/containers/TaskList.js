@@ -13,14 +13,20 @@ const TaskList = (props) => {
     const [editingTask, setEditingTask] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [editModeStyle, setEditModeStyle] = useState({});
 
-    const toggleTaskEditor = (editorOpen) => {
-
+    const toggleTaskEditor = () => {
+        const editorOpen = !editingTask;
+        setEditingTask(editorOpen);
     }
 
     const toggleEditMode = () => {
         const newEditMode = !editMode;
         setEditMode(newEditMode);
+
+        const buttonStyle = newEditMode ? 
+            {boxShadow: "-5px 5px 10px #ccc inset"}  : {};
+        setEditModeStyle(buttonStyle);
     }
 
     const handleTaskClick = (level) => {
@@ -30,16 +36,16 @@ const TaskList = (props) => {
  
     return (
         <div id = "tasklist" className = "container">
-            <div className = "add-button" onClick = {() => setEditingTask(true)}>
-            <Popup open = {editingTask} onClose = {() => toggleTaskEditor(false)}
+            <div className = "add-button" onClick = {() => toggleTaskEditor()}>
+            <Popup open = {editingTask} 
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
-                    <TaskEditor />
+                    <TaskEditor name = "" categoryID = {0}  />
                 </div>
             </Popup>
                 <i className="fas fa-plus"></i>
             </div>
-            <div className = "edit-button" onClick={() => toggleEditMode()}>
+            <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
 

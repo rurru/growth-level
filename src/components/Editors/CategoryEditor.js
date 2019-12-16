@@ -35,7 +35,9 @@ const CategoryEditor = (props) => {
 
     const addNew = (catName) => {
         const newCats = categories.concat(
-            [{name: catName, color: categoryColors[Math.floor(Math.random() * 10)]}]);
+            [{id: categories[categories.length-1].id + 1,
+              name: catName, 
+              color: categoryColors[Math.floor(Math.random() * 10)]}]);
         setCategories(newCats);
     }
 
@@ -51,7 +53,7 @@ const CategoryEditor = (props) => {
             <div className = "options-header">Choose a Color</div>
             { categoryColors.map(color =>
                 <div className = "category-color-option" 
-                     key = {color.color}
+                     key = {color.color}o
                      style = {{backgroundColor: color.color}} 
                      onClick = {() => selectColor(color)} />
                 )
@@ -62,9 +64,9 @@ const CategoryEditor = (props) => {
             <div className = "table-column">Color</div>
         </div>
         {categories.map ((cat, i) => 
-            <div className = "table-row" key = {cat.name}>
+            <div className = "table-row" key = {cat.id}>
                 <div className = "table-column">
-                    <input type="text" value={cat.name} 
+                    <input type="text" value={cat.name} key = {cat.id} 
                         style = {{border: "none"}} className = "settings-input"
                         onChange={(e) => updateName(e, i)} />  
                 </div>
