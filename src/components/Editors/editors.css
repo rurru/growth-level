@@ -28,7 +28,7 @@
     font-size: 0.75em;
     font-weight: 500;
     font-family: Acme;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .settings-table {
@@ -136,6 +136,11 @@
 .settings-input {
     height: 20px;
     padding: 0 2px;
+    width: 80%;
+}
+
+.settings-select {
+    height: 25px;
 }
 
 .delete {

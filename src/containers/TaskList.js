@@ -15,6 +15,8 @@ const TaskList = (props) => {
     const [tasks, setTasks] = useState([]);
     const [editModeStyle, setEditModeStyle] = useState({});
 
+    const level = props.levelInfo.level;
+
     const toggleTaskEditor = () => {
         const editorOpen = !editingTask;
         setEditingTask(editorOpen);
@@ -40,7 +42,13 @@ const TaskList = (props) => {
             <Popup open = {editingTask} 
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
-                    <TaskEditor name = "" categoryID = {0}  />
+                    <TaskEditor task = {{
+                        name: "", 
+                        categoryID: 0,  
+                        icon: "fas fa-home", 
+                        level: props.levelInfo.level, 
+                        auto: false}} 
+                        categories = {props.categories} />
                 </div>
             </Popup>
                 <i className="fas fa-plus"></i>
