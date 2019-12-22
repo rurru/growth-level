@@ -136,11 +136,13 @@
 .settings-input {
     height: 20px;
     padding: 0 2px;
-    width: 80%;
+    width: 90%;
 }
 
 .settings-select {
     height: 25px;
+    padding: 0 2px;
+    
 }
 
 .delete {

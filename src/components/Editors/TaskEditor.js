@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {icons} from './../../constants';
 import "./editors.css"; 
 
 const TaskEditor = (props) => {
@@ -15,7 +16,16 @@ const TaskEditor = (props) => {
   }
 
   return (
-    <div id = "task-editor">
+    <div id = "task-editor">        
+    <div className = "task-icon-picker" style = {iconPickerStyle} >
+    <div className = "options-header">Choose an Icon</div>
+    { icons.map(icon =>
+        <div className = "task-icon-option" 
+             key = {icon}
+             onClick = {() => selectIcon(icon)} />
+        )
+    }
+</div>
       <div className = "form-header">Add New Task</div>
       
       <div className = "form-label">Task Name</div>
