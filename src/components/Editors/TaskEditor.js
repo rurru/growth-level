@@ -6,6 +6,7 @@ const TaskEditor = (props) => {
 
   
   const [iconPickerStyle, setIconPickerStyle] = useState({display: "none"});
+  const [icon, setIcon] = useState("fas fa-tree");
   const [autoLevel, setAutoLevel] = useState(false);
 
 
@@ -34,7 +35,9 @@ const TaskEditor = (props) => {
     { icons.map(icon =>
         <div className = "task-icon-option" 
              key = {icon}
-             onClick = {() => selectIcon(icon)} />
+             onClick = {() => selectIcon(icon)}>
+          <i class={icon}></i>
+        </div>
         )
     }
 </div>
@@ -56,8 +59,8 @@ const TaskEditor = (props) => {
       <input type="checkbox" name="autoLevel" className = "settings-option"
         checked={autoLevel} onChange={toggleAutoLevel} />
         <span className = "form-label">Auto Level</span>
-      <span className = "task-icon-button">
-      <i class="fas fa-tree"></i>
+      <span className = "task-icon-button" onClick = {() => setIconPickerStyle({display:"block"})}>
+        <i class={icon}></i>
       </span>
       <span className = "form-label">Icon</span> 
     </div>

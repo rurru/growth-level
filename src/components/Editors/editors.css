@@ -102,13 +102,13 @@
     border: 1px solid #ccc;
 }
 
-.category-color:hover, .task-icon-button:hover {
+.category-color:hover {
     box-shadow: inset 1px 1px 4px 1px #fff,
         inset -1px -1px 0 1px rgba(255,255,255,0.5);
     cursor: pointer;
 }
 
-.category-color-picker {
+.category-color-picker, .task-icon-picker {
     display: none;
     position: absolute;
     right: 66px;
@@ -121,12 +121,33 @@
     flex-wrap: wrap;
 }
 
+.task-icon-picker {
+    right: 145px;
+    bottom: 52px;
+    width: 220px;
+    height: 370px;
+    color: #333;
+}
+
 .category-color-option {
     display: inline-block;
     margin: 3px;
     width: 30px;
     height: 30px;    
     border: 2px solid #fff;
+}
+
+.task-icon-option {
+    display: inline-block;
+    width: 25px;
+    height: 25px;    
+    border: 1px solid #777;
+    text-align: center;
+}
+
+.task-icon-option:hover {
+    cursor: pointer;
+    color: #56ab2f;
 }
 
 .category-color-option:hover {
@@ -155,16 +176,23 @@
 }
 
 .task-icon-button {
-    background: #9de381;
-    color: #fff;
+    color: #9de381;
+    background: #fff;
     padding: 7px 10px;
     margin: 0 5px 0 15px;
     position: relative;
     bottom: 8px;
+    border: 2px solid transparent;
+}
+
+.task-icon-button:hover {
+    background: #9de381;
+    color: #fff;
+    cursor: pointer;
 }
 
 .task-icon-button:active {
-    color: #333;
+    color: #000;
 }
 
 .delete {
