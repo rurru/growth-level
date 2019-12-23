@@ -11,8 +11,9 @@
 
 #task-editor {
     width: 300px;
-    height: 500px;
+    padding: 25px;
     color: #000;
+    background: #edffd4;
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -101,7 +102,7 @@
     border: 1px solid #ccc;
 }
 
-.category-color:hover {
+.category-color:hover, .task-icon-button:hover {
     box-shadow: inset 1px 1px 4px 1px #fff,
         inset -1px -1px 0 1px rgba(255,255,255,0.5);
     cursor: pointer;
@@ -133,16 +134,37 @@
     cursor: pointer;
 }
 
-.settings-input {
+.settings-input, .settings-select {
     height: 20px;
     padding: 0 2px;
     width: 90%;
 }
 
-.settings-select {
+.settings-select, .settings-select-small {
     height: 25px;
     padding: 0 2px;
-    
+}
+
+.settings-select-small {
+    width: 30%;
+}
+
+.settings-option {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.task-icon-button {
+    background: #9de381;
+    color: #fff;
+    padding: 7px 10px;
+    margin: 0 5px 0 15px;
+    position: relative;
+    bottom: 8px;
+}
+
+.task-icon-button:active {
+    color: #333;
 }
 
 .delete {

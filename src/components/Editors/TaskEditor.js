@@ -4,6 +4,11 @@ import "./editors.css";
 
 const TaskEditor = (props) => {
 
+  
+  const [iconPickerStyle, setIconPickerStyle] = useState({display: "none"});
+  const [autoLevel, setAutoLevel] = useState(false);
+
+
   const level = props.task.level;
   let levelOptions = [];
 
@@ -12,7 +17,14 @@ const TaskEditor = (props) => {
   }
 
   const updateName = (e) => {
+  }
 
+  const toggleAutoLevel =  () => {
+    const newSetting = !autoLevel;
+    setAutoLevel(newSetting);
+  }
+
+  const selectIcon =  (icon) => {
   }
 
   return (
@@ -32,15 +44,22 @@ const TaskEditor = (props) => {
       <input type="text" className="settings-input" onChange={(e) => updateName(e)} />
 
       <div className = "form-label">Category</div> 
-      <select className="settings-input settings-select">
+      <select className="settings-select">
         {props.categories.map(cat => <option value={cat.name}>{cat.name}</option>)}
       </select>
 
       <div className = "form-label">Level</div> 
-      <select className="settings-input settings-select">
+      <select className="settings-select-small">
         {levelOptions.map(lvl => <option value={lvl}>{lvl}</option>)} 
       </select>
-
+      
+      <input type="checkbox" name="autoLevel" className = "settings-option"
+        checked={autoLevel} onChange={toggleAutoLevel} />
+        <span className = "form-label">Auto Level</span>
+      <span className = "task-icon-button">
+      <i class="fas fa-tree"></i>
+      </span>
+      <span className = "form-label">Icon</span> 
     </div>
   );
 }
