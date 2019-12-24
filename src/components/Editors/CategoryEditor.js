@@ -83,7 +83,7 @@ const CategoryEditor = (props) => {
                 placeholder="Enter new category name" 
                 onKeyDown={keyPressed} /> 
         </div>
-        <div className = "table-row button-row" onClick = {() => props.update("categories", categories)}>
+        <div className = "table-row button submit-button" onClick = {() => props.update("categories", categories)}>
             Submit Changes
         </div>
     </div>)

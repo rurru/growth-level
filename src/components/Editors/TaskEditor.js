@@ -25,7 +25,9 @@ const TaskEditor = (props) => {
     setAutoLevel(newSetting);
   }
 
-  const selectIcon =  (icon) => {
+  const selectIcon = (icon) => {
+    setIcon(icon);
+    setIconPickerStyle({display: "none"});
   }
 
   return (
@@ -63,6 +65,11 @@ const TaskEditor = (props) => {
         <i class={icon}></i>
       </span>
       <span className = "form-label">Icon</span> 
+      <div id = "task-buttons">
+        <div className = "button task-edit-button">Cancel</div>
+        <div className = "button submit-button task-edit-button">Submit Task</div>
+        <div className = "button task-edit-button">Delete Task</div>
+      </div>
     </div>
   );
 }

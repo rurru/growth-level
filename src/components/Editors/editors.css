@@ -59,30 +59,50 @@
     font-size: 0.6em;
 }
 
-.button-row {
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Acme;
+    color: #000;
+}
+
+.submit-button {
     background: #DAD299;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #B0DAB9, #DAD299); 
     background: linear-gradient(to top, #B0DAB9, #DAD299); 
     opacity: 0.7;
-    color: #000;
     border-radius: 0 0 10px 10px;
-    font-family: Acme;
     font-size: 0.65em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.button-row:hover {
+.submit-button:hover {
     opacity: 1;
     cursor: pointer;
 }
 
-.button-row:active {
+.submit-button:active {
     background: #c2b656;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #86c694, #c2b656); 
     background: linear-gradient(to top, #86c694, #c2b656); 
     color: #fff;
+}
+
+#task-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.task-edit-button {
+    width: 100px;
+    height: 30px;
+    font-size: 0.7em;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .table-column {
