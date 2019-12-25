@@ -59,12 +59,37 @@
     font-size: 0.6em;
 }
 
+.button-row {
+    border-radius: 0 0 10px 10px;
+    font-size: 0.65em;
+}
+
 .button {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Acme;
     color: #000;
+    border-radius: 5px;
+}
+
+#task-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+.task-edit-button {
+    width: 90px;
+    height: 30px;
+    font-size: 0.7em;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.3);
+    opacity: 0.8;
 }
 
 .submit-button {
@@ -72,11 +97,9 @@
     background: -webkit-linear-gradient(to top, #B0DAB9, #DAD299); 
     background: linear-gradient(to top, #B0DAB9, #DAD299); 
     opacity: 0.7;
-    border-radius: 0 0 10px 10px;
-    font-size: 0.65em;
 }
 
-.submit-button:hover {
+.button:hover {
     opacity: 1;
     cursor: pointer;
 }
@@ -86,23 +109,6 @@
     background: -webkit-linear-gradient(to top, #86c694, #c2b656); 
     background: linear-gradient(to top, #86c694, #c2b656); 
     color: #fff;
-}
-
-#task-buttons {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.task-edit-button {
-    width: 100px;
-    height: 30px;
-    font-size: 0.7em;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .table-column {
@@ -196,7 +202,7 @@
 }
 
 .task-icon-button {
-    color: #9de381;
+    color: #56ab2f;
     background: #fff;
     padding: 7px 10px;
     margin: 0 5px 0 15px;
