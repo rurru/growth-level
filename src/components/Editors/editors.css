@@ -92,16 +92,16 @@
     opacity: 0.8;
 }
 
+.button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
 .submit-button {
     background: #DAD299;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #B0DAB9, #DAD299); 
     background: linear-gradient(to top, #B0DAB9, #DAD299); 
     opacity: 0.7;
-}
-
-.button:hover {
-    opacity: 1;
-    cursor: pointer;
 }
 
 .submit-button:active {
@@ -149,9 +149,9 @@
 
 .task-icon-picker {
     right: 145px;
-    bottom: 52px;
-    width: 220px;
-    height: 370px;
+    bottom: 115px;
+    width: 270px;
+    height: 290px;
     color: #333;
 }
 
@@ -230,6 +230,24 @@
 .delete:hover {
     cursor: pointer;
     color: #FC2847;
+}
+
+.delete-button:hover {
+    background: #FC2847;
+}
+
+.delete-button:active {   
+    color: #fff; 
+    background: #ff0327;
+}
+
+.cancel-button:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.cancel-button:active {
+    color: #fff;
+    background: #111;
 }
 
 h3 {

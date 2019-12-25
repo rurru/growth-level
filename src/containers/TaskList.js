@@ -48,7 +48,9 @@ const TaskList = (props) => {
                         icon: "fas fa-home", 
                         level: props.levelInfo.level, 
                         auto: false}} 
-                        categories = {props.categories} />
+                        categories = {props.categories}
+                        cancel = {toggleTaskEditor}
+                        />
                 </div>
             </Popup>
                 <i className="fas fa-plus"></i>
