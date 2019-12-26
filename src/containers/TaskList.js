@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
 import TaskEditor from '.././components/Editors/TaskEditor';
-//import TaskItem from 'TaskItem';
+import TaskItem from './TaskItem';
 import "../components/Editors/editors.css"; 
 import './lists.css';
  
@@ -31,10 +31,15 @@ const TaskList = (props) => {
         setEditModeStyle(buttonStyle);
     }
 
-    const handleTaskClick = (level) => {
+    const saveTask = (task) => {
+        const newTasks = [...tasks];
+        newTasks.push(task);
+        setTasks([...newTasks]);
+        setEditingTask(false);
     }
 
-       
+    const handleTaskClick = (level) => {
+    }       
  
     return (
         <div id = "tasklist" className = "container">
@@ -43,13 +48,10 @@ const TaskList = (props) => {
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
                     <TaskEditor task = {{
-                        name: "", 
-                        categoryID: 0,  
-                        icon: "fas fa-home", 
-                        level: props.levelInfo.level, 
-                        auto: false}} 
+                        name: "", categoryID: 0, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
                         categories = {props.categories}
                         cancel = {toggleTaskEditor}
+                        save = {saveTask}
                         />
                 </div>
             </Popup>
@@ -58,11 +60,9 @@ const TaskList = (props) => {
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-
-            {//tasks.map(task =>
-               // <TaskItem onTaskClick = {(level) => handleTaskClick(level)}
-                    
-         //</div></div>       /> ) 
+            {tasks.map(task =>
+               <TaskItem onTaskClick = {(level) => handleTaskClick(level)} />
+               ) 
         }
         </div>
     )

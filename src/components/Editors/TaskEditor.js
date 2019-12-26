@@ -3,21 +3,31 @@ import {icons} from './../../constants';
 import "./editors.css"; 
 
 const TaskEditor = (props) => {
-
+  const [taskIcon, setTaskIcon] = useState(props.task.icon);
+  const [taskName, setTaskName] = useState(props.task.name);
+  const [taskLevel, setTaskLevel] = useState(props.task.level);
+  const [category, setCategory] = useState(props.categoryID);
   
   const [iconPickerStyle, setIconPickerStyle] = useState({display: "none"});
-  const [icon, setIcon] = useState("fas fa-tree");
   const [autoLevel, setAutoLevel] = useState(false);
 
 
-  const level = props.task.level;
   let levelOptions = [];
 
-  for (let i = level-5; i <= level+5; i++) {
+  for (let i = taskLevel-5; i <= taskLevel+5; i++) {
     if (i > 0) levelOptions.push(i);
   }
 
   const updateName = (e) => {
+    setTaskName(e.target.value);
+  }
+
+  const updateCategory = (e) => {
+    setCategory(e.target.value)
+  }
+
+  const updateLevel = (e) => {
+    setTaskLevel(e.target.value);
   }
 
   const toggleAutoLevel =  () => {
@@ -26,8 +36,21 @@ const TaskEditor = (props) => {
   }
 
   const selectIcon = (icon) => {
-    setIcon(icon);
+    setTaskIcon(icon);
     setIconPickerStyle({display: "none"});
+  }
+
+  const handleSubmit = () => {
+    const task = {
+      name: taskName, 
+      categoryID: category,  
+      icon: taskIcon, 
+      level: taskLevel, 
+      auto: autoLevel
+    }
+    console.log("Before save: ");
+    console.log(task);
+    props.save(task);
   }
 
   return (
@@ -38,7 +61,7 @@ const TaskEditor = (props) => {
         <div className = "task-icon-option" 
              key = {icon}
              onClick = {() => selectIcon(icon)}>
-          <i class={icon}></i>
+          <i className={icon}></i>
         </div>
         )
     }
@@ -46,29 +69,31 @@ const TaskEditor = (props) => {
       <div className = "form-header">Add New Task</div>
       
       <div className = "form-label">Task Name</div>
-      <input type="text" className="settings-input" onChange={(e) => updateName(e)} />
+      <input type="text" className="settings-input" value={taskName} onChange={(e) => updateName(e)} />
 
       <div className = "form-label">Category</div> 
-      <select className="settings-select">
-        {props.categories.map(cat => <option value={cat.name}>{cat.name}</option>)}
+      <select className="settings-select" onChange = {(e) => updateCategory(e)}>
+        {props.categories.map(cat => cat.id === category ?
+          <option value={cat.id} key={cat.id} selected = "selected">{cat.name}</option> :
+          <option value={cat.id} key={cat.id}>{cat.name}</option>) }
       </select>
 
       <div className = "form-label">Level</div> 
       <select className="settings-select-small">
-        {levelOptions.map(lvl => <option value={lvl}>{lvl}</option>)} 
+        {levelOptions.map(lvl => <option value={lvl} key={lvl}>{lvl}</option>)} 
       </select>
       
       <input type="checkbox" name="autoLevel" className = "settings-option"
         checked={autoLevel} onChange={toggleAutoLevel} />
         <span className = "form-label">Auto Level</span>
       <span className = "task-icon-button" onClick = {() => setIconPickerStyle({display:"block"})}>
-        <i class={icon}></i>
+        <i className={taskIcon}></i>
       </span>
       <span className = "form-label">Icon</span> 
       <div id = "task-buttons">
-        <div className = "button task-edit-button cancel-button" onClick = {props.cancel}>Cancel</div>
-        <div className = "button task-edit-button submit-button ">Submit Task</div>
-        <div className = "button task-edit-button delete-button">Delete Task</div>
+        <div className = "button task-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
+        <div className = "button task-edit-button submit-button" onClick={handleSubmit}>Submit Task</div>
+        {props.task.name === "" ? "" : <div className="button task-edit-button delete-button">Delete Task</div>}
       </div>
     </div>
   );

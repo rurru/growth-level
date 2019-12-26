@@ -25,7 +25,9 @@ const App = (props) => {
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 200});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
-  const [categories, setCategories] = useState([{id: 0, name: "Test", color: categoryColors[0]}, {id: 1, name: "Test2", color: categoryColors[1]}]);
+  const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
+                                                {id: 1, name: "Test", color: categoryColors[1]}, 
+                                                {id: 2, name: "Test2", color: categoryColors[2]}]);
 
 
   useEffect(() => {

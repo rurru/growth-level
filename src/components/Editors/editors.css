@@ -76,7 +76,7 @@
 #task-buttons {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-top: 30px;
 }
 
