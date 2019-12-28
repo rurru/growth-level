@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
 import TaskEditor from '.././components/Editors/TaskEditor';
-import TaskItem from './TaskItem';
+import TaskItem from '../components/ListItems/TaskItem';
 import "../components/Editors/editors.css"; 
 import './lists.css';
  
@@ -33,6 +33,7 @@ const TaskList = (props) => {
 
     const saveTask = (task) => {
         const newTasks = [...tasks];
+        task.id = tasks.length === 0 ? 0 : tasks[tasks.length-1].id + 1;
         newTasks.push(task);
         setTasks([...newTasks]);
         setEditingTask(false);
@@ -48,7 +49,7 @@ const TaskList = (props) => {
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
                     <TaskEditor task = {{
-                        name: "", categoryID: 0, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
+                        name: "", category: props.categories[0].id, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
                         categories = {props.categories}
                         cancel = {toggleTaskEditor}
                         save = {saveTask}
@@ -61,7 +62,7 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {tasks.map(task =>
-               <TaskItem onTaskClick = {(level) => handleTaskClick(level)} />
+               <TaskItem {...task} onTaskClick = {(level) => handleTaskClick(level)} />
                ) 
         }
         </div>

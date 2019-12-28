@@ -1,4 +1,12 @@
-.taskitem {
-    width: 150px;
-    height: 150px;
+.task-item {
+    width: 90px;
+    height: 90px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto;
+    font-size: 0.85em;
+    flex-direction: column;
+    position: relative;
 }

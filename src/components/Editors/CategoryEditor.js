@@ -15,7 +15,7 @@ const CategoryEditor = (props) => {
 
     const selectColor = (color) => {
         let newCategories = _.cloneDeep(categories);
-        newCategories[currentCategory].color = color;
+        newCategories[currentCategory+1].color = color;
         setColorPickerStyle({display: "none"});
         setCategories(newCategories);
     }
@@ -53,7 +53,7 @@ const CategoryEditor = (props) => {
             <div className = "options-header">Choose a Color</div>
             { categoryColors.map(color =>
                 <div className = "category-color-option" 
-                     key = {color.color}o
+                     key = {color.color}
                      style = {{backgroundColor: color.color}} 
                      onClick = {() => selectColor(color)} />
                 )
@@ -63,7 +63,7 @@ const CategoryEditor = (props) => {
             <div className = "table-column">Name</div>
             <div className = "table-column">Color</div>
         </div>
-        {categories.map ((cat, i) => 
+        {categories.slice(1).map ((cat, i) => 
             <div className = "table-row" key = {cat.id}>
                 <div className = "table-column">
                     <input type="text" value={cat.name} key = {cat.id} 

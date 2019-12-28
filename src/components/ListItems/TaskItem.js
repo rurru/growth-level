@@ -1,18 +1,23 @@
 import React from 'react';
-
+import './ListItems.css';
 //category colors are predefined so they can be mapped to font color
 
 const TaskItem = (props) => {
+
+  console.log(props);
+
   const taskStyle = {
-    color: props.category.fontColor,
-    backgroundColor: props.category.bgColor
+    color: props.category.color.font,
+    backgroundColor: props.category.color.color
   };
 
+  console.log(taskStyle);
+
   return (
-  <div className = "taskItem" key = {taskId} style = {taskStyle}
+  <div className = "task-item" key = {props.id} style = {taskStyle}
     onClick = {(level) => props.onTaskClick(level)}>
-    {props.taskName}
-    <i className={"fas fa-"+props.icon}></i>
+    <div className = "item-title">{props.name}</div>
+    <i className={props.icon}></i>
   </div>);
 }
 

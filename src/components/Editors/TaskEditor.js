@@ -6,11 +6,10 @@ const TaskEditor = (props) => {
   const [taskIcon, setTaskIcon] = useState(props.task.icon);
   const [taskName, setTaskName] = useState(props.task.name);
   const [taskLevel, setTaskLevel] = useState(props.task.level);
-  const [category, setCategory] = useState(props.categoryID);
+  const [categoryID, setCategoryID] = useState(props.category);
   
   const [iconPickerStyle, setIconPickerStyle] = useState({display: "none"});
   const [autoLevel, setAutoLevel] = useState(false);
-
 
   let levelOptions = [];
 
@@ -23,7 +22,7 @@ const TaskEditor = (props) => {
   }
 
   const updateCategory = (e) => {
-    setCategory(e.target.value)
+    setCategoryID(e.target.value);
   }
 
   const updateLevel = (e) => {
@@ -43,13 +42,11 @@ const TaskEditor = (props) => {
   const handleSubmit = () => {
     const task = {
       name: taskName, 
-      categoryID: category,  
+      category: categoryID,  
       icon: taskIcon, 
       level: taskLevel, 
       auto: autoLevel
     }
-    console.log("Before save: ");
-    console.log(task);
     props.save(task);
   }
 
@@ -73,14 +70,14 @@ const TaskEditor = (props) => {
 
       <div className = "form-label">Category</div> 
       <select className="settings-select" onChange = {(e) => updateCategory(e)}>
-        {props.categories.map(cat => cat.id === category ?
-          <option value={cat.id} key={cat.id} selected = "selected">{cat.name}</option> :
-          <option value={cat.id} key={cat.id}>{cat.name}</option>) }
+        {props.categories.map((cat, i) => cat.id === categoryID ?
+          <option value={i} key={cat.id} selected = "selected">{cat.name}</option> :
+          <option value={i} key={cat.id}>{cat.name}</option>) }
       </select>
 
       <div className = "form-label">Level</div> 
       <select className="settings-select-small">
-        {levelOptions.map(lvl => <option value={lvl} key={lvl}>{lvl}</option>)} 
+        {levelOptions.map(lvl => <option value={lvl} key={lvl} onClick={updateLevel}>{lvl}</option>)} 
       </select>
       
       <input type="checkbox" name="autoLevel" className = "settings-option"

@@ -28,6 +28,7 @@ const App = (props) => {
   const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
                                                 {id: 1, name: "Test", color: categoryColors[1]}, 
                                                 {id: 2, name: "Test2", color: categoryColors[2]}]);
+  const [categoryIndex, setCategoryIndex] = useState({});
 
 
   useEffect(() => {
@@ -51,7 +52,13 @@ const App = (props) => {
     let xpPercent = (xp * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
-
+  
+  const indexCategories = () => { 
+    categories.reduce((obj, cat) => {
+    obj[cat.id] = cat;
+    return obj;
+    }, {})
+  }
 
   const changeSettings = (setting, value) => {
     switch (setting) {
@@ -62,6 +69,7 @@ const App = (props) => {
         break;
       case "categories":
         setCategories(value);
+        setCategoryIndex(indexCategories);
         setMessage({content: "Categories have been updated!", type: "notification"});
         break;
       case "paths":
