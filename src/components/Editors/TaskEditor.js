@@ -6,7 +6,7 @@ const TaskEditor = (props) => {
   const [taskIcon, setTaskIcon] = useState(props.task.icon);
   const [taskName, setTaskName] = useState(props.task.name);
   const [taskLevel, setTaskLevel] = useState(props.task.level);
-  const [categoryID, setCategoryID] = useState(props.category);
+  const [categoryID, setCategoryID] = useState(props.task.category);
   
   const [iconPickerStyle, setIconPickerStyle] = useState({display: "none"});
   const [autoLevel, setAutoLevel] = useState(false);
@@ -76,8 +76,8 @@ const TaskEditor = (props) => {
       </select>
 
       <div className = "form-label">Level</div> 
-      <select className="settings-select-small">
-        {levelOptions.map(lvl => <option value={lvl} key={lvl} onClick={updateLevel}>{lvl}</option>)} 
+      <select className="settings-select-small" onChange={updateLevel}>
+        {levelOptions.map(lvl => <option value={lvl} key={lvl} >{lvl}</option>)} 
       </select>
       
       <input type="checkbox" name="autoLevel" className = "settings-option"

@@ -9,4 +9,17 @@
     font-size: 0.85em;
     flex-direction: column;
     position: relative;
+    overflow-wrap: break-word;
+}
+
+.task-item i.fas, .task-item i.far {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.level {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }

@@ -22,7 +22,7 @@ const CategoryEditor = (props) => {
 
     const updateName = (e, i) => {
         let newCategories = _.cloneDeep(categories);
-        newCategories[i].name = e.target.value;
+        newCategories[i+1].name = e.target.value;
         setCategories(newCategories);
     }
 

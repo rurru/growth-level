@@ -4,11 +4,9 @@ import './ListItems.css';
 
 const TaskItem = (props) => {
 
-  console.log(props);
-
   const taskStyle = {
-    color: props.category.color.font,
-    backgroundColor: props.category.color.color
+    color: props.color.font,
+    backgroundColor: props.color.color
   };
 
   console.log(taskStyle);
@@ -17,7 +15,8 @@ const TaskItem = (props) => {
   <div className = "task-item" key = {props.id} style = {taskStyle}
     onClick = {(level) => props.onTaskClick(level)}>
     <div className = "item-title">{props.name}</div>
-    <i className={props.icon}></i>
+    <i className={props.icon}></i>    
+    <span className="level">{props.level}</span>
   </div>);
 }
 

@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
+import _ from "lodash";
 import TaskEditor from '.././components/Editors/TaskEditor';
 import TaskItem from '../components/ListItems/TaskItem';
 import "../components/Editors/editors.css"; 
@@ -16,6 +17,7 @@ const TaskList = (props) => {
     const [editModeStyle, setEditModeStyle] = useState({});
 
     const level = props.levelInfo.level;
+    const categories = props.categories;
 
     const toggleTaskEditor = () => {
         const editorOpen = !editingTask;
@@ -40,8 +42,8 @@ const TaskList = (props) => {
     }
 
     const handleTaskClick = (level) => {
-    }       
- 
+    }    
+
     return (
         <div id = "tasklist" className = "container">
             <div className = "add-button" onClick = {() => toggleTaskEditor()}>
@@ -49,8 +51,8 @@ const TaskList = (props) => {
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
                     <TaskEditor task = {{
-                        name: "", category: props.categories[0].id, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
-                        categories = {props.categories}
+                        name: "", category: 0, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
+                        categories = {categories}
                         cancel = {toggleTaskEditor}
                         save = {saveTask}
                         />
@@ -62,7 +64,10 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {tasks.map(task =>
-               <TaskItem {...task} onTaskClick = {(level) => handleTaskClick(level)} />
+               <TaskItem {...task} 
+                key = {task.id}
+                color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                onTaskClick={(level) => handleTaskClick(level)} />
                ) 
         }
         </div>
