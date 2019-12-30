@@ -11,9 +11,9 @@ const TaskList = (props) => {
         Initializate();}, []
       );
  */
-    const [editingTask, setEditingTask] = useState(false);
+    const [editingTask, setEditingTask] = useState(0);
     const [editMode, setEditMode] = useState(false);
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([{id: 0, name: "", category: 0, icon: "fas fa-home", level: level, auto: false}]);
     const [editModeStyle, setEditModeStyle] = useState({});
 
     const level = props.levelInfo.level;
@@ -28,30 +28,32 @@ const TaskList = (props) => {
         const newEditMode = !editMode;
         setEditMode(newEditMode);
 
-        const buttonStyle = newEditMode ? 
+    const buttonStyle = newEditMode ? 
             {boxShadow: "-5px 5px 10px #ccc inset"}  : {};
         setEditModeStyle(buttonStyle);
     }
 
     const saveTask = (task) => {
         const newTasks = [...tasks];
-        task.id = tasks.length === 0 ? 0 : tasks[tasks.length-1].id + 1;
+        task.id = tasks.length === 0 ? 1 : tasks[tasks.length-1].id + 1;
         newTasks.push(task);
         setTasks([...newTasks]);
         setEditingTask(false);
     }
 
     const handleTaskClick = (level) => {
+        if (editMode) {
+            
+        }
     }    
 
     return (
         <div id = "tasklist" className = "container">
             <div className = "add-button" onClick = {() => toggleTaskEditor()}>
-            <Popup open = {editingTask} 
+            <Popup open = {editingTask > 0} 
                   contentStyle = {{width: "auto"}}>
                 <div className = "modal" >
-                    <TaskEditor task = {{
-                        name: "", category: 0, icon: "fas fa-home", level: props.levelInfo.level, auto: false}} 
+                    <TaskEditor task = {blankTask} 
                         categories = {categories}
                         cancel = {toggleTaskEditor}
                         save = {saveTask}

@@ -2,20 +2,28 @@
     width: 90px;
     height: 90px;
     margin: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: Roboto;
     font-size: 0.85em;
-    flex-direction: column;
     position: relative;
-    overflow-wrap: break-word;
+    border: 1px solid #bbb;2
 }
 
 .task-item i.fas, .task-item i.far {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.item-title {
+    width: 100%;
+    position: absolute;
+    top: 25px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow-wrap: break-word;
 }
 
 .level {
