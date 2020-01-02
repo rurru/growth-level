@@ -41,6 +41,7 @@ const TaskEditor = (props) => {
 
   const handleSubmit = () => {
     const task = {
+      id: props.task.id,
       name: taskName, 
       category: categoryID,  
       icon: taskIcon, 

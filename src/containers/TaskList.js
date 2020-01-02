@@ -10,9 +10,7 @@ const TaskList = (props) => {
  /*   useEffect(() => {
         Initializate();}, []
       );
- */
-
-    
+ */    
     const level = props.levelInfo.level;
     const categories = props.categories;
 
@@ -22,8 +20,6 @@ const TaskList = (props) => {
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false}]);
-
-
 
     const toggleEditMode = () => {
         if (editMode != "edit") {
@@ -38,15 +34,23 @@ const TaskList = (props) => {
 
     const saveTask = (task) => {
         const newTasks = [...tasks];
-        task.id = tasks.length === 0 ? 1 : tasks[tasks.length-1].id + 1;
-        newTasks.push(task);
-        setTasks([...newTasks]);
+        if (task.id === 0) {
+            task.id = tasks.length === 0 ? 1 : tasks[tasks.length-1].id + 1;
+            newTasks.push(task);
+            setTasks([...newTasks]);
+        } else {
+            const i = _.findIndex(tasks, ['id', task.id]);
+            newTasks[i] = _.cloneDeep(task);
+            setTasks([...newTasks]);
+            setEditingTask(0);
+        }
+        setEditModeStyle({});
         setEditMode("default");
     }
 
-    const handleTaskClick = (level) => {
+    const handleTaskClick = (id) => {
         if (editMode=="edit") {
-            
+            setEditingTask(id);
         }
     }    
 
@@ -54,11 +58,11 @@ const TaskList = (props) => {
         <div id = "tasklist" className = "container">
             <div className = "add-button" onClick = {() => setEditMode("new")}>
             <Popup open = {editMode == "new" || editingTask > 0} 
-                  contentStyle = {{width: "auto"}}>
+                  contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
                 <div className = "modal" >
                     <TaskEditor task = {tasks[_.findIndex(tasks, ['id', editingTask])]} 
                         categories = {categories}
-                        cancel = {() => setEditMode("default")}
+                        cancel = {() => {setEditMode("default"); setEditingTask(0)}}
                         save = {saveTask}
                         />
                 </div>
@@ -69,12 +73,11 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {tasks.slice(1).map(task =>
-                <div className = "task-item-border">
-                    <TaskItem {...task} 
-                        key = {task.id}
-                        color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
-                        onTaskClick={(level) => handleTaskClick(level)} />
-                </div>
+                <TaskItem {...task} 
+                    key = {task.id}
+                    color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                    editing={editMode=="edit"}
+                    onTaskClick={(id) => handleTaskClick(id)} />
                 ) 
             }
         </div>

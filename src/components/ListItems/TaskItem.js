@@ -4,16 +4,16 @@ import './ListItems.css';
 
 const TaskItem = (props) => {
   const {color, font} = props.color;
-
   const taskStyle = {color: font, backgroundColor: color};
+  const classes = props.editing ? "task-item editing-task" : "task-item";
 
   return (
-  <div className="task-item" key = {props.id} style = {taskStyle}w
-    onClick = {(level) => props.onTaskClick(level)}>
+  <div className={classes} key = {props.id} style = {taskStyle}
+    onClick = {() => props.onTaskClick(props.id)}>
     <div className = "item-title">{props.name}</div>
     <i className={props.icon}></i>    
     <span className="level">{props.level}</span>
-  </div>);
+  </div>)
 }
 
 export default TaskItem;
