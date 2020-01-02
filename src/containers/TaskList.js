@@ -11,6 +11,7 @@ const TaskList = (props) => {
         Initializate();}, []
       );
  */
+
     
     const level = props.levelInfo.level;
     const categories = props.categories;
@@ -21,6 +22,7 @@ const TaskList = (props) => {
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false}]);
+
 
 
     const toggleEditMode = () => {
@@ -67,12 +69,14 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {tasks.slice(1).map(task =>
-               <TaskItem {...task} 
-                key = {task.id}
-                color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
-                onTaskClick={(level) => handleTaskClick(level)} />
-               ) 
-        }
+                <div className = "task-item-border">
+                    <TaskItem {...task} 
+                        key = {task.id}
+                        color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                        onTaskClick={(level) => handleTaskClick(level)} />
+                </div>
+                ) 
+            }
         </div>
     )
 }
