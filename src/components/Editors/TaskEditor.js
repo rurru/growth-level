@@ -64,20 +64,19 @@ const TaskEditor = (props) => {
         )
     }
 </div>
-      <div className = "form-header">Add New Task</div>
+      <div className = "form-header">{props.task.id === 0 ? "Add New Task" : "Edit Task"}</div>
       
       <div className = "form-label">Task Name</div>
       <input type="text" className="settings-input" value={taskName} onChange={(e) => updateName(e)} />
 
       <div className = "form-label">Category</div> 
-      <select className="settings-select" onChange = {(e) => updateCategory(e)}>
-        {props.categories.map((cat, i) => cat.id === categoryID ?
-          <option value={i} key={cat.id} selected = "selected">{cat.name}</option> :
-          <option value={i} key={cat.id}>{cat.name}</option>) }
+      <select className="settings-select" value={categoryID}
+        onChange = {(e) => updateCategory(e)}> 
+        {props.categories.map((cat) => <option value={cat.id} key={cat.id}>{cat.name}</option>) }
       </select>
 
       <div className = "form-label">Level</div> 
-      <select className="settings-select-small" onChange={updateLevel}>
+      <select className="settings-select-small" value = {taskLevel} onChange={updateLevel}>
         {levelOptions.map(lvl => <option value={lvl} key={lvl} >{lvl}</option>)} 
       </select>
       

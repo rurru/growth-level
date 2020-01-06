@@ -21,9 +21,9 @@ const RewardList = React.lazy(() => {
 const App = (props) => {
   const [paths, setPaths] = useState(["default"]);
   const [message, setMessage] = useState({content: "", type: ""});
-  const [xp, setXp] = useState(90);
+  const [xp, setXp] = useState(150);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
-  const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 200});
+  const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
                                                 {id: 1, name: "Test", color: categoryColors[3]}, 
@@ -34,7 +34,7 @@ const App = (props) => {
   );
 
   const calcXpToLevel = (level) => {
-    Math.round(multiplier * 100 * (Math.pow(level, 3)));
+    Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
   }
 
   const updateXP = (points) => {
@@ -54,7 +54,7 @@ const App = (props) => {
   const changeSettings = (setting, value) => {
     switch (setting) {
       case "speed": 
-        let speeds = ["Fast", "Balanced", "Slow"];
+        const speeds = ["Fast", "Balanced", "Slow"];
         setMultiplier(value + 1);
         setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
         break;
