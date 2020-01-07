@@ -58,7 +58,7 @@ const TaskList = (props) => {
         if (editMode=="edit") {
             setEditingTask(val);
         } else {
-            props.updateXP()
+            props.update(5*val+20);
         }
     }    
 
@@ -85,7 +85,7 @@ const TaskList = (props) => {
                     key = {task.id}
                     color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
                     editing={editMode=="edit"}
-                    onTaskClick={(id) => handleTaskClick(id)} />
+                    onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
             }
         </div>
