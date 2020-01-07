@@ -48,9 +48,11 @@ const TaskList = (props) => {
         setEditMode("default");
     }
 
-    const handleTaskClick = (id) => {
+    const handleTaskClick = (val) => {
         if (editMode=="edit") {
-            setEditingTask(id);
+            setEditingTask(val);
+        } else {
+            props.updateXP()
         }
     }    
 
