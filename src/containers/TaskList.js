@@ -38,21 +38,27 @@ const TaskList = (props) => {
             task.id = tasks.length === 0 ? 1 : tasks[tasks.length-1].id + 1;
             newTasks.push(task);
             setTasks([...newTasks]);
+            setEditMode("default");
         } else {
             const i = _.findIndex(tasks, ['id', task.id]);
             newTasks[i] = _.cloneDeep(task);
             setTasks([...newTasks]);
-            setEditingTask(0);
         }
-        setEditModeStyle({});
-        setEditMode("default");
+        setEditingTask(0);
+    }
+
+    const cancelEdit = () => {
+        if (editMode=="new") {
+            setEditMode("default");
+        }
+        setEditingTask(0);
     }
 
     const handleTaskClick = (val) => {
         if (editMode=="edit") {
             setEditingTask(val);
         } else {
-            props.updateXP()
+            props.update(5*val+20);
         }
     }    
 
@@ -64,7 +70,7 @@ const TaskList = (props) => {
                 <div className = "modal" >
                     <TaskEditor task = {tasks[_.findIndex(tasks, ['id', editingTask])]} 
                         categories = {categories}
-                        cancel = {() => {setEditMode("default"); setEditingTask(0)}}
+                        cancel = {() => cancelEdit()}
                         save = {saveTask}
                         />
                 </div>
@@ -79,7 +85,7 @@ const TaskList = (props) => {
                     key = {task.id}
                     color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
                     editing={editMode=="edit"}
-                    onTaskClick={(id) => handleTaskClick(id)} />
+                    onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
             }
         </div>

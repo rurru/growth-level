@@ -29,10 +29,6 @@ const App = (props) => {
                                                 {id: 1, name: "Test", color: categoryColors[3]}, 
                                                 {id: 2, name: "Test2", color: categoryColors[11]}]);
 
-  useEffect(() => {
-    updateXP(0);}, []
-  );
-
   const calcXpToLevel = (level) => {
     Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
   }
@@ -50,6 +46,10 @@ const App = (props) => {
     let xpPercent = (xp * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
+
+  useEffect(() => {
+    updateXP(0);}, []
+  );
   
   const changeSettings = (setting, value) => {
     switch (setting) {

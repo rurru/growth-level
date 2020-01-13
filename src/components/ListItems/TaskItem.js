@@ -9,10 +9,10 @@ const TaskItem = (props) => {
 
   return (
   <div className={classes} key = {props.id} style = {taskStyle}
-    onClick = {() => props.onTaskClick(props.id)}>
-    <div className = "item-title">{props.name}</div>
-    <i className={props.icon}></i>    
-    <span className="level">{props.level}</span>
+      onClick = {() => props.onTaskClick(props.id)}>
+      <div className = "item-title">{props.name}</div>
+      <i className={props.icon}></i>    
+      <span className="level">{props.level}</span>
   </div>)
 }
 
