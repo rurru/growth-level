@@ -4,8 +4,41 @@ import "./editors.css";
 
 const PathEditor = (props) => {
 
-    const [paths, setPaths] = useState([]);
+    const [paths, setPaths] = useState(_.cloneDeep(props.paths));
     const [pathEditorStyle, setPathEditorStyle] = useState({});
+    const [currentPath, setCurrentPath] = useState(0);
+
+    const selectPath = (path) => {
+        //setColorPickerStyle({display: "block", top: -227 + (cat+2)*36 + "px"});
+        setCurrentPath(path); 
+    }
+
+    const addNew = (pathName) => {
+        const newPaths = paths.concat(
+            [{id: paths[paths.length-1].id + 1,
+              name: pathName}]);
+        setPaths(newPaths);
+    }
+
+    const updateName = (e, i) => {
+        let newPaths = _.cloneDeep(paths);
+        newPaths[i+1].name = e.target.value;
+        setPaths(newPaths);
+    }
+
+    const deletePath = (i) => {
+        let newPaths = _.cloneDeep(paths);
+        newPaths.splice(i, 1);
+        setPaths(newPaths);
+    }
+
+    const keyPressed = (e) => {
+        if (e.keyCode === 13) {
+          addNew(e.target.value);
+          e.target.value = '';
+        }
+      }
+
 
     return (
         <div className = "settings-table">          
@@ -25,7 +58,7 @@ const PathEditor = (props) => {
                 </div>
                 <div className = "table-column">
                     <div className = "path-edit-button" 
-                        onClick = {() => selectCategories(i)} /> 
+                        onClick = {() => selectPath(i)} /> 
                 </div>
                 <div className = "delete" onClick = {() => deletePath(i)}>x</div>
             </div>
@@ -42,3 +75,5 @@ const PathEditor = (props) => {
     );
 
 }
+
+export default PathEditor;

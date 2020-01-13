@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
+import PathEditor from '../Editors/PathEditor';
 import CategoryEditor from '../Editors/CategoryEditor';
 import './ui.css';
 
@@ -7,6 +8,7 @@ const MainMenu = (props) => {
     const [buttonStyle, setButtonStyle] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const [categoriesOpen, setCategoriesOpen] = useState(false);
+    const [pathsOpen, setPathsOpen] = useState(false);
     const menuStyle = { width: "auto", padding: "0", boxShadow: "-8px 8px 5px #ccc"};
     const subMenuStyle = {...menuStyle, textAlign: "center"};
 
@@ -20,6 +22,13 @@ const MainMenu = (props) => {
         toggleMenu(false);
       }
       setCategoriesOpen(shouldOpen);
+    }
+
+    const togglePaths = (shouldOpen) => {
+      if (!shouldOpen) {
+        toggleMenu(false);
+      }
+      setPathsOpen(shouldOpen);
     }
 
     const updateSettings = (setting, value) => {
@@ -46,7 +55,7 @@ const MainMenu = (props) => {
             <div className = "modal">
             <h3>Leveling Paths</h3>
               <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>
-              <PathEditor categories={props.categories} paths={props.paths) update = {(s,v) => updateSettings(s,v)} />
+              <PathEditor categories={props.categories} paths={props.paths} update={(s,v)=>updateSettings(s,v)} />
             </div>
             </Popup>
         </Popup>
