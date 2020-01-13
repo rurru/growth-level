@@ -19,7 +19,7 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
-  const [paths, setPaths] = useState(["default"]);
+  const [paths, setPaths] = useState([{id: 0, name: "Default"}, {id: 1, name: "My Path", categories: [1, 2]}]);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(150);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});

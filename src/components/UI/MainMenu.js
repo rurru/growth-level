@@ -35,7 +35,21 @@ const MainMenu = (props) => {
                          contentStyle={menuStyle} position='bottom right'>
 
         <div className="menu">
-          <div className="menu-item">Set Path</div>
+        <Popup trigger={<div className="menu-item"> Set Path </div>} onClick = {() => toggleMenu(false)}
+                        position="left top" on="hover"  arrow = {false} contentStyle={subMenuStyle}>
+          {props.paths.map(path =>
+            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>
+              {path.name}
+            </div> ) }
+            <Popup open = {pathsOpen} onClose = {() => togglePaths(false)}
+                  contentStyle = {{width: "auto"}}>
+            <div className = "modal">
+            <h3>Leveling Paths</h3>
+              <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>
+              <PathEditor categories={props.categories} paths={props.paths) update = {(s,v) => updateSettings(s,v)} />
+            </div>
+            </Popup>
+        </Popup>
           <div className = "menu-item leaf" 
                onClick = {() => toggleCategories(true)}>Edit Categories</div>
 
