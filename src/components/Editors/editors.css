@@ -221,14 +221,20 @@
     color: #000;
 }
 
-.delete {
-    right: 5px;
+.edit, .delete {
     font-size: 1.25em;
     font-weight: 700;
 }
 
-.delete:hover {
+.delete {    
+    right: 5px;
+}
+
+.delete:hover, .edit:hover {    
     cursor: pointer;
+}
+
+.delete:hover {
     color: #FC2847;
 }
 
@@ -241,7 +247,7 @@
     background: #ff0327;
 }
 
-.cancel-button:hover {
+.edit:hover, .cancel-button:hover {
     background: rgba(0, 0, 0, 0.4);
 }
 
