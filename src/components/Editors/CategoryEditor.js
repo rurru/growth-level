@@ -8,7 +8,7 @@ const CategoryEditor = (props) => {
     const [colorPickerStyle, setColorPickerStyle] = useState({display: "none"});
     const [currentCategory, setCurrentCategory] = useState(0);
 
-    const selectCategory = (cat) => {
+    const selectCategory = (cat) => {w
         setColorPickerStyle({display: "block", top: -227 + (cat+2)*36 + "px"});
         setCurrentCategory(cat); 
     }

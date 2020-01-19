@@ -37,6 +37,7 @@ const MainMenu = (props) => {
     }
 
   return (
+      //Menu button
       <Popup trigger = { <div id = "menu-button" style = {buttonStyle} >
                           <i className="fas fa-bars"></i> </div>} 
                           onOpen={() => toggleMenu(true)} arrow={false}
@@ -44,41 +45,47 @@ const MainMenu = (props) => {
                          contentStyle={menuStyle} position='bottom right'>
 
         <div className="menu">
+
+        //Menu
         <Popup trigger={<div className="menu-item"> Set Path </div>} onClick = {() => toggleMenu(false)}
                         position="left top" on="hover"  arrow = {false} contentStyle={subMenuStyle}>
           {props.paths.map(path =>
-            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>
-              {path.name}
-            </div> ) }
+            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>{path.name}</div> )}
+
+            //Path editor modal
             <Popup open = {pathsOpen} onClose = {() => togglePaths(false)}
                   contentStyle = {{width: "auto"}}>
-            <div className = "modal">
-            <h3>Leveling Paths</h3>
-              <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>
-              <PathEditor categories={props.categories} paths={props.paths} update={(s,v)=>updateSettings(s,v)} />
-            </div>
+              <div className = "modal">
+                <h3>Leveling Paths</h3>
+                <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>
+                <PathEditor categories={props.categories} paths={props.paths} update={(s,v)=>updateSettings(s,v)} />
+              </div>
             </Popup>
+
+        //Select path
         </Popup>
           <div className = "menu-item leaf" 
                onClick = {() => toggleCategories(true)}>Edit Categories</div>
 
+            //Category Editor Modal
             <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}
                   contentStyle = {{width: "auto"}}>
               <div className = "modal">
                 <h3>Task and Quest Categories</h3>
-                  <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
-                  <CategoryEditor categories = {props.categories} update = {(s,v) => updateSettings(s,v)} />
+                <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
+                <CategoryEditor categories = {props.categories} update = {(s,v) => updateSettings(s,v)} />
               </div>
             </Popup>
 
+            //Leveling speed Submenu
             <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} >
-            <div className="subMenu" onClick = {() => toggleMenu(false)}>
-              <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 2)}>Slow</div>
-              <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 1)}>Balanced</div>
-              <div className="menu-item leaf" onClick ={()=>updateSettings("speed", 0)}>Fast</div>
-            </div>
+              <div className="subMenu" onClick = {() => toggleMenu(false)}>
+                <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 2)}>Slow</div>
+                <div className="menu-item leaf" onClick = {()=>updateSettings("speed", 1)}>Balanced</div>
+                <div className="menu-item leaf" onClick ={()=>updateSettings("speed", 0)}>Fast</div>
+              </div>
           </Popup>
 
         </div>
