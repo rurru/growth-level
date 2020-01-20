@@ -184,7 +184,7 @@
 .settings-input, .settings-select {
     height: 20px;
     padding: 0 2px;
-    width: 90%;
+    width: 270px;
 }
 
 .settings-select, .settings-select-small {
@@ -230,7 +230,7 @@
     right: 5px;
 }
 
-.delete:hover, .edit:hover {    
+.delete:hover {    
     cursor: pointer;
 }
 
@@ -247,8 +247,9 @@
     background: #ff0327;
 }
 
-.edit:hover{
+.edit .fas:hover{
     color: #aaa;
+    cursor: pointer;
 }
 
 .cancel-button:hover {

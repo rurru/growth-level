@@ -51,6 +51,10 @@ const TaskEditor = (props) => {
     props.save(task);
   }
 
+  const handleDelete = (id) => {
+
+  }
+
   return (
     <div id = "task-editor">        
     <div className = "task-icon-picker" style = {iconPickerStyle} >
@@ -63,7 +67,7 @@ const TaskEditor = (props) => {
         </div>
         )
     }
-</div>
+    </div>
       <div className = "form-header">{props.task.id === 0 ? "Add New Task" : "Edit Task"}</div>
       
       <div className = "form-label">Task Name</div>
@@ -90,7 +94,9 @@ const TaskEditor = (props) => {
       <div id = "task-buttons">
         <div className = "button task-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
         <div className = "button task-edit-button submit-button" onClick={handleSubmit}>Submit Task</div>
-        {props.task.name === "" ? "" : <div className="button task-edit-button delete-button">Delete Task</div>}
+        {props.task.name === "" ? "" : 
+          <div className="button task-edit-button delete-button" 
+            onClick={()=>handleDelete(props.task.id)}>Delete Task</div>}
       </div>
     </div>
   );
