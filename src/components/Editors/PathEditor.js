@@ -5,11 +5,11 @@ import "./editors.css";
 const PathEditor = (props) => {
 
     const [paths, setPaths] = useState(_.cloneDeep(props.paths));
-    const [pathEditorStyle, setPathEditorStyle] = useState({});
+    const [pathEditorStyle, setPathEditorStyle] = useState({display: "none"});
     const [currentPath, setCurrentPath] = useState(0);
 
     const selectPath = (path) => {
-        //setColorPickerStyle({display: "block", top: -227 + (cat+2)*36 + "px"});
+        setPathEditorStyle({display: "block", top: -227 + (path+2)*36 + "px"});
         setCurrentPath(path); 
     }
 

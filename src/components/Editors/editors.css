@@ -247,7 +247,11 @@
     background: #ff0327;
 }
 
-.edit:hover, .cancel-button:hover {
+.edit:hover{
+    color: #aaa;
+}
+
+.cancel-button:hover {
     background: rgba(0, 0, 0, 0.4);
 }
 

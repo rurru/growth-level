@@ -37,7 +37,6 @@ const MainMenu = (props) => {
     }
 
   return (
-      //Menu button
       <Popup trigger = { <div id = "menu-button" style = {buttonStyle} >
                           <i className="fas fa-bars"></i> </div>} 
                           onOpen={() => toggleMenu(true)} arrow={false}
@@ -46,13 +45,17 @@ const MainMenu = (props) => {
 
         <div className="menu">
 
-        //Menu
+        {/*Path Submenu*/}
         <Popup trigger={<div className="menu-item"> Set Path </div>} onClick = {() => toggleMenu(false)}
                         position="left top" on="hover"  arrow = {false} contentStyle={subMenuStyle}>
           {props.paths.map(path =>
-            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>{path.name}</div> )}
+            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>{path.name}</div> )}            
+            <div className = "menu-item leaf" onClick = {() => togglePaths(true)}>Edit Paths</div>
+          <div>
 
-            //Path editor modal
+          </div>
+
+            {/*Path editor modal*/}
             <Popup open = {pathsOpen} onClose = {() => togglePaths(false)}
                   contentStyle = {{width: "auto"}}>
               <div className = "modal">
@@ -62,12 +65,12 @@ const MainMenu = (props) => {
               </div>
             </Popup>
 
-        //Select path
+        {/*Edit Categories*/}
         </Popup>
           <div className = "menu-item leaf" 
                onClick = {() => toggleCategories(true)}>Edit Categories</div>
-
-            //Category Editor Modal
+            
+            {/*Category Editor Modal*/}
             <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}
                   contentStyle = {{width: "auto"}}>
               <div className = "modal">
@@ -77,7 +80,7 @@ const MainMenu = (props) => {
               </div>
             </Popup>
 
-            //Leveling speed Submenu
+            {/*Leveling Speed Submenu*/}
             <Popup trigger={<div className="menu-item"> Set Leveling Speed </div>}
                             position="left top" on="hover"  arrow = {false}
                             contentStyle={subMenuStyle} >
