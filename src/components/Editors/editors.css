@@ -155,6 +155,10 @@
     color: #333;
 }
 
+.path-editor {
+    width: 100%;
+}
+
 .category-color-option {
     display: inline-block;
     margin: 3px;

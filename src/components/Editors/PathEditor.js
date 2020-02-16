@@ -39,30 +39,31 @@ const PathEditor = (props) => {
         }
       }
 
-
     return (
-        <div className = "settings-table">          
-            <div className = "path-editor" style = {pathEditorStyle} >
-                <div className = "options-header">Select Path Categories</div>
-            </div>
+        <div className = "settings-table">
             <div className = "table-row table-header">
                 <div className = "table-column">Path Name</div>
                 <div className = "table-column"></div>
             </div>
         
         {paths.slice(1).map ((path, i) => 
-            <div className = "table-row" key = {path.id}>
-                <div className = "table-column">
-                    <input type="text" value={path.name} key = {path.id} 
-                        style = {{border: "none"}} className = "settings-input"
-                        onChange={(e) => updateName(e, i)} />  
-                </div>
-                <div className = "table-column">
-                    <div className="edit" onClick = {() => selectPath(i)} > 
-                          <i className="fas fa-pencil-alt"></i>
+            <div className = "path-container" key = {path.id + "path"}>
+                <div className = "table-row" key = {path.id}>
+                    <div className = "table-column">
+                        <input type="text" value={path.name} key = {path.id} 
+                            style = {{border: "none"}} className = "settings-input"
+                            onChange={(e) => updateName(e, i)} />  
                     </div>
+                    <div className = "table-column">
+                        <div className="edit" onClick = {() => selectPath(i)} > 
+                            <i className="fas fa-pencil-alt"></i>
+                        </div>
+                    </div>
+                    <div className = "delete" onClick = {() => deletePath(i)}>x</div>  
+                </div>                        
+                <div className = "path-editor" style = {pathEditorStyle} >
+                    <div className = "options-header">Select Path Categories</div>
                 </div>
-                <div className = "delete" onClick = {() => deletePath(i)}>x</div>
             </div>
         )}
         
@@ -77,7 +78,6 @@ const PathEditor = (props) => {
         </div>
         </div>
     );
-
 }
 
 export default PathEditor;
