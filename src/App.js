@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
+import Firebase from 'firebase';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
@@ -28,6 +29,14 @@ const App = (props) => {
   const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
                                                 {id: 1, name: "Test", color: categoryColors[3]}, 
                                                 {id: 2, name: "Test2", color: categoryColors[11]}]);
+  
+  useEffect(() => {
+    if (!Firebase.apps.length)
+      Firebase.initializeApp(config);
+  }, []);
+  
+  const loadUserData = () => {
+  }
 
   const calcXpToLevel = (level) => {
     Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
