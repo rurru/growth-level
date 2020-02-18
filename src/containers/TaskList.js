@@ -18,6 +18,7 @@ const TaskList = (props) => {
         level: level, auto: false}]);
  
 //Need to restructure data so we can retrieve by category
+//Actually, never mind.  Let's pull in all the tasks and then filter them in the app code
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
