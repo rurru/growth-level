@@ -102,7 +102,7 @@ const TaskList = (props) => {
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-            {tasks.slice(1).map(task =>
+            {_.tail(tasks).filter(t=>_.includes(props.path.categories, t.category)).map(task =>
                 <TaskItem {...task} 
                     key = {task.id}
                     color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
