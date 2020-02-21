@@ -108,7 +108,7 @@ const App = (props) => {
               <RewardList {...props} />} />
             <Route exact path="/tasklist" render={props => 
               <TaskList {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} 
-                categories = {categories} />} />
+                path = {paths[1]} categories = {categories} />} />
             <Redirect exact from="/" to="taskList" />
           </Switch>
         </Suspense>

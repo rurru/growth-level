@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {icons} from './../../constants';
 import "./editors.css"; 
 
-const TaskEditor = (props) => {
+ const TaskEditor = (props) => {
   const [taskIcon, setTaskIcon] = useState(props.task.icon);
   const [taskName, setTaskName] = useState(props.task.name);
   const [taskLevel, setTaskLevel] = useState(props.task.level);

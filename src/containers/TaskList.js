@@ -36,7 +36,7 @@ const TaskList = (props) => {
                   } }
              );
                 
-            setTasks(_.cloneDeep(savedTasks));
+  //          setTasks(_.cloneDeep(savedTasks));
         });
     }, []);
 
