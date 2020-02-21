@@ -8,6 +8,7 @@ import MainMenu from './components/UI/MainMenu';
 import Message from './components/UI/Message';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
+import config from './Config';
 import "./react-router-tabs.css";
 import './App.css';
 

@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
+import Firebase from 'firebase';
 import _ from "lodash";
 import TaskEditor from '.././components/Editors/TaskEditor';
 import TaskItem from '../components/ListItems/TaskItem';
+import config from '../Config';
 import "../components/Editors/editors.css"; 
 import './lists.css';
  
@@ -40,7 +42,7 @@ const TaskList = (props) => {
 
     const getTasks = async () => {
         var taskRef = Firebase.database().ref('tasks/');
-        var taskItems = await inventoryRef.once('value');
+        var taskItems = await taskRef.once('value');
         return taskItems.val();
     }
 
