@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
+import _ from "lodash"
 import PathEditor from '../Editors/PathEditor';
 import CategoryEditor from '../Editors/CategoryEditor';
 import './ui.css';
@@ -48,8 +49,10 @@ const MainMenu = (props) => {
         {/*Path Submenu*/}
         <Popup trigger={<div className="menu-item"> Set Path </div>} onClick = {() => toggleMenu(false)}
                         position="left top" on="hover"  arrow = {false} contentStyle={subMenuStyle}>
-          {props.paths.map(path =>
-            <div className="menu-item leaf" onClick={()=>updateSettings("path", path.id)}>{path.name}</div> )}  
+          {_.keys(props.paths).map(id =>
+            <div className="menu-item leaf" key={id} onClick={()=>updateSettings("path", id)}>
+              {props.paths[id].name}
+            </div> )}  
         </Popup>
 
         {/*Leveling Speed Submenu*/}

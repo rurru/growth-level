@@ -1,16 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
+import Firebase from 'firebase';
 import _ from "lodash";
 import TaskEditor from '.././components/Editors/TaskEditor';
 import TaskItem from '../components/ListItems/TaskItem';
+import config from '../Config';
 import "../components/Editors/editors.css"; 
 import './lists.css';
  
-const TaskList = (props) => {
- /*   useEffect(() => {
-        Initializate();}, []
-      );
- */    
+const TaskList = (props) => { 
     const level = props.levelInfo.level;
     const categories = props.categories;
 
@@ -20,6 +18,32 @@ const TaskList = (props) => {
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false}]);
+ 
+     useEffect(() => {        
+        if (!Firebase.apps.length)
+            Firebase.initializeApp(config); 
+        getTasks().then(t => {
+            const savedTasks = _.keys(t).map(i =>
+                {return {
+                    id: i, 
+                    name: t[i].name, 
+                    category: t[i].category, 
+                    icon: t[i].icon,
+                    level: t[i].level,
+                    auto: t[i].auto
+                  } }
+             );
+
+             if (savedTasks.length > 0)
+              setTasks(_.cloneDeep(savedTasks));
+        });
+    }, []);
+
+    const getTasks = async () => {
+        var taskRef = Firebase.database().ref('tasks/');
+        var taskItems = await taskRef.once('value');
+        return taskItems.val();
+    }
 
     const toggleEditMode = () => {
         if (editMode != "edit") {
@@ -33,17 +57,16 @@ const TaskList = (props) => {
     }
 
     const saveTask = (task) => {
-        const newTasks = [...tasks];
+        const newTasks = _.cloneDeep(tasks);
         if (task.id === 0) {
             task.id = tasks.length === 0 ? 1 : tasks[tasks.length-1].id + 1;
-            newTasks.push(task);
-            setTasks([...newTasks]);
+            newTasks.push(task);           
             setEditMode("default");
         } else {
             const i = _.findIndex(tasks, ['id', task.id]);
             newTasks[i] = _.cloneDeep(task);
-            setTasks([...newTasks]);
         }
+        setTasks(_.cloneDeep(newTasks));
         setEditingTask(0);
     }
 
@@ -80,12 +103,13 @@ const TaskList = (props) => {
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-            {tasks.slice(1).map(task =>
-                <TaskItem {...task} 
-                    key = {task.id}
-                    color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
-                    editing={editMode=="edit"}
-                    onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
+            {_.tail(tasks).filter(t=>props.path.name=="Default" || _.includes(props.path.categories, t.category))
+                .map(task =>
+                    <TaskItem {...task} 
+                        key = {task.id}
+                        color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                        editing={editMode=="edit"}
+                        onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
             }
         </div>

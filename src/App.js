@@ -1,12 +1,15 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
+import Firebase from 'firebase';
+import _ from 'lodash';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
 import Message from './components/UI/Message';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
+import config from './Config';
 import "./react-router-tabs.css";
 import './App.css';
 
@@ -19,7 +22,8 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
-  const [paths, setPaths] = useState([{id: 0, name: "Default"}, {id: 1, name: "My Path", categories: [1, 2]}]);
+  const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: ["1", "2"]}});
+  const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(150);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
@@ -28,9 +32,17 @@ const App = (props) => {
   const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
                                                 {id: 1, name: "Test", color: categoryColors[3]}, 
                                                 {id: 2, name: "Test2", color: categoryColors[11]}]);
+  
+  useEffect(() => {
+    if (!Firebase.apps.length)
+      Firebase.initializeApp(config);
+  }, []);
+  
+  const loadUserData = () => {
+  }
 
   const calcXpToLevel = (level) => {
-    Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
+    return Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
   }
 
   const updateXP = (points) => {
@@ -66,6 +78,9 @@ const App = (props) => {
         setPaths(value);
         setMessage({content: "Paths have been updated!", type: "notification"});
         break;
+      case "path":
+        setCurrentPath(value);
+        setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
       default: break;
     }
   }
@@ -98,7 +113,7 @@ const App = (props) => {
               <RewardList {...props} />} />
             <Route exact path="/tasklist" render={props => 
               <TaskList {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} 
-                categories = {categories} />} />
+                path = {paths[currentPath]} categories = {categories} />} />
             <Redirect exact from="/" to="taskList" />
           </Switch>
         </Suspense>
