@@ -33,8 +33,9 @@ const TaskList = (props) => {
                     auto: t[i].auto
                   } }
              );
-console.log()               
-  //          setTasks(_.cloneDeep(savedTasks));
+
+             if (savedTasks.length > 0)
+              setTasks(_.cloneDeep(savedTasks));
         });
     }, []);
 
@@ -102,12 +103,13 @@ console.log()
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-            {_.tail(tasks).filter(t=>_.includes(props.path.categories, t.category)).map(task =>
-                <TaskItem {...task} 
-                    key = {task.id}
-                    color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
-                    editing={editMode=="edit"}
-                    onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
+            {_.tail(tasks).filter(t=>props.path.name=="Default" || _.includes(props.path.categories, t.category))
+                .map(task =>
+                    <TaskItem {...task} 
+                        key = {task.id}
+                        color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                        editing={editMode=="edit"}
+                        onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
             }
         </div>
