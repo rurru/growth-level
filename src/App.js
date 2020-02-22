@@ -42,7 +42,7 @@ const App = (props) => {
   }
 
   const calcXpToLevel = (level) => {
-    Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
+    return Math.round(multiplier * 50 * (Math.pow(level, 2)) + 200);
   }
 
   const updateXP = (points) => {
