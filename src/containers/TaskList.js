@@ -19,8 +19,6 @@ const TaskList = (props) => {
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false}]);
  
-//Need to restructure data so we can retrieve by category
-//Actually, never mind.  Let's pull in all the tasks and then filter them in the app code
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
@@ -35,7 +33,7 @@ const TaskList = (props) => {
                     auto: t[i].auto
                   } }
              );
-                
+console.log()               
   //          setTasks(_.cloneDeep(savedTasks));
         });
     }, []);

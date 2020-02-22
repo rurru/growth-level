@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
 import Firebase from 'firebase';
+import _ from 'lodash';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
@@ -21,7 +22,8 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
-  const [paths, setPaths] = useState([{id: 0, name: "Default"}, {id: 1, name: "My Path", categories: [1, 2]}]);
+  const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: ["1", "2"]}});
+  const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(150);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
@@ -76,6 +78,9 @@ const App = (props) => {
         setPaths(value);
         setMessage({content: "Paths have been updated!", type: "notification"});
         break;
+      case "path":
+        setCurrentPath(value);
+        setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
       default: break;
     }
   }
