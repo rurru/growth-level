@@ -23,7 +23,7 @@ const TaskList = (props) => {
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
         getTasks().then(tsk => {
-            const savedTasks = _.tail(tsk).map(t =>
+            const savedTasks = tsk.filter(t=>t!=null).map(t =>
                 { return {
                     id: t.id, 
                     name: t.name, 
@@ -83,6 +83,10 @@ const TaskList = (props) => {
     const deleteTask = (id) => {
         const taskRef = Firebase.database().ref('tasks/');
         taskRef.child(id).remove();
+        const newTasks = _.pullAllBy(tasks, [{ 'id': id }], 'id');
+        setTasks(newTasks);
+        setEditMode("default");
+        setEditingTask(0);
     }
 
     const cancelEdit = () => {
