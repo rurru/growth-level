@@ -22,20 +22,20 @@ const TaskList = (props) => {
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
-        getTasks().then(t => {
-            const savedTasks = _.keys(t).map(i =>
-                {return {
-                    id: i, 
-                    name: t[i].name, 
-                    category: t[i].category, 
-                    icon: t[i].icon,
-                    level: t[i].level,
-                    auto: t[i].auto
+        getTasks().then(tsk => {
+            const savedTasks = _.tail(tsk).map(t =>
+                { return {
+                    id: t.id, 
+                    name: t.name, 
+                    category: t.category, 
+                    icon: t.icon,
+                    level: t.level,
+                    auto: t.auto
                   } }
              );
 
-             if (savedTasks.length > 0)
-              setTasks(_.cloneDeep(savedTasks));
+             const loadedTasks = tasks.concat(savedTasks);
+              setTasks(_.cloneDeep(loadedTasks));
         });
     }, []);
 
@@ -66,6 +66,16 @@ const TaskList = (props) => {
             const i = _.findIndex(tasks, ['id', task.id]);
             newTasks[i] = _.cloneDeep(task);
         }
+        
+        Firebase.database().ref('tasks/' + task.id).set({
+            id: task.id,
+            name: task.name, 
+            category: task.category, 
+            icon: task.icon,
+            level: task.level,
+            auto: task.auto
+          });
+
         setTasks(_.cloneDeep(newTasks));
         setEditingTask(0);
     }
