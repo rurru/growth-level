@@ -51,10 +51,6 @@ import "./editors.css";
     props.save(task);
   }
 
-  const handleDelete = (id) => {
-
-  }
-
   return (
     <div id = "task-editor">        
     <div className = "task-icon-picker" style = {iconPickerStyle} >
@@ -96,7 +92,7 @@ import "./editors.css";
         <div className = "button task-edit-button submit-button" onClick={handleSubmit}>Submit Task</div>
         {props.task.name === "" ? "" : 
           <div className="button task-edit-button delete-button" 
-            onClick={()=>handleDelete(props.task.id)}>Delete Task</div>}
+            onClick={()=>props.delete(props.task.id)}>Delete Task</div>}
       </div>
     </div>
   );

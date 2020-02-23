@@ -80,6 +80,11 @@ const TaskList = (props) => {
         setEditingTask(0);
     }
 
+    const deleteTask = (id) => {
+        const taskRef = Firebase.database().ref('tasks/');
+        taskRef.child(id).remove();
+    }
+
     const cancelEdit = () => {
         if (editMode=="new") {
             setEditMode("default");
@@ -105,6 +110,7 @@ const TaskList = (props) => {
                         categories = {categories}
                         cancel = {() => cancelEdit()}
                         save = {saveTask}
+                        delete = {deleteTask}
                         />
                 </div>
             </Popup>
