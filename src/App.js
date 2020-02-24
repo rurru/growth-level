@@ -30,15 +30,19 @@ const App = (props) => {
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
-  const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
-                                                {id: 1, name: "Test", color: categoryColors[3]}, 
-                                                {id: 2, name: "Test2", color: categoryColors[11]}]);  
+  const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}}]);  
   useEffect(() => {
     if (!Firebase.apps.length)
       Firebase.initializeApp(config);
   }, []);
   
   const loadUserData = () => {
+  }
+
+  const getCategories = async () => {
+      var catRef = Firebase.database().ref(props.user + '/categories/');
+      var cats = await catRef.once('value');
+      return cats.val();
   }
 
   const calcXpToLevel = (level) => {
@@ -60,6 +64,9 @@ const App = (props) => {
   }
 
   useEffect(() => {
+    getCategories().then(
+      
+    );
     updateXP(0);}, []
   );
   
