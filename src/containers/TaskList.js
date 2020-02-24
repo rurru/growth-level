@@ -22,15 +22,17 @@ const TaskList = (props) => {
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
-        getTasks().then(tsk => {
-            const savedTasks = tsk.filter(t=>t!=null).map(t =>
+        getTasks().then(tsk => {                      
+            const savedTasks = Array.isArray(tsk) ?
+            tsk.filter(t=>t!=null) :
+            _.keys(tsk).filter(t=>t!=null).map(t =>
                 { return {
-                    id: t.id, 
-                    name: t.name, 
-                    category: t.category, 
-                    icon: t.icon,
-                    level: t.level,
-                    auto: t.auto
+                    id: tsk[t].id, 
+                    name: tsk[t].name, 
+                    category: tsk[t].category, 
+                    icon: tsk[t].icon,
+                    level: tsk[t].level,
+                    auto: tsk[t].auto
                   } }
              );
 
