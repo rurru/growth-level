@@ -41,6 +41,7 @@ import "./editors.css";
 
   const handleSubmit = () => {
     const task = {
+      userID: props.user,
       id: props.task.id,
       name: taskName, 
       category: categoryID,  

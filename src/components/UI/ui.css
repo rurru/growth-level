@@ -54,6 +54,11 @@
     margin: 0 10px 0 5px;
 }
 
+#level {
+    margin-left: 20px;
+    color: rgba(0, 0, 0, 0.5)
+}
+
 #message {
     display: flex;
     align-items: center;

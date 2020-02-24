@@ -22,17 +22,17 @@ const RewardList = React.lazy(() => {
 });
 
 const App = (props) => {
+  const [userID, setuserID] = useState(0);
   const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: ["1", "2"]}});
   const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
-  const [xp, setXp] = useState(150);
+  const [xp, setXp] = useState(0);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}},
                                                 {id: 1, name: "Test", color: categoryColors[3]}, 
-                                                {id: 2, name: "Test2", color: categoryColors[11]}]);
-  
+                                                {id: 2, name: "Test2", color: categoryColors[11]}]);  
   useEffect(() => {
     if (!Firebase.apps.length)
       Firebase.initializeApp(config);
@@ -55,7 +55,7 @@ const App = (props) => {
       newXP -= levelInfo.levelXP;
     }
     setXp(newXP);
-    let xpPercent = (xp * 100) / levelInfo.levelXP;
+    let xpPercent = (newXP * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
 
@@ -87,17 +87,17 @@ const App = (props) => {
 
   return (
     <div id = "app">
-      <NavBar>
+      <NavBar level={levelInfo.level}>
         <MainMenu
-          paths = {paths}
-          categories = {categories}
-          update = {(setting, value) => changeSettings(setting, value)} />
+          paths={paths}
+          categories={categories}
+          update={(setting, value) => changeSettings(setting, value)} />
       </NavBar>
       {message.content !== "" ? 
         <Message content = {message} 
           clear = {() => {setMessage({content: "", type: ""})}} /> 
         : null }
-      <XPBar progress = {progress} />
+      <XPBar xp={xp} progress={progress} xpToLevel={levelInfo.levelXP} />
       <div id = "list">
         <div className = "tab-row">
           <NavTab to="/tasklist">Tasks</NavTab>
@@ -112,8 +112,8 @@ const App = (props) => {
             <Route path="/rewardlist" render={props => 
               <RewardList {...props} />} />
             <Route exact path="/tasklist" render={props => 
-              <TaskList {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} 
-                path = {paths[currentPath]} categories = {categories} />} />
+              <TaskList {...props} update={(p) => updateXP(p)} levelInfo={levelInfo} 
+                path={paths[currentPath]} categories={categories} user={userID} />} />
             <Redirect exact from="/" to="taskList" />
           </Switch>
         </Suspense>

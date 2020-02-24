@@ -17,7 +17,7 @@ const TaskList = (props) => {
     const [editModeStyle, setEditModeStyle] = useState({});
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
-        level: level, auto: false}]);
+        level: level, auto: false, userID: props.user}]);
  
      useEffect(() => {        
         if (!Firebase.apps.length)
@@ -27,6 +27,7 @@ const TaskList = (props) => {
             tsk.filter(t=>t!=null) :
             _.keys(tsk).filter(t=>t!=null).map(t =>
                 { return {
+                    userID: tsk[t].userID,
                     id: tsk[t].id, 
                     name: tsk[t].name, 
                     category: tsk[t].category, 
@@ -42,7 +43,7 @@ const TaskList = (props) => {
     }, []);
 
     const getTasks = async () => {
-        var taskRef = Firebase.database().ref('tasks/');
+        var taskRef = Firebase.database().ref(props.user + '/tasks/');
         var taskItems = await taskRef.once('value');
         return taskItems.val();
     }
@@ -68,8 +69,8 @@ const TaskList = (props) => {
             const i = _.findIndex(tasks, ['id', task.id]);
             newTasks[i] = _.cloneDeep(task);
         }
-        
-        Firebase.database().ref('tasks/' + task.id).set({
+   
+        Firebase.database().ref(task.userID + '/tasks/' + task.id).set({
             id: task.id,
             name: task.name, 
             category: task.category, 
@@ -87,8 +88,7 @@ const TaskList = (props) => {
         taskRef.child(id).remove();
         const newTasks = _.pullAllBy(tasks, [{ 'id': id }], 'id');
         setTasks(newTasks);
-        setEditMode("default");
-        setEditingTask(0);
+        toggleEditMode();
     }
 
     const cancelEdit = () => {
@@ -114,6 +114,7 @@ const TaskList = (props) => {
                 <div className = "modal" >
                     <TaskEditor task = {tasks[_.findIndex(tasks, ['id', editingTask])]} 
                         categories = {categories}
+                        user = {props.user}
                         cancel = {() => cancelEdit()}
                         save = {saveTask}
                         delete = {deleteTask}

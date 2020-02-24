@@ -8,7 +8,8 @@ const XPBar = (props) => {
             <span id = "bar-progress" 
              style = {{width: props.progress.current+"%"}}></span>
             <span id = "bar-background"
-             style = {{width: props.progress.toLevel+"%"}}></span>
+             style = {{width: props.progress.toLevel+"%"}}></span>             
+            <div id = "xp-bar-overlay">{props.xp} / {props.xpToLevel} </div>
         </div>
     );
 }
