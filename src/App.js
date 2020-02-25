@@ -95,6 +95,7 @@ const App = (props) => {
       setCategories(allCategories);      
     });      
     
+    let allPaths = _.cloneDeep(paths);
     getPaths().then(pths => {
       const savedPaths = Array.isArray(pths) ?
       pths.filter(p=>p!=null) :
@@ -102,11 +103,11 @@ const App = (props) => {
         { return {
             id: pths[i].id,
             name: pths[i].name,
-            color: pths[i].color
+            categories: pths[i].categories
           }}
-      );
-      const allPaths = paths.concat(savedPaths);
-      setCategories(allPaths);      
+      );      
+      _.each(savedPaths, p=>allPaths[p.id] = p);     
+      setPaths(allPaths);      
      });
     }, []
   );
