@@ -34,15 +34,25 @@ const App = (props) => {
   useEffect(() => {
     if (!Firebase.apps.length)
       Firebase.initializeApp(config);
+    updateXP(0);
   }, []);
   
   const loadUserData = () => {
+    var userRef = Firebase.database().ref(userID + '/userData/');
+    var userData = await userRef.once('value');
+    return userData.val();
   }
 
   const getCategories = async () => {
-      var catRef = Firebase.database().ref(props.user + '/categories/');
+      var catRef = Firebase.database().ref(userID + '/categories/');
       var cats = await catRef.once('value');
       return cats.val();
+  }
+  
+  const getPaths = async () => {
+    var pathRef = Firebase.database().ref(userID + '/paths');
+    var pths = await pathRef.once('value');
+    return pths.val();
   }
 
   const calcXpToLevel = (level) => {
@@ -63,11 +73,42 @@ const App = (props) => {
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
 
-  useEffect(() => {
-    getCategories().then(
-      
-    );
-    updateXP(0);}, []
+  useEffect(() => {        
+    loadUserData().then(userData => {
+      if (userData.length > 0) {
+        setLevelInfo(userData.levelInfo);
+        setXp(userData.xp);        
+      }
+    });                  
+        
+    getCategories().then(cats => {
+      const savedCategories = Array.isArray(cats) ?
+      cats.filter(c=>c!=null) :
+      _.keys(cats).filter(c=>c!=null).map(i =>
+        { return {
+            id: cats[i].id,
+            name: cats[i].name,
+            color: cats[i].color
+          }}
+      );
+      const allCategories = categories.concat(savedCategories);
+      setCategories(allCategories);      
+    });      
+    
+    getPaths().then(pths => {
+      const savedPaths = Array.isArray(pths) ?
+      pths.filter(p=>p!=null) :
+      _.keys(pths).filter(p=>p!=null).map(i =>
+        { return {
+            id: pths[i].id,
+            name: pths[i].name,
+            color: pths[i].color
+          }}
+      );
+      const allPaths = paths.concat(savedPaths);
+      setCategories(allPaths);      
+     });
+    }, []
   );
   
   const changeSettings = (setting, value) => {
