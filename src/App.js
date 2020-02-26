@@ -75,9 +75,11 @@ const App = (props) => {
 
   useEffect(() => {        
     loadUserData().then(userData => {
-      if (userData.length > 0) {
+      if (userData != null) {
         setLevelInfo(userData.levelInfo);
-        setXp(userData.xp);        
+        setXp(userData.xp);    
+        setMultiplier(userData.multiplier);
+        setCurrentPath(userData.currentPath);
       }
     });                  
         
@@ -121,10 +123,24 @@ const App = (props) => {
         break;
       case "categories":
         setCategories(value);
+        _.each(value, category => {
+          Firebase.database().ref(userID + "/categories/" + category.id).set({
+            id: category.id,
+            name: category.name,
+            color: category.color
+           });
+        }
         setMessage({content: "Categories have been updated!", type: "notification"});
         break;
       case "paths":
         setPaths(value);
+        _.each(_.keys(value), i => {
+          Firebase.database().ref(userID + "/paths/" + value[i].id).set({
+            id: value[i].id,
+            name: value[i].name,
+            categories: value[i].categories
+           });
+        }
         setMessage({content: "Paths have been updated!", type: "notification"});
         break;
       case "path":
