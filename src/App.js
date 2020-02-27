@@ -90,7 +90,8 @@ const App = (props) => {
         { return {
             id: cats[i].id,
             name: cats[i].name,
-            color: cats[i].color
+            color: cats[i].color,
+            active: true
           }}
       );
       const allCategories = categories.concat(savedCategories);
@@ -122,12 +123,19 @@ const App = (props) => {
         setMessage({content: "Leveling speed is now "+speeds[value]+".", type: "notification"});
         break;
       case "categories":
-        setCategories(value);
-        _.each(value, category => {
+        const deletedCategories = value.filter(c => c.active === false);
+        const updatedCategories = value.filter(c => c.active === true);         
+        setCategories(updatedCategories);
+        _.each(deletedCategories, category => {
+          const catRef = Firebase.database().ref(userID + "/categories/" + category.id);
+          catRef.child(id).remove();
+        });        
+        _.each(updatedCategories, category => {
           Firebase.database().ref(userID + "/categories/" + category.id).set({
             id: category.id,
             name: category.name,
-            color: category.color
+            color: category.color,
+            active: true
            });
         }
         setMessage({content: "Categories have been updated!", type: "notification"});
