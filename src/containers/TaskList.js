@@ -84,7 +84,7 @@ const TaskList = (props) => {
     }
 
     const deleteTask = (id) => {
-        const taskRef = Firebase.database().ref('tasks/');
+        const taskRef = Firebase.database().ref(props.user + '/tasks/');
         taskRef.child(id).remove();
         const newTasks = _.pullAllBy(tasks, [{ 'id': id }], 'id');
         setTasks(newTasks);
