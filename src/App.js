@@ -124,10 +124,10 @@ const App = (props) => {
         break;
       case "categories":
         const deletedCategories = value.filter(c => c.active === false);
-        const updatedCategories = value.filter(c => c.active === true);         
+        const updatedCategories = value.filter(c => c.active === true);       
         setCategories(updatedCategories);
         _.each(deletedCategories, category => {
-          const catRef = Firebase.database().ref(userID + "/categories/" + category.id);
+          const catRef = Firebase.database().ref(userID + "/categories/");
           catRef.child(category.id).remove();
         });        
         _.each(updatedCategories, category => {

@@ -34,15 +34,18 @@ const CategoryEditor = (props) => {
       }
 
     const addNew = (catName) => {
-        const category = {id: categories[categories.length-1].id + 1,
-            name: catName, color: categoryColors[Math.floor(Math.random() * 10)]};
+        const category = {
+            id: categories[categories.length-1].id + 1,
+            name: catName, 
+            color: categoryColors[Math.floor(Math.random() * 10)],
+            active: true};
         const newCats = categories.concat([category]);
         setCategories(newCats);
     }
 
     const deleteCategory = (i) => {
         let newCategories = _.cloneDeep(categories);
-        newCategories.splice(i, 1);
+        newCategories[i+1].active = false;
         setCategories(newCategories);
     }
 
@@ -62,7 +65,7 @@ const CategoryEditor = (props) => {
             <div className = "table-column">Name</div>
             <div className = "table-column">Color</div>
         </div>
-        {categories.slice(1).map ((cat, i) => 
+        {categories.filter(c=>c.active && c.id > 0 ).map ((cat, i) => 
             <div className = "table-row" key = {cat.id}>
                 <div className = "table-column">
                     <input type="text" value={cat.name} key = {cat.id} 
@@ -82,7 +85,7 @@ const CategoryEditor = (props) => {
                 placeholder="Enter new category name" 
                 onKeyDown={keyPressed} /> 
         </div>
-        <div className = "table-row button submit-button" onClick = {() => props.update("categories", categories)}>
+        <div className = "table-row button submit-button" onClick = {() => props.update("categories", categories.slice(1))}>
             Submit Changes
         </div>
     </div>)
