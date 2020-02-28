@@ -37,7 +37,7 @@ const App = (props) => {
     updateXP(0);
   }, []);
   
-  const loadUserData = () => {
+  const loadUserData = async () => {
     var userRef = Firebase.database().ref(userID + '/userData/');
     var userData = await userRef.once('value');
     return userData.val();
@@ -128,7 +128,7 @@ const App = (props) => {
         setCategories(updatedCategories);
         _.each(deletedCategories, category => {
           const catRef = Firebase.database().ref(userID + "/categories/" + category.id);
-          catRef.child(id).remove();
+          catRef.child(category.id).remove();
         });        
         _.each(updatedCategories, category => {
           Firebase.database().ref(userID + "/categories/" + category.id).set({
@@ -137,7 +137,7 @@ const App = (props) => {
             color: category.color,
             active: true
            });
-        }
+        });
         setMessage({content: "Categories have been updated!", type: "notification"});
         break;
       case "paths":
@@ -148,7 +148,7 @@ const App = (props) => {
             name: value[i].name,
             categories: value[i].categories
            });
-        }
+        });
         setMessage({content: "Paths have been updated!", type: "notification"});
         break;
       case "path":
