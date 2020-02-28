@@ -65,7 +65,7 @@ const CategoryEditor = (props) => {
             <div className = "table-column">Name</div>
             <div className = "table-column">Color</div>
         </div>
-        {categories.filter(c=>c.active && c.id > 0 ).map ((cat, i) => 
+        {categories.filter(c=>c.active).map ((cat, i) => 
             <div className = "table-row" key = {cat.id}>
                 <div className = "table-column">
                     <input type="text" value={cat.name} key = {cat.id} 

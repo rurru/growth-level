@@ -30,7 +30,7 @@ const App = (props) => {
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
-  const [categories, setCategories] = useState([{id: 0, name: "None", color: {color:"#fff", font: "#000"}}]);  
+  const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
   useEffect(() => {
     if (!Firebase.apps.length)
       Firebase.initializeApp(config);
