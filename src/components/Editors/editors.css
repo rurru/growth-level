@@ -50,13 +50,19 @@
     font-weight: 700;
 }
 
-.table-row {
+.table-row, .table-edit-row {
     height: 35px;
     border-bottom: 1px solid #ccc;    
     padding: 0 15px;
     display: flex;
     align-items: center;
     font-size: 0.6em;
+}
+
+.table-edit-row {
+    height: 150px;
+    display: block;
+    padding: 10px;
 }
 
 .button-row {
@@ -155,7 +161,7 @@
     color: #333;
 }
 
-.path-editor {
+.path-editor, .path-name {
     width: 100%;
 }
 
@@ -234,16 +240,9 @@
     right: 5px;
 }
 
-.delete:hover {    
+.delete:hover, .delete-button:hover  {
     cursor: pointer;
-}
-
-.delete:hover {
     color: #FC2847;
-}
-
-.delete-button:hover {
-    background: #FC2847;
 }
 
 .delete-button:active {   

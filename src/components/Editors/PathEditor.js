@@ -5,11 +5,9 @@ import "./editors.css";
 const PathEditor = (props) => {
 
     const [paths, setPaths] = useState(_.cloneDeep(props.paths));
-    const [pathEditorStyle, setPathEditorStyle] = useState({display: "none"});
     const [currentPath, setCurrentPath] = useState(0);
 
     const selectPath = (path) => {
-        setPathEditorStyle({display: "block", top: -227 + (path+2)*36 + "px"});
         setCurrentPath(path); 
     }
 
@@ -46,11 +44,22 @@ const PathEditor = (props) => {
                 <div className = "table-column"></div>
             </div>
         
-        {paths.slice(1).map ((path, i) => 
-            <div className = "path-container" key = {path.id + "path"}>
-                <div className = "table-row" key = {path.id}>
+        {_.keys(paths).slice(1).map ((i) => 
+            i === currentPath ?
+                <div className = "table-edit-row" key = {paths[i].id}>
+                    <div className = "path-name">
+                        <input type="text" value={paths[i].name} key = {paths[i].id} 
+                            style = {{border: "none"}} className = "settings-input"
+                            onChange={(e) => updateName(e, i)} />  
+                    </div>
+                    <div className = "path-editor">
+                        <div className = "options-header">Select Path Categories</div>
+                    </div>
+                </div> :
+
+                <div className = "table-row" key = {paths[i].id}>
                     <div className = "table-column">
-                        <input type="text" value={path.name} key = {path.id} 
+                        <input type="text" value={paths[i].name} key = {paths[i].id} 
                             style = {{border: "none"}} className = "settings-input"
                             onChange={(e) => updateName(e, i)} />  
                     </div>
@@ -60,11 +69,9 @@ const PathEditor = (props) => {
                         </div>
                     </div>
                     <div className = "delete" onClick = {() => deletePath(i)}>x</div>  
-                </div>                        
-                <div className = "path-editor" style = {pathEditorStyle} >
-                    <div className = "options-header">Select Path Categories</div>
-                </div>
-            </div>
+                </div>    
+                
+                
         )}
         
         <div className = "table-row" >     
