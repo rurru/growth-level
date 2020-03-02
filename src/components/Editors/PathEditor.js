@@ -56,16 +56,19 @@ const PathEditor = (props) => {
                     <div className="select-label">Unselected</div>
                     <div className="select-label">Selected</div>
                     </div>
-                    <div className = "path-editor">
+                    <div className = "path-editor">                    
+                        <select multiple className="path-cats">
+                            {props.categories.filter(c=>!_.includes(paths[i].categories, c.id.toString())).map(c =>
+                                <option value={c.name} key={c.id}>{c.name}</option>
+                            )}  
+                        </select>
                         <select multiple className="path-cats">
                             {paths[i].categories.map(c =>
-                                <option value={props.categories[c].name} key={c}>{props.categories[c].name}</option>
+                                <option value={props.categories[c].name} key={c}>
+                                    {props.categories[c].name}
+                                </option>
                             )}
-                            <option value="Category">Category</option>
-                        </select>                        
-                        <select multiple className="path-cats">
-                            <option value="Category">Category</option>
-                        </select>
+                        </select>    
                     </div>
                 </div> :
                 <div className = "table-row" key = {paths[i].id}>

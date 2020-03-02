@@ -89,7 +89,7 @@ const MainMenu = (props) => {
             <div className = "modal">
               <h3>Leveling Paths</h3>
               <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>
-              <PathEditor categories={props.categories} paths={props.paths} update={(s,v)=>updateSettings(s,v)} />
+              <PathEditor categories={props.categories.slice(1)} paths={props.paths} update={(s,v)=>updateSettings(s,v)} />
             </div>
           </Popup>
 

@@ -23,7 +23,7 @@ const RewardList = React.lazy(() => {
 
 const App = (props) => {
   const [userID, setuserID] = useState(0);
-  const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: ["1", "2"]}});
+  const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: ["3", "2"]}});
   const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(0);
