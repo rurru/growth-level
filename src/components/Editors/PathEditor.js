@@ -12,9 +12,9 @@ const PathEditor = (props) => {
     }
 
     const addNew = (pathName) => {
-        const newPaths = paths.concat(
-            [{id: paths[paths.length-1].id + 1,
-              name: pathName}]);
+        const newID = _.max(_.keys(paths)) + 1;
+        let newPaths = _.cloneDeep(paths);
+        newPaths[newID] = {id: newID, name: pathName};
         setPaths(newPaths);
     }
 
@@ -49,18 +49,30 @@ const PathEditor = (props) => {
                 <div className = "table-edit-row" key = {paths[i].id}>
                     <div className = "path-name">
                         <input type="text" value={paths[i].name} key = {paths[i].id} 
-                            style = {{border: "none"}} className = "settings-input"
+                            style = {{border: "none"}} className = "settings-input bold"
                             onChange={(e) => updateName(e, i)} />  
                     </div>
+                    <div className="path-name">
+                    <div className="select-label">Unselected</div>
+                    <div className="select-label">Selected</div>
+                    </div>
                     <div className = "path-editor">
-                        <div className = "options-header">Select Path Categories</div>
+                        <select multiple className="path-cats">
+                            {paths[i].categories.map(c =>
+                                <option value={props.categories[c].name} key={c}>{props.categories[c].name}</option>
+                            )}
+                            <option value="Category">Category</option>
+                        </select>                        
+                        <select multiple className="path-cats">
+                            <option value="Category">Category</option>
+                        </select>
                     </div>
                 </div> :
-
                 <div className = "table-row" key = {paths[i].id}>
                     <div className = "table-column">
-                        <input type="text" value={paths[i].name} key = {paths[i].id} 
-                            style = {{border: "none"}} className = "settings-input"
+                        <input type="text" value={paths[i].name} key={paths[i].id} 
+                            style={{border: "none"}} className="settings-input"
+                            onClick={(e) => setCurrentPath(0)}
                             onChange={(e) => updateName(e, i)} />  
                     </div>
                     <div className = "table-column">
@@ -69,14 +81,13 @@ const PathEditor = (props) => {
                         </div>
                     </div>
                     <div className = "delete" onClick = {() => deletePath(i)}>x</div>  
-                </div>    
-                
-                
+                </div>     
         )}
         
         <div className = "table-row" >     
             <input type="text" className = "settings-input"
                 placeholder="Enter new path name" 
+                onClick={(e) => setCurrentPath(0)}
                 onKeyDown={keyPressed} /> 
         </div>
 

@@ -43,6 +43,13 @@
     font-family: Roboto;
 }
 
+.select-label {
+    display: inline-block;
+    width: 200px;
+    margin-top: 10px;
+    font-weight: 900;
+}
+
 .table-header {
     background-color: #edffd4;    
     border-radius: 10px 10px 0 0;
@@ -60,9 +67,13 @@
 }
 
 .table-edit-row {
-    height: 150px;
+    height: auto;
     display: block;
-    padding: 10px;
+    padding: 10px 15px;
+}
+
+.bold {
+    font-weight: 700;
 }
 
 .button-row {
@@ -253,6 +264,13 @@
 .edit .fas:hover{
     color: #aaa;
     cursor: pointer;
+}
+
+.path-cats {
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    margin-right: 50px;
 }
 
 .cancel-button:hover {
