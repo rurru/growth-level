@@ -6,6 +6,11 @@ const PathEditor = (props) => {
 
     const [paths, setPaths] = useState(_.cloneDeep(props.paths));
     const [currentPath, setCurrentPath] = useState(0);
+    
+    const categoryName = (id) => {
+        const i = _.findIndex(props.categories, ['id', id]);
+        return props.categories[i].name;
+    }
 
     const selectPath = (path) => {
         setCurrentPath(path); 
@@ -58,14 +63,14 @@ const PathEditor = (props) => {
                     </div>
                     <div className = "path-editor">                    
                         <select multiple className="path-cats">
-                            {props.categories.filter(c=>!_.includes(paths[i].categories, c.id.toString())).map(c =>
+                            {props.categories.filter(c=>!_.includes(paths[i].categories, c.id)).map(c =>
                                 <option value={c.name} key={c.id}>{c.name}</option>
                             )}  
                         </select>
                         <select multiple className="path-cats">
                             {paths[i].categories.map(c =>
-                                <option value={props.categories[c].name} key={c}>
-                                    {props.categories[c].name}
+                                <option value={categoryName(c)} key={c}>
+                                    {categoryName(c)}
                                 </option>
                             )}
                         </select>    

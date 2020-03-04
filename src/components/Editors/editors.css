@@ -270,7 +270,10 @@
     overflow: hidden;
     width: 150px;
     height: 150px;
+    padding: 4px;
     margin-right: 50px;
+    outline-color: #aaa;
+    box-shadow: -3px 3px 4px #ddd inset;
 }
 
 .cancel-button:hover {
