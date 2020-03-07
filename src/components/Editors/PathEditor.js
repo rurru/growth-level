@@ -16,6 +16,14 @@ const PathEditor = (props) => {
         setCurrentPath(path); 
     }
 
+    const addCategories = () => {
+
+    }
+
+    const removeCategories = () => {
+        
+    }
+
     const addNew = (pathName) => {
         const newID = _.max(_.keys(paths)) + 1;
         let newPaths = _.cloneDeep(paths);
@@ -67,6 +75,14 @@ const PathEditor = (props) => {
                                 <option value={c.name} key={c.id}>{c.name}</option>
                             )}  
                         </select>
+                        <div id="path-edit-row">
+                            <button className = "path-edit-button">
+                                <i class="fas fa-angle-double-right"></i>
+                            </button>
+                            <button className = "path-edit-button">
+                                <i class="fas fa-angle-double-left"></i>
+                            </button>
+                        </div>
                         <select multiple className="path-cats">
                             {paths[i].categories.map(c =>
                                 <option value={categoryName(c)} key={c}>
