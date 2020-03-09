@@ -23,7 +23,7 @@ const RewardList = React.lazy(() => {
 
 const App = (props) => {
   const [userID, setuserID] = useState(0);
-  const [paths, setPaths] = useState({0: {name: "Default"}, 1: {name: "My Path", categories: [3, 2]}});
+  const [paths, setPaths] = useState({0: {name: "Default"}});
   const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(0);
@@ -31,6 +31,7 @@ const App = (props) => {
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
+
   useEffect(() => {
     if (!Firebase.apps.length)
       Firebase.initializeApp(config);
@@ -142,7 +143,7 @@ const App = (props) => {
         break;
       case "paths":
         setPaths(value);
-        _.each(_.keys(value), i => {
+        _.each(_.keys(value).slice(1), i => {
           Firebase.database().ref(userID + "/paths/" + value[i].id).set({
             id: value[i].id,
             name: value[i].name,
