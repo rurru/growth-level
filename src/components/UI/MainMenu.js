@@ -34,6 +34,7 @@ const MainMenu = (props) => {
 
     const updateSettings = (setting, value) => {
       toggleCategories(false);
+      togglePaths(false);
       props.update(setting, value);
     }
 
@@ -72,7 +73,7 @@ const MainMenu = (props) => {
           
           {/*Category Editor Modal*/}
           <Popup open = {categoriesOpen} onClose = {() => toggleCategories(false)}
-                contentStyle = {{width: "auto"}}>
+                contentStyle = {{width: "auto"}} closeOnDocumentClick = {false}>
             <div className = "modal">
               <h3>Task and Quest Categories</h3>
               <div className = "close-button" onClick = {() => toggleCategories(false)}>X</div>
@@ -85,7 +86,7 @@ const MainMenu = (props) => {
 
           {/*Path editor modal*/}
           <Popup open = {pathsOpen} onClose = {() => togglePaths(false)}
-                contentStyle = {{width: "auto"}}>
+                contentStyle = {{width: "auto"}} closeOnDocumentClick = {false}>
             <div className = "modal">
               <h3>Leveling Paths</h3>
               <div className = "close-button" onClick = {() => togglePaths(false)}>X</div>

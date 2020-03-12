@@ -49,15 +49,15 @@ const PathEditor = (props) => {
         setPaths(newPaths);
     }
 
-    const updateName = (e, i) => {
+    const updateName = (e, id) => {
         let newPaths = _.cloneDeep(paths);
-        newPaths[i+1].name = e.target.value;
+        newPaths[id].name = e.target.value;
         setPaths(newPaths);
     }
 
-    const deletePath = (i) => {
+    const deletePath = (id) => {
         let newPaths = _.cloneDeep(paths);
-        newPaths.splice(i, 1);
+        delete newPaths[id];
         setPaths(newPaths);
     }
 
