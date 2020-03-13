@@ -10,15 +10,17 @@ import './lists.css';
  
 const TaskList = (props) => { 
     const level = props.levelInfo.level;
-    const categories = props.categories;
+    const defaultColor = {font: "#fff", color: "#000"}
 
     const [editingTask, setEditingTask] = useState(0);
     const [editMode, setEditMode] = useState("default");
     const [editModeStyle, setEditModeStyle] = useState({});
+    const [categories, setCategories] = useState(props.categories);
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false, userID: props.user}]);
  
+
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
@@ -126,11 +128,12 @@ const TaskList = (props) => {
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-            {_.tail(tasks).filter(t=>props.path.name=="Default" || _.includes(props.path.categories, t.category))
-                .map(task =>
+            {_.tail(tasks).filter(t=>props.path.name=="Default" || 
+                _.includes(props.path.categories.map(c=>c.id), t.category))
+                 .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={ categories[_.findIndex(categories, ['id', Number(task.category)])].color}
+                        color={props.categories.length < 1 ? defaultColor : categories[task.category].color} 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
