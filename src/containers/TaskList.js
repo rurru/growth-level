@@ -18,8 +18,7 @@ const TaskList = (props) => {
     const [categories, setCategories] = useState(props.categories);
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
-        level: level, auto: false, userID: props.user}]);
- 
+        level: level, auto: false, userID: props.user}]); 
 
      useEffect(() => {        
         if (!Firebase.apps.length)
@@ -133,7 +132,7 @@ const TaskList = (props) => {
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={props.categories.length < 1 ? defaultColor : categories[task.category].color} 
+                        color={(Array.isArray(props.categories)) ? categories[task.category].color : defaultColor } 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 

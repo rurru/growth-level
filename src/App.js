@@ -96,6 +96,7 @@ const App = (props) => {
           }}
       );
       const allCategories = categories.concat(savedCategories);
+      console.log("Categories after: "+allCategories);
       setCategories(allCategories);      
     });      
     
