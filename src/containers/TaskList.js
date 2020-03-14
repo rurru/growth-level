@@ -11,11 +11,10 @@ import './lists.css';
 const TaskList = (props) => { 
     const level = props.levelInfo.level;
     const defaultColor = {font: "#fff", color: "#000"}
-
+    const categories = _.keyBy(_.cloneDeep(props.categories), 'id');
     const [editingTask, setEditingTask] = useState(0);
     const [editMode, setEditMode] = useState("default");
     const [editModeStyle, setEditModeStyle] = useState({});
-    const [categories, setCategories] = useState(props.categories);
     const [tasks, setTasks] = useState([{
         id: 0, name: "", category: 0, icon: "fas fa-home", 
         level: level, auto: false, userID: props.user}]); 
@@ -114,7 +113,7 @@ const TaskList = (props) => {
                   contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
                 <div className = "modal" >
                     <TaskEditor task = {tasks[_.findIndex(tasks, ['id', editingTask])]} 
-                        categories = {categories}
+                        categories = {props.categories}
                         user = {props.user}
                         cancel = {() => cancelEdit()}
                         save = {saveTask}
@@ -132,7 +131,8 @@ const TaskList = (props) => {
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={(Array.isArray(props.categories)) ? categories[task.category].color : defaultColor } 
+                        color={categories.hasOwnProperty(Number(task.category)) 
+                                ? categories[Number(task.category)].color : defaultColor } 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
