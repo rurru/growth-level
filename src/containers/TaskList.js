@@ -12,6 +12,7 @@ const TaskList = (props) => {
     const level = props.levelInfo.level;
     const defaultColor = {font: "#fff", color: "#000"}
     const categories = _.keyBy(_.cloneDeep(props.categories), 'id');
+
     const [editingTask, setEditingTask] = useState(0);
     const [editMode, setEditMode] = useState("default");
     const [editModeStyle, setEditModeStyle] = useState({});
@@ -28,7 +29,7 @@ const TaskList = (props) => {
             _.keys(tsk).filter(t=>t!=null).map(t =>
                 { return {
                     userID: tsk[t].userID,
-                    id: tsk[t].id, 
+                    id: Number(tsk[t].id), 
                     name: tsk[t].name, 
                     category: tsk[t].category, 
                     icon: tsk[t].icon,
@@ -127,7 +128,7 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {_.tail(tasks).filter(t=>props.path.name=="Default" || 
-                _.includes(props.path.categories.map(c=>c.id), t.category))
+                _.includes(props.path.categories, Number(t.category)))
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
