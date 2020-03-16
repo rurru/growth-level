@@ -23,18 +23,18 @@ const TaskList = (props) => {
      useEffect(() => {        
         if (!Firebase.apps.length)
             Firebase.initializeApp(config); 
-        getTasks().then(tsk => {                      
-            const savedTasks = Array.isArray(tsk) ?
-            tsk.filter(t=>t!=null) :
-            _.keys(tsk).filter(t=>t!=null).map(t =>
+        getTasks().then(taskList => {                      
+            const savedTasks = Array.isArray(taskList) ?
+            taskList.filter(t=>t!=null).map(t=>{return {...t, category: Number(t.category)}}) :
+            _.keys(taskList).filter(t=>t!=null).map(t =>
                 { return {
-                    userID: tsk[t].userID,
-                    id: Number(tsk[t].id), 
-                    name: tsk[t].name, 
-                    category: tsk[t].category, 
-                    icon: tsk[t].icon,
-                    level: tsk[t].level,
-                    auto: tsk[t].auto
+                    userID: taskList[t].userID,
+                    id: Number(taskList[t].id), 
+                    name: taskList[t].name, 
+                    category: Number(taskList[t].category), 
+                    icon: taskList[t].icon,
+                    level: taskList[t].level,
+                    auto: taskList[t].auto
                   } }
              );
 
@@ -128,12 +128,12 @@ const TaskList = (props) => {
                 <i className="fas fa-pen"></i>
             </div>
             {_.tail(tasks).filter(t=>props.path.name=="Default" || 
-                _.includes(props.path.categories, Number(t.category)))
+                _.includes(props.path.categories, t.category))
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={categories.hasOwnProperty(Number(task.category)) 
-                                ? categories[Number(task.category)].color : defaultColor } 
+                        color={categories.hasOwnProperty(task.category) 
+                                ? categories[task.category].color : defaultColor } 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 
