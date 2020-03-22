@@ -9,7 +9,7 @@
     cursor: default;
 }
 
-#task-editor {
+#task-editor, #reward-editor {
     width: 300px;
     padding: 25px;
     color: #000;

@@ -5,7 +5,11 @@ import config from '../../Config';
 
 const RewardEditor = (props) => {
 
+  const [rewardIcon, setRewardIcon] = useState(props.reward.icon);
+  const [rewardName, setRewardName] = useState(props.reward.name);
+  const [rewardLevel, setRewardLevel] = useState(props.reward.level);
   const [uploadedFile, setUploadedFile] = useState('');
+  const [fileURL, setFileURL] = useState('');
 
   const onImageDrop = (files) => {
     setUploadedFile(files[0]);
@@ -18,25 +22,32 @@ const RewardEditor = (props) => {
                         .field('file', file);
 
     upload.end((err, response) => {
-      if (err) {
+      if (err) 
         console.error(err);
-      }
 
-      if (response.body.secure_url !== '') {
-        this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
-        });
-      }
+      if (response.body.secure_url !== '') 
+        setFileURL(response.body.secure_url);      
     });
   }
 
   return (
   <div id = "reward-editor">
     <Dropzone
-      multiple={false}
+      onDrop={onImageDrop}
       accept="image/*"
-      onDrop={onImageDrop}>
-      <p>Drop an image or click to select a file to upload.</p>
+      multiple={false}>
+        {({getRootProps, getInputProps}) => {
+          return (
+            <div
+              {...getRootProps()}
+            >
+              <input {...getInputProps()} />
+              {
+              <p>Click or drag to upload </p>
+              }
+            </div>
+          )
+      }}
     </Dropzone>
   </div>
   );
