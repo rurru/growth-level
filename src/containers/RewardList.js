@@ -29,7 +29,6 @@ const RewardList = (props) => {
     setEditingReward(0);
 }
 
-
 const saveReward = (reward) => {
   const newRewards = _.cloneDeep(rewards);
   if (reward.id === 0) {

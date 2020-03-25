@@ -10,6 +10,20 @@ const RewardEditor = (props) => {
   const [uploadedFile, setUploadedFile] = useState('');
   const [fileURL, setFileURL] = useState('');
 
+  let levelOptions = [];
+
+  for (let i = rewardLevel-5; i <= rewardLevel+5; i++) {
+    if (i > 0) levelOptions.push(i);
+  }
+
+  const updateName = (e) => {
+    setRewardName(e.target.value);
+  }
+
+  const updateLevel = (e) => {
+    setRewardLevel(e.target.value);
+  }
+
   const onImageDrop = (files) => {
     setUploadedFile(files[0]);
     handleImageUpload(files[0]);
@@ -37,6 +51,12 @@ const RewardEditor = (props) => {
   return (
   <div id = "reward-editor">
     <div className = "form-header">{props.reward.id === 0 ? "Add New Reward" : "Edit Reward"}</div>
+    <div className = "form-label">Reward Name</div>
+      <input type="text" className="settings-input" value={rewardName} onChange={(e) => updateName(e)} />
+      <div className = "form-label">Level</div> 
+      <select className="settings-select-small" value = {rewardLevel} onChange={updateLevel}>
+        {levelOptions.map(lvl => <option value={lvl} key={lvl} >{lvl}</option>)} 
+      </select>
     <Dropzone
       onDrop={onImageDrop}
       accept="image/*"
