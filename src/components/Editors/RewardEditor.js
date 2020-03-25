@@ -5,7 +5,6 @@ import config from '../../Config';
 
 const RewardEditor = (props) => {
 
-  const [rewardIcon, setRewardIcon] = useState(props.reward.icon);
   const [rewardName, setRewardName] = useState(props.reward.name);
   const [rewardLevel, setRewardLevel] = useState(props.reward.level);
   const [uploadedFile, setUploadedFile] = useState('');
@@ -30,8 +29,14 @@ const RewardEditor = (props) => {
     });
   }
 
+
+  const handleSubmit = () => {
+
+  }
+
   return (
   <div id = "reward-editor">
+    <div className = "form-header">{props.reward.id === 0 ? "Add New Reward" : "Edit Reward"}</div>
     <Dropzone
       onDrop={onImageDrop}
       accept="image/*"
@@ -49,7 +54,22 @@ const RewardEditor = (props) => {
           )
       }}
     </Dropzone>
-  </div>
+    <div>
+        {uploadedFile === '' ? null :
+        <div>
+          <p>{uploadedFile.name}</p>
+          <img src={fileURL} />
+        </div>}
+      </div>
+
+      <div className = "edit-button-row">
+        <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
+        <div className = "button item-edit-button submit-button" onClick={handleSubmit}>Submit Reward</div>
+        {props.reward.name === "" ? "" : 
+          <div className="button item-edit-button delete-button" 
+            onClick={()=>props.delete(props.reward.id)}>Delete Reward</div>}
+      </div>
+    </div>
   );
 }
 

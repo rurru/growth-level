@@ -88,11 +88,11 @@ import "./editors.css";
         <i className={taskIcon}></i>
       </span>
       <span className = "form-label">Icon</span> 
-      <div id = "task-buttons">
-        <div className = "button task-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
-        <div className = "button task-edit-button submit-button" onClick={handleSubmit}>Submit Task</div>
+      <div className = "edit-button-row">
+        <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
+        <div className = "button item-edit-button submit-button" onClick={handleSubmit}>Submit Task</div>
         {props.task.name === "" ? "" : 
-          <div className="button task-edit-button delete-button" 
+          <div className="button item-edit-button delete-button" 
             onClick={()=>props.delete(props.task.id)}>Delete Task</div>}
       </div>
     </div>
