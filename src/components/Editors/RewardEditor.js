@@ -12,7 +12,7 @@ const RewardEditor = (props) => {
 
   let levelOptions = [];
 
-  for (let i = rewardLevel-5; i <= rewardLevel+5; i++) {
+  for (let i = rewardLevel-4; i <= rewardLevel+4; i++) {
     if (i > 0) levelOptions.push(i);
   }
 
@@ -45,7 +45,14 @@ const RewardEditor = (props) => {
 
 
   const handleSubmit = () => {
-
+    const reward = {
+      userID: props.user,
+      id: props.reward.id,
+      name: rewardName, 
+      level: rewardLevel,
+      url: fileURL
+    }
+    props.save(reward);
   }
 
   return (
@@ -53,35 +60,34 @@ const RewardEditor = (props) => {
     <div className = "form-header">{props.reward.id === 0 ? "Add New Reward" : "Edit Reward"}</div>
     <div className = "form-label">Reward Name</div>
       <input type="text" className="settings-input" value={rewardName} onChange={(e) => updateName(e)} />
-      <div className = "form-label">Level</div> 
-      <select className="settings-select-small" value = {rewardLevel} onChange={updateLevel}>
-        {levelOptions.map(lvl => <option value={lvl} key={lvl} >{lvl}</option>)} 
-      </select>
-    <Dropzone
-      onDrop={onImageDrop}
-      accept="image/*"
-      multiple={false}>
-        {({getRootProps, getInputProps}) => {
-          return (
-            <div
-              {...getRootProps()}
-            >
-              <input {...getInputProps()} />
-              {
-              <p>Click or drag to upload </p>
-              }
-            </div>
-          )
-      }}
-    </Dropzone>
+    <div className="form-label">Image</div>
+    {uploadedFile === '' ? 
+      <div className="image-upload">
+        <Dropzone
+          onDrop={onImageDrop}
+          accept="image/*"
+          multiple={false}>
+            {({getRootProps, getInputProps}) => {
+              return (
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {<p>Click or drag to upload </p>}
+                </div> )
+          }}
+        </Dropzone>
+      </div>
+      : null
+    }
     <div>
         {uploadedFile === '' ? null :
         <div>
-          <p>{uploadedFile.name}</p>
-          <img src={fileURL} />
+          <img src={fileURL} className = "reward-preview" />
         </div>}
-      </div>
-
+      </div>      
+      <div className = "form-label">Level</div> 
+      <select className="settings-select-small" value={rewardLevel} onChange={updateLevel}>
+        {levelOptions.map(lvl => <option value={lvl} key={lvl} >{lvl}</option>)} 
+      </select>
       <div className = "edit-button-row">
         <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
         <div className = "button item-edit-button submit-button" onClick={handleSubmit}>Submit Reward</div>

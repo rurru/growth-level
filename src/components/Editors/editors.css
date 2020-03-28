@@ -300,6 +300,24 @@
     height: 40px;
 }
 
+.reward-preview {
+    width: auto;
+    height: 100px;
+}
+
+.image-upload {    
+    text-align: center;
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 0.75em;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+.image-upload:hover {
+    cursor:pointer;
+}
+
 h3 {
     margin: 0 0 10px;
 }

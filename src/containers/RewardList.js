@@ -9,7 +9,7 @@ const RewardList = (props) => {
   const [editMode, setEditMode] = useState("default");
   const [editModeStyle, setEditModeStyle] = useState({});
   const [rewards, setRewards] = 
-    useState([{id: 0, name: "", level: props.level, userID: props.user, url: ''}]); 
+    useState([{id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''}]); 
 
   const toggleEditMode = () => {
     if (editMode != "edit") {
@@ -65,8 +65,7 @@ const deleteReward= (id) => {
         <Popup open = {editMode == "new" || editingReward > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-                <RewardEditor reward = {rewards[_.findIndex(rewards, ['id', editingReward])]} 
-                    categories = {props.categories}
+                <RewardEditor reward = {rewards[_.findIndex(rewards, ['id', editingReward])]}                   
                     user = {props.user}
                     cancel = {() => cancelEdit()}
                     save = {saveReward}

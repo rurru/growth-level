@@ -13,7 +13,7 @@ import "./editors.css";
 
   let levelOptions = [];
 
-  for (let i = taskLevel-5; i <= taskLevel+5; i++) {
+  for (let i = taskLevel-4; i <= taskLevel+4; i++) {
     if (i > 0) levelOptions.push(i);
   }
 

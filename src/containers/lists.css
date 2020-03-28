@@ -27,3 +27,14 @@
 .add-button:active, .edit-button:active {
     background: #074a07;
 }
+
+.reward-item {
+    width: 100px;
+    height: auto;
+}
+
+.reward-item-label {
+    width: 100px;
+    font-family: Roboto;
+    font-size: 0.85em;
+}
