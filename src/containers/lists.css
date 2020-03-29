@@ -30,6 +30,11 @@
 
 .reward-item {
     width: 100px;
+    height: 100px;
+}
+
+.reward-item-image {
+    width: 100px;
     height: auto;
 }
 
