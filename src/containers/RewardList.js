@@ -11,6 +11,12 @@ const RewardList = (props) => {
   const [rewards, setRewards] = 
     useState([{id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''}]); 
 
+  const getRewards = async () => {
+    var rewardRef = Firebase.database().ref(props.user + '/rewards/');
+    var rewardItems = await rewardRef.once('value');
+    return rewardItems.val();
+  }
+
   const toggleEditMode = () => {
     if (editMode != "edit") {
         setEditMode("edit");
