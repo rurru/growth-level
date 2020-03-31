@@ -11,6 +11,27 @@ const RewardList = (props) => {
   const [rewards, setRewards] = 
     useState([{id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''}]); 
 
+    useEffect(() => {        
+      if (!Firebase.apps.length)
+          Firebase.initializeApp(config); 
+      getrewards().then(rewardList => {                      
+          const savedrewards = Array.isArray(rewardList) ?
+          rewardList.filter(t=>t!=null) :
+          _.keys(rewardList).filter(t=>t!=null).map(t =>
+              { return {
+                  userID: rewardList[t].userID,
+                  id: Number(rewardList[t].id), 
+                  name: rewardList[t].name, 
+                  level: rewardList[t].level,
+                  url: rewardList[t].url
+                } }
+           );
+
+           const loadedrewards = rewards.concat(savedrewards);
+            setrewards(_.cloneDeep(loadedrewards));
+      });
+  }, []);
+
   const getRewards = async () => {
     var rewardRef = Firebase.database().ref(props.user + '/rewards/');
     var rewardItems = await rewardRef.once('value');
