@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from "lodash";
+import config from '../Config';
 import RewardEditor from '.././components/Editors/RewardEditor';
 
 const RewardList = (props) => {
@@ -14,8 +15,8 @@ const RewardList = (props) => {
     useEffect(() => {        
       if (!Firebase.apps.length)
           Firebase.initializeApp(config); 
-      getrewards().then(rewardList => {                      
-          const savedrewards = Array.isArray(rewardList) ?
+      getRewards().then(rewardList => {                      
+          const savedRewards = Array.isArray(rewardList) ?
           rewardList.filter(t=>t!=null) :
           _.keys(rewardList).filter(t=>t!=null).map(t =>
               { return {
