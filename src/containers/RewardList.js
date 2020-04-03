@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from "lodash";
 import config from '../Config';
+import RewardItem from '../components/ListItems/RewardItem';
 import RewardEditor from '.././components/Editors/RewardEditor';
 
 const RewardList = (props) => {
@@ -28,8 +29,8 @@ const RewardList = (props) => {
                 } }
            );
 
-           const loadedrewards = rewards.concat(savedrewards);
-            setrewards(_.cloneDeep(loadedrewards));
+           const loadedrewards = rewards.concat(savedRewards);
+            setRewards(_.cloneDeep(loadedrewards));
       });
   }, []);
 
@@ -87,6 +88,14 @@ const deleteReward= (id) => {
   toggleEditMode();
 }
 
+const handleRewardClick = (val) => {
+  if (editMode=="edit") {
+      setEditingReward(val);
+  } else {
+      props.update(5*val+20);
+  }
+}   
+
   return (
     <div className = "container">
       <div className = "add-button" onClick = {() => setEditMode("new")}>
@@ -103,6 +112,13 @@ const deleteReward= (id) => {
         </Popup>
         <i className="fas fa-plus"></i>
       </div>
+      {_.tail(rewards).map(reward =>
+                    <RewardItem {...reward} 
+                        key = {reward.id}
+                        editing={editMode=="edit"}
+                        onRewardClick={() => handleRewardClick(reward.id)} />
+                ) 
+            }
       <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
         <i className="fas fa-pen"></i>
       </div>

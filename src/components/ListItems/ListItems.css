@@ -42,3 +42,27 @@
     box-shadow: inset 1px 1px 4px 1px #fff,
         inset -1px -1px 0 1px rgba(255,255,255,0.5);
 }
+
+.reward-item {
+    width: 100px;
+    height: 100px;
+}
+
+.reward-item:hover {
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 5px 5px #aaa;
+}
+
+.reward-item-image {
+    width: 100px;
+    height: auto;    
+    max-height: 100px;
+}
+
+.reward-item-label {
+    width: 100px;
+    font-family: Roboto;
+    font-size: 0.85em;
+    text-align: center;
+}
