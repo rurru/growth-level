@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from "lodash";
-import TaskItem from '../components/ListItems/RewardItem';
+import TaskItem from '../components/ListItems/TaskItem';
 import TaskEditor from '.././components/Editors/TaskEditor';
 import config from '../Config';
 import "../components/Editors/editors.css"; 

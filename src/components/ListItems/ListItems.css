@@ -48,13 +48,13 @@
     height: 100px;
 }
 
-.reward-item:hover {
+.reward-item:hover {    
     cursor: pointer;
-    font-weight: 700;
-    box-shadow: 5px 5px #aaa;
+    font-weight: 700;    
+    box-shadow: 5px 5px 5px #aaa;
 }
 
-.reward-item-image {
+.reward-image {
     width: 100px;
     height: auto;    
     max-height: 100px;
@@ -65,4 +65,5 @@
     font-family: Roboto;
     font-size: 0.85em;
     text-align: center;
+    margin-top: 5px;
 }
