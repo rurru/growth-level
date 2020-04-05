@@ -23,14 +23,14 @@ const RewardList = React.lazy(() => {
 
 const App = (props) => {
   const [userID, setuserID] = useState(0);
-  const [paths, setPaths] = useState({0: {name: "Default", rewardsEarned: [0]}});
-  const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(0);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
+  const [paths, setPaths] = useState({0: {name: "Default", categories: categories, rewardsEarned: [0]}});
+  const [currentPath, setCurrentPath] = useState(0);
 
   useEffect(() => {
     if (!Firebase.apps.length)
@@ -107,7 +107,8 @@ const App = (props) => {
         { return {
             id: pths[i].id,
             name: pths[i].name,
-            categories: pths[i].categories
+            categories: pths[i].categories,
+            rewardsEarned: pths[i].rewardsEarned
           }}
       );      
       _.each(savedPaths, p=>allPaths[p.id] = p);     
