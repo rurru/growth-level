@@ -23,7 +23,7 @@ const RewardList = React.lazy(() => {
 
 const App = (props) => {
   const [userID, setuserID] = useState(0);
-  const [paths, setPaths] = useState({0: {name: "Default"}});
+  const [paths, setPaths] = useState({0: {name: "Default", rewardsEarned: [0]}});
   const [currentPath, setCurrentPath] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [xp, setXp] = useState(0);
@@ -143,11 +143,14 @@ const App = (props) => {
         break;
       case "paths":
         setPaths(value);
+        Firebase.database().ref(userID + "/paths/").remove();
         _.each(_.keys(value).slice(1), i => {
+          console.log("Rewards earned: "+value[i].rewardsEarned);
           Firebase.database().ref(userID + "/paths/" + value[i].id).set({
             id: value[i].id,
             name: value[i].name,
-            categories: value[i].categories
+            categories: value[i].categories,
+            rewardsEarned: value[i].rewardsEarned
            });
         });
         setMessage({content: "Paths have been updated!", type: "notification"});
