@@ -45,7 +45,7 @@ const PathEditor = (props) => {
     const addNew = (pathName) => {
         const newID = _.max(_.keys(paths)) + 1;
         let newPaths = _.cloneDeep(paths);
-        newPaths[newID] = {id: newID, name: pathName, categories: [], rewardsEarned: [0]};
+        newPaths[newID] = {id: newID, name: pathName, categories: [0]};
         setPaths(newPaths);
     }
 
@@ -103,7 +103,7 @@ const PathEditor = (props) => {
                             </button>
                         </div>
                         <select multiple className="path-cats" id="selected" onChange={handleSelect}>
-                            {paths[i].categories.map(c =>
+                            {paths[i].categories.slice(1).map(c =>
                                 <option value={c} key={c}>
                                     {categoryName(c)}
                                 </option>

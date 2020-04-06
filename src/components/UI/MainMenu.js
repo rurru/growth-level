@@ -10,8 +10,8 @@ const MainMenu = (props) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [categoriesOpen, setCategoriesOpen] = useState(false);
     const [pathsOpen, setPathsOpen] = useState(false);
-    const menuStyle = { width: "auto", padding: "0", boxShadow: "-8px 8px 5px #ccc"};
-    const subMenuStyle = {...menuStyle, textAlign: "center"};
+    const menuStyle = { width: "150px", padding: "0", boxShadow: "-8px 8px 5px #ccc"};
+    const subMenuStyle = {...menuStyle, textAlign: "center", fontSize: "0.9em"};
 
     const toggleMenu = (shouldOpen) => {
       setButtonStyle(shouldOpen ? {boxShadow: "-5px 5px 10px #ccc inset", color: "#fff"} : null);
