@@ -13,7 +13,8 @@ const RewardList = (props) => {
   const [rewards, setRewards] = 
     useState([{id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''}]); 
 
-    useEffect(() => {        
+    useEffect(() => {       
+      console.log(rewards); 
       if (!Firebase.apps.length)
           Firebase.initializeApp(config); 
       getRewards().then(rewardList => {                      
@@ -92,7 +93,7 @@ const handleRewardClick = (val) => {
   if (editMode=="edit") {
       setEditingReward(val);
   } else {
-      props.update(5*val+20);
+     
   }
 }   
 
@@ -114,7 +115,8 @@ const handleRewardClick = (val) => {
       </div>
       {_.tail(rewards).map(reward =>
                     <RewardItem {...reward} 
-                        key = {reward.id}
+                        key={reward.id}
+                        active={reward.level <= _.max(props.earned)}
                         editing={editMode=="edit"}
                         onRewardClick={() => handleRewardClick(reward.id)} />
                 ) 

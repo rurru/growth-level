@@ -46,6 +46,7 @@
 .reward-item {
     width: 100px;
     height: 100px;
+    margin: 0 5px 10px;
 }
 
 .reward-item:hover {    
@@ -54,10 +55,19 @@
     box-shadow: 5px 5px 5px #aaa;
 }
 
+.inactive-reward-item {
+    filter: grayscale(100%);
+    opacity: 0.5;
+    color: #999;
+}
+
+.inactive-reward-item:hover{
+    cursor: not-allowed;
+}
+
 .reward-image {
     width: 100px;
-    height: auto;    
-    max-height: 100px;
+    height: 100px;
 }
 
 .reward-item-label {

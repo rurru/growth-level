@@ -146,7 +146,6 @@ const App = (props) => {
         setPaths(value);
         Firebase.database().ref(userID + "/paths/").remove();
         _.each(_.keys(value).slice(1), i => {
-          console.log("Rewards earned: "+value[i].rewardsEarned);
           Firebase.database().ref(userID + "/paths/" + value[i].id).set({
             id: value[i].id,
             name: value[i].name,
@@ -159,6 +158,18 @@ const App = (props) => {
       case "path":
         setCurrentPath(value);
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
+      case "rewards":
+        const {id} = currentPath;
+        const updatedPath = {
+          id: id,
+          name: currentPath.name,
+          categories: currentPath.categories,
+          rewardsEarned: value
+        }
+
+        Firebase.database().ref(userID + "/paths/" + id).set({...updatedPath});
+
+        break;
       default: break;
     }
   }
@@ -188,7 +199,7 @@ const App = (props) => {
             <Route path="/questlog" render={props => 
               <QuestLog {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} />} />
             <Route path="/rewardlist" render={props => 
-              <RewardList {...props} levelInfo={levelInfo} user={userID} />} />
+              <RewardList {...props} levelInfo={levelInfo} user={userID} earned={paths[currentPath].rewardsEarned} />} />
             <Route exact path="/tasklist" render={props => 
               <TaskList {...props} update={(p) => updateXP(p)} levelInfo={levelInfo} 
                 path={paths[currentPath]} categories={categories} user={userID} />} />
