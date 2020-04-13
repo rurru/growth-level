@@ -7,14 +7,16 @@ import RewardItem from '../components/ListItems/RewardItem';
 import RewardEditor from '.././components/Editors/RewardEditor';
 
 const RewardList = (props) => {
+  const rewardTemplate = {id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''};
+
   const [editingReward, setEditingReward] = useState(0);
+  const [selectedReward, setSelectedReward] = useState(rewardTemplate);
   const [editMode, setEditMode] = useState("default");
   const [editModeStyle, setEditModeStyle] = useState({});
-  const [rewards, setRewards] = 
-    useState([{id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''}]); 
+  const [rewards, setRewards] = useState([rewardTemplate]);
+    useState([]); 
 
     useEffect(() => {       
-      console.log(rewards); 
       if (!Firebase.apps.length)
           Firebase.initializeApp(config); 
       getRewards().then(rewardList => {                      
@@ -93,12 +95,19 @@ const handleRewardClick = (val) => {
   if (editMode=="edit") {
       setEditingReward(val);
   } else {
-     
+    const i = _.findIndex(rewards, ['id', val]);
+    setSelectedReward(rewards[i]);
   }
 }   
 
   return (
-    <div className = "container">
+    <div className = "container">      
+      <Popup open = {selectedReward.id > 0} 
+          contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
+            <div className = "modal" >
+              STUFF
+            </div>
+        </Popup>
       <div className = "add-button" onClick = {() => setEditMode("new")}>
         <Popup open = {editMode == "new" || editingReward > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >

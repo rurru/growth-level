@@ -158,6 +158,7 @@ const App = (props) => {
       case "path":
         setCurrentPath(value);
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
+        break;
       case "rewards":
         const {id} = currentPath;
         const updatedPath = {
