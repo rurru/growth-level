@@ -4,7 +4,7 @@ import Firebase from 'firebase';
 import _ from "lodash";
 import config from '../Config';
 import RewardItem from '../components/ListItems/RewardItem';
-import RewardEditor from '.././components/Editors/RewardEditor';
+import RewardEditor from '../components/Popups/RewardEditor';
 
 const RewardList = (props) => {
   const rewardTemplate = {id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''};
