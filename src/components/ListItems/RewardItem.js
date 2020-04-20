@@ -2,8 +2,11 @@ import React from 'react';
 import './ListItems.css';
 
 const RewardItem = (props) => {
-  const classes = props.active ? "reward-item" : "inactive-reward-item";
+  let classes = "reward-item";
   if (props.editing) classes += " editing-reward";
+  else if (!props.active) classes += " inactive";
+  
+  if (props.editing) classes = "reward-item editing-reward";
 
   return (
   <div className={classes} key = {props.id} 

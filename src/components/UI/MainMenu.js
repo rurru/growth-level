@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
 import _ from "lodash"
-import PathEditor from '../Editors/PathEditor';
-import CategoryEditor from '../Editors/CategoryEditor';
+import PathEditor from '../Popups/PathEditor';
+import CategoryEditor from '../Popups/CategoryEditor';
 import './ui.css';
 
 const MainMenu = (props) => {

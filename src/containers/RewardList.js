@@ -5,6 +5,7 @@ import _ from "lodash";
 import config from '../Config';
 import RewardItem from '../components/ListItems/RewardItem';
 import RewardEditor from '../components/Popups/RewardEditor';
+import RewardConfirmation from '../components/Popups/RewardConfirmation';
 
 const RewardList = (props) => {
   const rewardTemplate = {id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''};
@@ -105,7 +106,7 @@ const handleRewardClick = (val) => {
       <Popup open = {selectedReward.id > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-              STUFF
+              <RewardConfirmation reward = {selectedReward} />
             </div>
         </Popup>
       <div className = "add-button" onClick = {() => setEditMode("new")}>

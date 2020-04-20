@@ -55,13 +55,13 @@
     box-shadow: 5px 5px 5px #aaa;
 }
 
-.inactive-reward-item {
+.inactive {
     filter: grayscale(100%);
     opacity: 0.5;
     color: #999;
 }
 
-.inactive-reward-item:hover{
+.inactive:hover{
     cursor: not-allowed;
 }
 

@@ -9,13 +9,18 @@
     cursor: default;
 }
 
-#task-editor, #reward-editor {
+#task-editor, #reward-editor, #reward-confirm {
     width: 300px;
     padding: 25px;
     color: #000;
     background: #edffd4;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+#reward-confirm {
+    height: 300px;
+    font-family: Acme;
 }
 
 .form-header {
@@ -314,11 +319,20 @@
     margin-top: 5px;
 }
 
-.image-upload:hover {
+.image-upload:hover, .settings-option {
     cursor:pointer;
 }
 
 h3 {
     margin: 0 0 10px;
+}
+
+.reward-confirm-name {
+    font-weight: 900;
+}
+
+.reward-confirm-image {
+    margin: 20px auto;
+    display: block;
 }
 

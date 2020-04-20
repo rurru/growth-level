@@ -3,9 +3,9 @@ import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from "lodash";
 import TaskItem from '../components/ListItems/TaskItem';
-import TaskEditor from '.././components/Editors/TaskEditor';
+import TaskEditor from '.././components/Popups/TaskEditor';
 import config from '../Config';
-import "../components/Editors/editors.css"; 
+import "../components/Popups/editors.css"; 
 import './lists.css';
  
 const TaskList = (props) => { 
