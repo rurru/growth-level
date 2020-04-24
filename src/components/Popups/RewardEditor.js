@@ -90,7 +90,7 @@ const RewardEditor = (props) => {
       </select>
       <div className = "edit-button-row">
         <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
-        <div className = "button item-edit-button submit-button" onClick={handleSubmit}>Submit Reward</div>
+        <div className = "button item-edit-button submit-button" onClick={handleSubmit}>Submit </div>
         {props.reward.name === "" ? "" : 
           <div className="button item-edit-button delete-button" 
             onClick={()=>props.delete(props.reward.id)}>Delete Reward</div>}

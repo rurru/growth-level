@@ -99,6 +99,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    font-size: 1.25em;
     padding-top: 30px;
 }
 

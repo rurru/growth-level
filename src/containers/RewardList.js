@@ -60,6 +60,7 @@ const RewardList = (props) => {
         setEditMode("default");
     }
     setEditingReward(0);
+    setSelectedReward(rewardTemplate)
 }
 
 const saveReward = (reward) => {
@@ -106,7 +107,8 @@ const handleRewardClick = (val) => {
       <Popup open = {selectedReward.id > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-              <RewardConfirmation reward = {selectedReward} />
+              <RewardConfirmation reward = {selectedReward} 
+                cancel = {cancelEdit} />
             </div>
         </Popup>
       <div className = "add-button" onClick = {() => setEditMode("new")}>

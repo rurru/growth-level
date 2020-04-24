@@ -3,10 +3,14 @@ import React, {useState} from 'react';
 const RewardConfirmation = (props) => {
     const [keepReward, setKeepReward] = useState(false);
 
-    const toggleKeepReward =  () => {
+    const toggleKeepReward = () => {
         const newSetting = !keepReward;
         setKeepReward(newSetting);
       }
+
+    const handleSelect = (id) => {
+
+    }
 
     return (
         <div id = "reward-confirm">
@@ -17,6 +21,10 @@ const RewardConfirmation = (props) => {
             <input type="checkbox" name="keepReward" className="settings-option"
              checked={keepReward} onChange={toggleKeepReward} />
             Keep Reward in List
+            <div className = "edit-button-row">
+                <div className = "button item-edit-button submit-button" onClick={handleSelect}>Select</div>
+                <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
+            </div>
         </div>
     )
 }
