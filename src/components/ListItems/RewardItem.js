@@ -10,7 +10,8 @@ const RewardItem = (props) => {
 
   return (
   <div className={classes} key = {props.id} 
-    onClick = {props.active ? () => props.onRewardClick(props.id) : ''}>       
+    onClick = {props.active ? () => props.onRewardClick(props.id) : ''}>           
+      <div className = "reward-item-label level-label">LEVEL {props.level} </div>  
       <img src = {props.url} className = "reward-image" />
       <div className = "reward-item-label">{props.name}</div>
   </div>);
