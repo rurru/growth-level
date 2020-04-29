@@ -102,13 +102,20 @@ const handleRewardClick = (val) => {
   }
 }   
 
+const selectReward = (id) => {
+  const updatedEarned = props.earned;
+  
+}
+
   return (
     <div className = "container">      
       <Popup open = {selectedReward.id > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
               <RewardConfirmation reward = {selectedReward} 
-                cancel = {cancelEdit} />
+                cancel = {cancelEdit}
+                delete = {deleteReward} 
+              />
             </div>
         </Popup>
       <div className = "add-button" onClick = {() => setEditMode("new")}>

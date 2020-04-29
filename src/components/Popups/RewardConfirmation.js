@@ -9,7 +9,11 @@ const RewardConfirmation = (props) => {
       }
 
     const handleSelect = (id) => {
+        props.select(id);
 
+        if (!keepReward) {
+            props.delete(id);
+        }
     }
 
     return (
