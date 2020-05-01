@@ -26,7 +26,8 @@ const RewardConfirmation = (props) => {
              checked={keepReward} onChange={toggleKeepReward} />
             Keep Reward in List
             <div className = "edit-button-row">
-                <div className = "button item-edit-button submit-button" onClick={handleSelect}>Select</div>
+                <div className = "button item-edit-button submit-button" 
+                    onClick={() => handleSelect(props.reward.id)}>Select</div>
                 <div className = "button item-edit-button cancel-button" onClick={props.cancel}>Cancel</div>
             </div>
         </div>

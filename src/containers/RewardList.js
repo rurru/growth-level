@@ -103,8 +103,10 @@ const handleRewardClick = (val) => {
 }   
 
 const selectReward = (id) => {
-  const updatedEarned = props.earned;
-  
+  const i = _.findIndex(rewards, ['id', id]);
+  const levelToRemove = _.max(props.earned.filter(e => e <= rewards[i].level ));
+  const updatedEarned = _.pull(props.earned, levelToRemove);
+  props.update("rewards", updatedEarned);
 }
 
   return (
@@ -115,6 +117,7 @@ const selectReward = (id) => {
               <RewardConfirmation reward = {selectedReward} 
                 cancel = {cancelEdit}
                 delete = {deleteReward} 
+                select = {selectReward}
               />
             </div>
         </Popup>

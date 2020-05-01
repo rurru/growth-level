@@ -200,7 +200,8 @@ const App = (props) => {
             <Route path="/questlog" render={props => 
               <QuestLog {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} />} />
             <Route path="/rewardlist" render={props => 
-              <RewardList {...props} levelInfo={levelInfo} user={userID} earned={paths[currentPath].rewardsEarned} />} />
+              <RewardList {...props} levelInfo={levelInfo} user={userID} earned={paths[currentPath].rewardsEarned} 
+                update={(setting, value) => changeSettings(setting, value)} />} />
             <Route exact path="/tasklist" render={props => 
               <TaskList {...props} update={(p) => updateXP(p)} levelInfo={levelInfo} 
                 path={paths[currentPath]} categories={categories} user={userID} />} />
