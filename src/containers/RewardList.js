@@ -106,7 +106,10 @@ const selectReward = (id) => {
   const i = _.findIndex(rewards, ['id', id]);
   const levelToRemove = _.max(props.earned.filter(e => e <= rewards[i].level ));
   const updatedEarned = _.pull(props.earned, levelToRemove);
+
   props.update("rewards", updatedEarned);
+  props.updateMessage({content: "Reward has been selected!", type: "notification"});
+
   setEditingReward(0);
   setSelectedReward(rewardTemplate);
 
