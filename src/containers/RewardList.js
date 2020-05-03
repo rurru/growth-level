@@ -60,7 +60,7 @@ const RewardList = (props) => {
         setEditMode("default");
     }
     setEditingReward(0);
-    setSelectedReward(rewardTemplate)
+    setSelectedReward(rewardTemplate);
 }
 
 const saveReward = (reward) => {
@@ -107,6 +107,9 @@ const selectReward = (id) => {
   const levelToRemove = _.max(props.earned.filter(e => e <= rewards[i].level ));
   const updatedEarned = _.pull(props.earned, levelToRemove);
   props.update("rewards", updatedEarned);
+  setEditingReward(0);
+  setSelectedReward(rewardTemplate);
+
 }
 
   return (

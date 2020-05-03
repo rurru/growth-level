@@ -29,7 +29,7 @@ const App = (props) => {
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
-  const [paths, setPaths] = useState({0: {name: "Default", categories: categories, rewardsEarned: [0]}});
+  const [paths, setPaths] = useState({0: {name: "Default", categories: categories, rewardsEarned: [0], id: 0}});
   const [currentPath, setCurrentPath] = useState(0);
 
   useEffect(() => {
@@ -160,11 +160,11 @@ const App = (props) => {
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
         break;
       case "rewards":
-        const {id} = currentPath;
+        const id = paths[currentPath].id;
         const updatedPath = {
           id: id,
-          name: currentPath.name,
-          categories: currentPath.categories,
+          name: paths[currentPath].name,
+          categories: paths[currentPath].categories,
           rewardsEarned: value
         }
 
