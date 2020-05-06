@@ -1,12 +1,14 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RoutedTabs, NavTab } from "react-router-tabs";
+import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from 'lodash';
 import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
 import Message from './components/UI/Message';
+import LevelUpNotification from '../components/Popups/LevelUpNotification';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
 import config from './Config';
