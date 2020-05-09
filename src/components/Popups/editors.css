@@ -107,11 +107,12 @@
     width: 100px;
     height: 30px;
     font-size: 0.7em;
-    border: 1px solid #ccc;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.3);    
+    border: 1px solid #ccc;
     opacity: 0.8;
 }
 

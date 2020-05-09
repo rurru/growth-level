@@ -8,7 +8,7 @@ import XPBar from './components/XPBar';
 import NavBar from './components/UI/NavBar';
 import MainMenu from './components/UI/MainMenu';
 import Message from './components/UI/Message';
-import LevelUpNotification from '../components/Popups/LevelUpNotification';
+import LevelUpNotification from './components/Popups/LevelUpNotification';
 import TaskList from './containers/TaskList';
 import { categoryColors } from './constants';
 import config from './Config';
@@ -71,11 +71,11 @@ const App = (props) => {
         levelXP: calcXpToLevel(levelInfo.level + 1)
       }) );
       newXP -= levelInfo.levelXP;
+      setLeveledUp(true);
     }
     setXp(newXP);
     let xpPercent = (newXP * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
-    setLeveledUp(true);
   }
 
   useEffect(() => {        
@@ -196,7 +196,7 @@ const App = (props) => {
       <Popup open = {leveledUp == true} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-              <LevelUpNotification level={level} />
+              <LevelUpNotification level={levelInfo.level} />
             </div>
         </Popup>
 

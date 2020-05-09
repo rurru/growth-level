@@ -10,8 +10,13 @@
 
 .task-item:hover {
     cursor: pointer;
-    border-color: #000;
     font-weight: 700;
+}
+
+.task-item:active {
+    -moz-box-shadow:    inset 0 0 5px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow:         inset 0 0 5px #000000;
 }
 
 .task-item i.fas, .task-item i.far {
@@ -84,4 +89,9 @@
     font-weight: 500;
     font-size: 1em;
     border: 1px solid #555;
+}
+
+#level-notify {
+    width: 250px;
+    height: 200px;
 }
