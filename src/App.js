@@ -32,7 +32,7 @@ const App = (props) => {
   const [leveledUp, setLeveledUp] = useState(false);
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
-  const [paths, setPaths] = useState({0: {name: "Default", categories: categories, rewardsEarned: [0], id: 0}});
+  const [paths, setPaths] = useState({0: {name: "Default", level: 1, categories: categories, rewardsEarned: [0], id: 0}});
   const [currentPath, setCurrentPath] = useState(0);
 
   useEffect(() => {
@@ -196,7 +196,7 @@ const App = (props) => {
       <Popup open = {leveledUp == true} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-              <LevelUpNotification level={levelInfo.level} />
+              <LevelUpNotification level={levelInfo.level} close={() => setLeveledUp(false)} />
             </div>
         </Popup>
 

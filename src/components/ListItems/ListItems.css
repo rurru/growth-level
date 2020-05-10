@@ -91,6 +91,10 @@
     border: 1px solid #555;
 }
 
+.button-link {
+    text-decoration: none;
+}
+
 #level-notify {
     width: 250px;
     height: 200px;
