@@ -26,13 +26,12 @@ const RewardList = React.lazy(() => {
 const App = (props) => {
   const [userID, setuserID] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
-  const [xp, setXp] = useState(0);
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
   const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
   const [leveledUp, setLeveledUp] = useState(false);
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
-  const [paths, setPaths] = useState({0: {name: "Default", level: 1, categories: categories, rewardsEarned: [0], id: 0}});
+  const [paths, setPaths] = useState({0: {name: "Default", level: 1, xp: 0, categories: categories, rewardsEarned: [0], id: 0}});
   const [currentPath, setCurrentPath] = useState(0);
 
   useEffect(() => {
@@ -64,7 +63,7 @@ const App = (props) => {
   }
 
   const updateXP = (points) => {
-    let newXP = xp + points;
+    let newXP = paths[currentPath].xp + points;
     if (newXP > levelInfo.levelXP) {      
       setLevelInfo((levelInfo) => ({
         level: levelInfo.level + 1,
@@ -73,6 +72,7 @@ const App = (props) => {
       newXP -= levelInfo.levelXP;
       setLeveledUp(true);
     }
+
     setXp(newXP);
     let xpPercent = (newXP * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
@@ -152,7 +152,9 @@ const App = (props) => {
         _.each(_.keys(value).slice(1), i => {
           Firebase.database().ref(userID + "/paths/" + value[i].id).set({
             id: value[i].id,
+            xp: value[i].xp,
             name: value[i].name,
+            level: value[i].level,
             categories: value[i].categories,
             rewardsEarned: value[i].rewardsEarned
            });
@@ -176,7 +178,7 @@ const App = (props) => {
 
         break;
       default: break;
-    }
+    }ww
   }
 
   return (
@@ -191,7 +193,7 @@ const App = (props) => {
         <Message content = {message} 
           clear = {() => {setMessage({content: "", type: ""})}} /> 
         : null }
-      <XPBar xp={xp} progress={progress} xpToLevel={levelInfo.levelXP} />
+      <XPBar xp={paths[currentPath].xp} progress={progress} xpToLevel={levelInfo.levelXP} />
 
       <Popup open = {leveledUp == true} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
