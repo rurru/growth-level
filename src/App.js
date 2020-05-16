@@ -63,6 +63,8 @@ const App = (props) => {
   }
 
   const updateXP = (points) => {
+    const newPaths = _.cloneDeep(paths);
+
     let newXP = paths[currentPath].xp + points;
     if (newXP > levelInfo.levelXP) {      
       setLevelInfo((levelInfo) => ({
@@ -70,10 +72,13 @@ const App = (props) => {
         levelXP: calcXpToLevel(levelInfo.level + 1)
       }) );
       newXP -= levelInfo.levelXP;
+      newPaths[currentPath].level = levelInfo.level;
       setLeveledUp(true);
+      changeSettings("paths", newPaths);
     }
 
-    setXp(newXP);
+    newPaths[currentPath].xp = newXP;
+
     let xpPercent = (newXP * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
   }
@@ -82,7 +87,6 @@ const App = (props) => {
     loadUserData().then(userData => {
       if (userData != null) {
         setLevelInfo(userData.levelInfo);
-        setXp(userData.xp);    
         setMultiplier(userData.multiplier);
         setCurrentPath(userData.currentPath);
       }
@@ -178,7 +182,7 @@ const App = (props) => {
 
         break;
       default: break;
-    }ww
+    }
   }
 
   return (
