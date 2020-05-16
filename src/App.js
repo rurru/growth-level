@@ -63,25 +63,27 @@ const App = (props) => {
   }
 
   const updateXP = (points) => {
-    console.log("Updating XP");
     const newPaths = _.cloneDeep(paths);
+    let pathLevel = paths[currentPath].level;
+    let pathLevelXP = calcXpToLevel(pathLevel);
 
     let newXP = paths[currentPath].xp + points;
     if (newXP > levelInfo.levelXP) {      
-      setLevelInfo((levelInfo) => ({
-        level: levelInfo.level + 1,
-        levelXP: calcXpToLevel(levelInfo.level + 1)
-      }) );
-      newXP -= levelInfo.levelXP;
-      newPaths[currentPath].level = levelInfo.level;
+      pathLevel = levelInfo.level + 1;
+      newXP -= pathLevelXP;
+      newPaths[currentPath].level = pathLevel;
       setLeveledUp(true);
     }
 
     newPaths[currentPath].xp = newXP;
     changeSettings("paths", newPaths);
+    setLevelInfo({level: pathLevel, levelXP: pathLevelXP});
 
-    let xpPercent = (newXP * 100) / levelInfo.levelXP;
+    let xpPercent = (newXP * 100) / pathLevelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
+    
+console.log("newxp " + newXP);
+console.log("Path XP: " + paths[currentPath].xp);
   }
 
   useEffect(() => {        
@@ -123,7 +125,7 @@ const App = (props) => {
           }}
       );      
       _.each(savedPaths, p=>allPaths[p.id] = p);     
-      setPaths(allPaths);      
+      setPaths(allPaths);    
      });
     }, []
   );
@@ -169,6 +171,7 @@ const App = (props) => {
         break;
       case "path":
         setCurrentPath(value);
+        updateXP(0);
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
         break;
       case "rewards":
@@ -191,7 +194,7 @@ const App = (props) => {
 
   return (
     <div id = "app">
-      <NavBar level={levelInfo.level}>
+      <NavBar level={paths[currentPath].level}>
         <MainMenu
           paths={paths}
           categories={categories}
