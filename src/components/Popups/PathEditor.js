@@ -45,7 +45,7 @@ const PathEditor = (props) => {
     const addNew = (pathName) => {
         const newID = Number(_.max(_.keys(paths))) + 1;
         let newPaths = _.cloneDeep(paths);
-        newPaths[newID] = {id: newID, name: pathName, categories: [0]};
+        newPaths[newID] = {id: newID, name: pathName, level: 1, xp: 0, categories: [0], rewardsEarned: [0]};
         setPaths(newPaths);
     }
 

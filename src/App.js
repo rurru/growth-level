@@ -63,6 +63,7 @@ const App = (props) => {
   }
 
   const updateXP = (points) => {
+    console.log("Updating XP");
     const newPaths = _.cloneDeep(paths);
 
     let newXP = paths[currentPath].xp + points;
@@ -74,10 +75,10 @@ const App = (props) => {
       newXP -= levelInfo.levelXP;
       newPaths[currentPath].level = levelInfo.level;
       setLeveledUp(true);
-      changeSettings("paths", newPaths);
     }
 
     newPaths[currentPath].xp = newXP;
+    changeSettings("paths", newPaths);
 
     let xpPercent = (newXP * 100) / levelInfo.levelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
@@ -115,6 +116,8 @@ const App = (props) => {
         { return {
             id: pths[i].id,
             name: pths[i].name,
+            level: pths[i].level,
+            xp: pths[i].xp,
             categories: pths[i].categories,
             rewardsEarned: pths[i].rewardsEarned
           }}
@@ -152,7 +155,7 @@ const App = (props) => {
         break;
       case "paths":
         setPaths(value);
-        Firebase.database().ref(userID + "/paths/").remove();
+       // Firebase.database().ref(userID + "/paths/").remove();
         _.each(_.keys(value).slice(1), i => {
           Firebase.database().ref(userID + "/paths/" + value[i].id).set({
             id: value[i].id,
@@ -163,7 +166,6 @@ const App = (props) => {
             rewardsEarned: value[i].rewardsEarned
            });
         });
-        setMessage({content: "Paths have been updated!", type: "notification"});
         break;
       case "path":
         setCurrentPath(value);
@@ -173,6 +175,8 @@ const App = (props) => {
         const id = paths[currentPath].id;
         const updatedPath = {
           id: id,
+          xp: paths[currentPath].xp,
+          level: paths[currentPath].level,
           name: paths[currentPath].name,
           categories: paths[currentPath].categories,
           rewardsEarned: value
