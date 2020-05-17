@@ -68,7 +68,7 @@ const App = (props) => {
     let pathLevelXP = calcXpToLevel(pathLevel);
 
     let newXP = paths[currentPath].xp + points;
-    if (newXP > levelInfo.levelXP) {      
+    if (newXP > pathLevelXP) {      
       pathLevel = levelInfo.level + 1;
       newXP -= pathLevelXP;
       newPaths[currentPath].level = pathLevel;
@@ -82,8 +82,6 @@ const App = (props) => {
     let xpPercent = (newXP * 100) / pathLevelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
     
-console.log("newxp " + newXP);
-console.log("Path XP: " + paths[currentPath].xp);
   }
 
   useEffect(() => {        
@@ -171,7 +169,11 @@ console.log("Path XP: " + paths[currentPath].xp);
         break;
       case "path":
         setCurrentPath(value);
-        updateXP(0);
+
+        const pathLevelXP = calcXpToLevel(paths[value].level);
+        const xpPercent = (paths[value].xp * 100) / pathLevelXP;
+        setLevelInfo({level: paths[value].level, levelXP: paths[value].xp});
+        setProgress({current: xpPercent, toLevel: 100 - xpPercent});
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
         break;
       case "rewards":
