@@ -69,6 +69,7 @@ const App = (props) => {
 
     let newXP = paths[currentPath].xp + points;
     if (newXP > pathLevelXP) {      
+      newPaths[currentPath].rewardsEarned.push(pathLevel);
       pathLevel = paths[currentPath].level + 1;
       newXP -= pathLevelXP;
       newPaths[currentPath].level = pathLevel;
