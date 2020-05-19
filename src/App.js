@@ -200,7 +200,9 @@ const App = (props) => {
           paths={paths}
           categories={categories}
           update={(setting, value) => changeSettings(setting, value)} />
-          <span id="header-path-name">{paths[currentPath].name}</span>
+          <span id="header-path-name">
+            {currentPath > 0 ? paths[currentPath].name : "No Path Selected"}
+          </span>
       </NavBar>
       {message.content !== "" ? 
         <Message content = {message} 
