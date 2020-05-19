@@ -173,7 +173,6 @@ const App = (props) => {
         const xpPercent = (paths[value].xp * 100) / pathLevelXP;
         setLevelXP(pathLevelXP);
         setProgress({current: xpPercent, toLevel: 100 - xpPercent});
-        setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
         break;
       case "rewards":
         const id = paths[currentPath].id;
