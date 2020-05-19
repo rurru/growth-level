@@ -44,6 +44,10 @@
     cursor: default;
 }
 
+.menu-item-new {
+    font-style: italic;
+}
+
 .leaf:hover {
     background-color: #56ab2f;
     cursor: pointer;

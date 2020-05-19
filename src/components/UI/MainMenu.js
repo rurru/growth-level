@@ -51,8 +51,9 @@ const MainMenu = (props) => {
         <Popup trigger={<div className="menu-item"> Set Path </div>} onClick = {() => toggleMenu(false)}
                         position="left top" on="hover"  arrow = {false} contentStyle={subMenuStyle}>
           {_.keys(props.paths).map(id =>
-            <div className="menu-item leaf" key={id} onClick={()=>updateSettings("path", id)}>
-              {props.paths[id].name}
+            <div className="menu-item leaf" key={id}>
+              {id > 0 ? <div onClick={()=>updateSettings("path", id)}>{props.paths[id].name}</div> : 
+                <div className="menu-item-new" onClick={()=>setPathsOpen(true)}>Create New</div>}
             </div> )}  
         </Popup>
 
