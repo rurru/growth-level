@@ -146,6 +146,10 @@
     font-size: 0.75em;
 }
 
+.level-notify {
+    font-size: 1.2em;
+}
+
 .category-color {
     width: 50px;
     height: 15px;
