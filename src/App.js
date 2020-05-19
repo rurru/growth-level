@@ -27,7 +27,7 @@ const App = (props) => {
   const [userID, setuserID] = useState(0);
   const [message, setMessage] = useState({content: "", type: ""});
   const [progress, setProgress] = useState({current: 0, toLevel: 100});
-  const [levelInfo, setLevelInfo] = useState({level: 1, levelXP: 400});
+  const [levelXP, setLevelXP] = useState(400);
   const [leveledUp, setLeveledUp] = useState(false);
   const [multiplier, setMultiplier] = useState(2); //1 = fast, 2 = balanced, 3 = slow
   const [categories, setCategories] = useState([{id: 0, name: "None", active: false, color: {color:"#fff", font: "#000"}}]);  
@@ -69,7 +69,7 @@ const App = (props) => {
 
     let newXP = paths[currentPath].xp + points;
     if (newXP > pathLevelXP) {      
-      pathLevel = levelInfo.level + 1;
+      pathLevel = paths[currentPath].level + 1;
       newXP -= pathLevelXP;
       newPaths[currentPath].level = pathLevel;
       setLeveledUp(true);
@@ -77,7 +77,7 @@ const App = (props) => {
 
     newPaths[currentPath].xp = newXP;
     changeSettings("paths", newPaths);
-    setLevelInfo({level: pathLevel, levelXP: pathLevelXP});
+    setLevelXP(pathLevelXP);
 
     let xpPercent = (newXP * 100) / pathLevelXP;
     setProgress({current: xpPercent, toLevel: 100 - xpPercent});
@@ -87,7 +87,6 @@ const App = (props) => {
   useEffect(() => {        
     loadUserData().then(userData => {
       if (userData != null) {
-        setLevelInfo(userData.levelInfo);
         setMultiplier(userData.multiplier);
         setCurrentPath(userData.currentPath);
       }
@@ -169,10 +168,9 @@ const App = (props) => {
         break;
       case "path":
         setCurrentPath(value);
-
         const pathLevelXP = calcXpToLevel(paths[value].level);
         const xpPercent = (paths[value].xp * 100) / pathLevelXP;
-        setLevelInfo({level: paths[value].level, levelXP: paths[value].xp});
+        setLevelXP(pathLevelXP);
         setProgress({current: xpPercent, toLevel: 100 - xpPercent});
         setMessage({content: "Current path switched to "+paths[value].name+".", type: "notification"});
         break;
@@ -206,12 +204,12 @@ const App = (props) => {
         <Message content = {message} 
           clear = {() => {setMessage({content: "", type: ""})}} /> 
         : null }
-      <XPBar xp={paths[currentPath].xp} progress={progress} xpToLevel={levelInfo.levelXP} />
+      <XPBar xp={paths[currentPath].xp} progress={progress} xpToLevel={levelXP} />
 
       <Popup open = {leveledUp == true} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
-              <LevelUpNotification level={levelInfo.level} close={() => setLeveledUp(false)} />
+              <LevelUpNotification level={paths[currentPath].level} close={() => setLeveledUp(false)} />
             </div>
         </Popup>
 
@@ -225,12 +223,12 @@ const App = (props) => {
         <Suspense fallback = {<p>Loading Tasks...</p>} >
           <Switch>        
             <Route path="/questlog" render={props => 
-              <QuestLog {...props} update = {(p) => updateXP(p)} levelInfo = {levelInfo} />} />
+              <QuestLog {...props} update = {(p) => updateXP(p)} />} />
             <Route path="/rewardlist" render={props => 
-              <RewardList {...props} levelInfo={levelInfo} user={userID} earned={paths[currentPath].rewardsEarned} 
+              <RewardList {...props} level={paths[currentPath].level} user={userID} earned={paths[currentPath].rewardsEarned} 
                 update={(s,v) => changeSettings(s,v)} updateMessage={(m)=>setMessage(m)} />} />
             <Route exact path="/tasklist" render={props => 
-              <TaskList {...props} update={(p) => updateXP(p)} levelInfo={levelInfo} 
+              <TaskList {...props} update={(p) => updateXP(p)} level={paths[currentPath].level}
                 path={paths[currentPath]} categories={categories} user={userID} />} />
             <Redirect exact from="/" to="taskList" />
           </Switch>

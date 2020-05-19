@@ -9,7 +9,7 @@ import "../components/Popups/editors.css";
 import './lists.css';
  
 const TaskList = (props) => { 
-    const level = props.levelInfo.level;
+    const level = props.level;
     const defaultColor = {font: "#fff", color: "#000"}
     const categories = _.keyBy(_.cloneDeep(props.categories), 'id');
 
