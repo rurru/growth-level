@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import Popup from "reactjs-popup";
 import Firebase from 'firebase';
 import _ from "lodash";
@@ -8,7 +8,7 @@ import RewardEditor from '../components/Popups/RewardEditor';
 import RewardConfirmation from '../components/Popups/RewardConfirmation';
 
 const RewardList = (props) => {
-  const rewardTemplate = {id: 0, name: "", level: props.levelInfo.level, userID: props.user, url: ''};
+  const rewardTemplate = {id: 0, name: "", level: props.level, userID: props.user, url: ''};
 
   const [editingReward, setEditingReward] = useState(0);
   const [selectedReward, setSelectedReward] = useState(rewardTemplate);
