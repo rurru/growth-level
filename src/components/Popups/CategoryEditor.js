@@ -35,7 +35,7 @@ const CategoryEditor = (props) => {
 
     const addNew = (catName) => {
         const category = {
-            id: categories[categories.length-1].id + 1,
+            id: Number(categories[categories.length-1].id) + 1,
             name: catName, 
             color: categoryColors[Math.floor(Math.random() * 10)],
             active: true};

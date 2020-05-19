@@ -132,8 +132,7 @@ const TaskList = (props) => {
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={categories.hasOwnProperty(task.category) 
-                                ? categories[task.category].color : defaultColor } 
+                        color={categories[task.category].color} 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 

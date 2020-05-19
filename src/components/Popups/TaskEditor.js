@@ -44,7 +44,7 @@ import "./editors.css";
       userID: props.user,
       id: props.task.id,
       name: taskName, 
-      category: categoryID,  
+      category: Number(categoryID),  
       icon: taskIcon, 
       level: taskLevel, 
       auto: autoLevel
