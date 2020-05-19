@@ -22,6 +22,12 @@ body {
   margin: 0 auto;
 }
 
+#header-path-name {
+  position: absolute;
+  right: 75px;
+  font-size: 0.8em;
+}
+
 .tab-row {
   width: 100%;
   height: 100%;

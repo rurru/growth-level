@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import "./editors.css";
 
 const LevelUpNotification = (props) => {
     return (
-        <div id = "level-notify">
+        <div className="level-notify">
+            Congratulations!  You've reached level {props.level}!
             <div className = "edit-button-row">
                 <Link to="/rewardList" className="button-link">
                     <div className = "button item-edit-button submit-button"
