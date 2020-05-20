@@ -71,7 +71,7 @@ const RewardEditor = (props) => {
               return (
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {<p>Click or drag to upload </p>}
+                  {<p>Click to upload </p>}
                 </div> )
           }}
         </Dropzone>

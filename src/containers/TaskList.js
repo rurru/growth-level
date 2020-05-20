@@ -127,12 +127,11 @@ const TaskList = (props) => {
             <div className = "edit-button" onClick={() => toggleEditMode()} style = {editModeStyle} >
                 <i className="fas fa-pen"></i>
             </div>
-            {_.tail(tasks).filter(t=>props.path.name=="Default" || 
-                _.includes(props.path.categories, t.category))
+            {_.tail(tasks).filter(t=>_.includes(props.path.categories, Number(t.category)))
                  .map(task =>
                     <TaskItem {...task} 
                         key = {task.id}
-                        color={categories[task.category].color} 
+                        color={categories[Number(task.category)].color} 
                         editing={editMode=="edit"}
                         onTaskClick={() => handleTaskClick(editMode=="edit"?task.id:task.level)} />
                 ) 

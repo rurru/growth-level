@@ -115,12 +115,11 @@ const selectReward = (id) => {
 
   setEditingReward(0);
   setSelectedReward(rewardTemplate);
-
 }
 
   return (
     <div className = "container">      
-      <Popup open = {selectedReward.id > 0} 
+      <Popup open = {editingReward > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
               <RewardConfirmation reward = {selectedReward} 
