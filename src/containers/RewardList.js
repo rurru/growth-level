@@ -104,11 +104,8 @@ const handleRewardClick = (val) => {
 
 const selectReward = (id) => {
   const i = _.findIndex(rewards, ['id', id]);
-  console.log("Reward level: " + rewards);
   const levelToRemove = _.min(props.earned.filter(e => e >= rewards[i].level));
-  console.log("Removing level " + levelToRemove);
   const updatedEarned = _.pull(props.earned, levelToRemove);
-  console.log("After removing level: " + props.earned);
 
   props.update("rewards", updatedEarned);
   props.updateMessage({content: "Reward has been selected!", type: "notification"});
@@ -119,7 +116,7 @@ const selectReward = (id) => {
 
   return (
     <div className = "container">      
-      <Popup open = {editingReward > 0} 
+      <Popup open = {selectedReward.id > 0} 
           contentStyle = {{width: "auto"}} closeOnDocumentClick = {false} >
             <div className = "modal" >
               <RewardConfirmation reward = {selectedReward} 
