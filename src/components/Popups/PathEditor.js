@@ -56,7 +56,8 @@ const PathEditor = (props) => {
     }
 
     const deletePath = (id) => {
-        const newPaths = _.pullAllBy(paths, [{ 'id': id }], 'id');
+        let newPaths = _.cloneDeep(paths);
+        delete newPaths[id];
         setPaths(newPaths);
     }
 
