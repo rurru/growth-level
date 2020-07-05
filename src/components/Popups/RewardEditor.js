@@ -12,7 +12,7 @@ const RewardEditor = (props) => {
 
   let levelOptions = [];
 
-  for (let i = rewardLevel-4; i <= rewardLevel+4; i++) {
+  for (let i = rewardLevel-19; i <= rewardLevel+19; i++) {
     if (i > 0) levelOptions.push(i);
   }
 
